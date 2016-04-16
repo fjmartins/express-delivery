@@ -1,6 +1,7 @@
 package views;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
@@ -48,13 +49,12 @@ public class PrincipalActivity extends AppCompatActivity
         mRecyclerView.setLayoutManager(layoutManager);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+
             @Override
             public void onItemClick(View view, int position) {
                 Context contexto = getApplicationContext();
-                String texto = "CURTO";
-                int duracao = Toast.LENGTH_SHORT;
-                Toast toast = Toast.makeText(contexto, texto, duracao);
-                toast.show();
+                Intent intent = new Intent(contexto, DetalheAnuncioActivity.class);
+                startActivity(intent);
             }
 
             @Override
