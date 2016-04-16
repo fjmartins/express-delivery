@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Express Delivery</string>
-    <string name="user_login">Usuário</string>
-    <string name="user_password">Senha</string>
-    <string name="btn_login_entrar">Entrar</string>
-    <string name="btn_login_visitar">Visitar</string>
+    <string name="user">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="entrar">Entrar</string>
+    <string name="visitar">Visitar</string>
+    <string name="email">E-mail</string>
+    <string name="password_confirm">Confimar Senha</string>
+    <string name="cadastrar">Cadastrar</string>
 </resources>
