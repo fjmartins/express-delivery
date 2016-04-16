@@ -1,9 +1,11 @@
-package com.example.anderson.myapplication;
+package com.example.anderson.expressdelivery.view;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import com.example.anderson.expressdelivery.R;
 
 public class LoginActivity extends Activity {
 
@@ -14,13 +16,13 @@ public class LoginActivity extends Activity {
     }
 
     public void logar(View view){
-        //Intent intent = new Intent(this, PrincipalActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        startActivity(intent);
     }
 
     public void visitar(View view){
-        //Intent intent = new Intent(this, PrincipalActivity.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        startActivity(intent);
     }
 
 }

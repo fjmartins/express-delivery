@@ -1,7 +1,9 @@
-package com.example.anderson.myapplication;
+package com.example.anderson.expressdelivery.view;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.anderson.expressdelivery.R;
 
 public class CadastroActivity extends Activity {
 
