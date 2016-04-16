@@ -11,8 +11,8 @@
 
 
     <ImageView
-        android:layout_width="150px"
-        android:layout_height="150px"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:id="@+id/imgDetAnuncImagem"
         android:src="@drawable/ic_menu_camera"
         android:layout_centerHorizontal="true"/>
@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtDetAnuncTitulo"
         android:text="Título"
-        android:textSize="50px"
+        android:textSize="50dp"
         android:layout_below="@id/imgDetAnuncImagem"/>
 
     <TextView
@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtDetAnuncDesc"
         android:text="Descrição"
-        android:textSize="35px"
+        android:textSize="25dp"
         android:layout_below="@id/txtDetAnuncTitulo"/>
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtDetAnuncEndereco"
         android:text="Endereço"
-        android:textSize="50px"
+        android:textSize="35dp"
         android:layout_below="@id/txtDetAnuncDesc"/>
 
     <TextView
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtDetAnuncTelefone"
         android:text="Telefone"
-        android:textSize="50px"
+        android:textSize="35dp"
         android:layout_below="@id/txtDetAnuncEndereco"/>
 
     <android.support.design.widget.FloatingActionButton
@@ -56,7 +56,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentBottom="true"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_edit" />
+        android:src="@android:drawable/ic_menu_edit"
+        android:onClick="atualizar"/>
 
 
 </RelativeLayout>
