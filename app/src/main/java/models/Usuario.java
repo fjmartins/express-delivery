@@ -1,4 +1,4 @@
-package com.example.anderson.expressdelivery.view.model;
+package models;
 
 /**
  * Created by morte on 16/04/2016.

@@ -1,6 +1,6 @@
-package com.example.anderson.expressdelivery.view.teste;
+package utils;
 
-import com.example.anderson.expressdelivery.view.model.Anuncio;
+import models.Anuncio;
 
 import java.util.ArrayList;
 import java.util.List;

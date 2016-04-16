@@ -1,4 +1,4 @@
-package com.example.anderson.expressdelivery.view.adapters;
+package views.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.anderson.expressdelivery.R;
-import com.example.anderson.expressdelivery.view.model.Anuncio;
+import models.Anuncio;
 
 import java.util.List;
 

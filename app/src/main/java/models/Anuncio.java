@@ -1,4 +1,4 @@
-package com.example.anderson.expressdelivery.view.model;
+package models;
 
 import android.widget.ImageView;
 

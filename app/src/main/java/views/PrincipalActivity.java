@@ -1,10 +1,8 @@
-package com.example.anderson.expressdelivery.view;
+package views;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -19,10 +17,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
-import com.example.anderson.expressdelivery.view.adapters.AnuncioAdapter;
-import com.example.anderson.expressdelivery.view.adapters.RecyclerItemClickListener;
-import com.example.anderson.expressdelivery.view.model.Anuncio;
-import com.example.anderson.expressdelivery.view.teste.AnuncioData;
+import views.adapters.AnuncioAdapter;
+import views.adapters.RecyclerItemClickListener;
+import models.Anuncio;
+import utils.AnuncioData;
 
 import java.util.List;
 

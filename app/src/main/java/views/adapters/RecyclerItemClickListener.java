@@ -1,4 +1,4 @@
-package com.example.anderson.expressdelivery.view.adapters;
+package views.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
