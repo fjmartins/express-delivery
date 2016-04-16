@@ -17,9 +17,21 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.example.anderson.expressdelivery.R;
+import com.example.anderson.expressdelivery.view.adapters.AnuncioAdapter;
+import com.example.anderson.expressdelivery.view.model.Anuncio;
+import com.example.anderson.expressdelivery.view.teste.AnuncioData;
+
+import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+
+    private RecyclerView mRecyclerView;
+    private AnuncioAdapter mAdapter;
+    private boolean mLayoutGrid;
+    private List<Anuncio> mList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +39,19 @@ public class PrincipalActivity extends AppCompatActivity
         setContentView(R.layout.principal_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
+        mRecyclerView.setHasFixedSize(true);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        //PREENCHER OS ANUNCIO AQUI
+        mLayoutGrid = false;
+        mList = AnuncioData.getAnuncio();
+        mAdapter = new AnuncioAdapter(mList);
+        mRecyclerView.setAdapter(mAdapter);
+
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCadastrarAnuncio);
         fab.setOnClickListener(new View.OnClickListener() {
