@@ -4,34 +4,39 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.anderson.myapplication.LoginActivity"
+    tools:context="com.example.anderson.myapplication.CadastroActivity"
     android:orientation="vertical">
 
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtLogin"
+        android:id="@+id/txtCadUser"
         android:hint="@string/user"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtPassword"
+        android:id="@+id/txtCadMail"
+        android:hint="@string/email"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtCadPassword"
         android:hint="@string/password"/>
 
-    <Button
-        android:layout_width="wrap_content"
+    <EditText
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/btnEntrar"
-        android:text="@string/entrar"
-        android:onClick="logar"/>
+        android:id="@+id/txtCadConfirmPassword"
+        android:hint="@string/password_confirm"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btnVisitar"
-        android:text="@string/visitar"
-        android:onClick="visitar"/>
+        android:id="@+id/btnCadCadastrar"
+        android:text="@string/cadastrar"
+        android:onClick="logar"/>
 
 </LinearLayout>
