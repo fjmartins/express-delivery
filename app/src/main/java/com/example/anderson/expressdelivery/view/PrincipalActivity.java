@@ -1,5 +1,6 @@
 package com.example.anderson.expressdelivery.view;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -15,9 +16,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 import com.example.anderson.expressdelivery.view.adapters.AnuncioAdapter;
+import com.example.anderson.expressdelivery.view.adapters.RecyclerItemClickListener;
 import com.example.anderson.expressdelivery.view.model.Anuncio;
 import com.example.anderson.expressdelivery.view.teste.AnuncioData;
 
@@ -45,6 +48,27 @@ public class PrincipalActivity extends AppCompatActivity
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
+
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                Context contexto = getApplicationContext();
+                String texto = "CURTO";
+                int duracao = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(contexto, texto, duracao);
+                toast.show();
+            }
+
+            @Override
+            public void onItemLongClick(View view, int position) {
+                Context contexto = getApplicationContext();
+                String texto = "LONGO";
+                int duracao = Toast.LENGTH_SHORT;
+                Toast toast = Toast.makeText(contexto, texto, duracao);
+                toast.show();
+            }
+        }));
+
 
         //PREENCHER OS ANUNCIO AQUI
         mLayoutGrid = false;

@@ -42,15 +42,16 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioV
 
     protected static class AnuncioViewHolder extends RecyclerView.ViewHolder{
 
-        protected TextView viewDescricao;
         protected TextView viewTitulo;
+        protected TextView viewDescricao;
         protected TextView viewTelefone;
 
         public AnuncioViewHolder(View itemView) {
             super(itemView);
 
-            viewDescricao = (TextView) itemView.findViewById(R.id.txtDescricao);
+
             viewTitulo = (TextView) itemView.findViewById(R.id.txtTitulo);
+            viewDescricao = (TextView) itemView.findViewById(R.id.txtDescricao);
             viewTelefone = (TextView) itemView.findViewById(R.id.txtTelefone);
         }
     }
