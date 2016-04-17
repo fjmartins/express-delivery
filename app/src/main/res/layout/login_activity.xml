@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/colorPrimary"
@@ -54,8 +53,19 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:onClick="logar"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/colorAccent"
             android:text="@string/entrar"/>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/btn_visitar"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="24dp"
+            android:padding="12dp"
+            android:onClick="visitar"
+            android:background="@color/colorAccent"
+            android:text="@string/visitar"/>
 
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
