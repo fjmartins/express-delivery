@@ -2,10 +2,12 @@ package models;
 
 import android.widget.ImageView;
 
+import java.io.Serializable;
+
 /**
  * Created by morte on 16/04/2016.
  */
-public class Anuncio {
+public class Anuncio implements Serializable {
 
     private String titulo;
     private String descricao;

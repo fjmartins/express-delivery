@@ -54,6 +54,8 @@ public class PrincipalActivity extends AppCompatActivity
             public void onItemClick(View view, int position) {
                 Context contexto = getApplicationContext();
                 Intent intent = new Intent(contexto, DetalheAnuncioActivity.class);
+                Anuncio anuncio = mList.get(position);
+                intent.putExtra("anuncio", anuncio);
                 startActivity(intent);
             }
 
@@ -74,15 +76,6 @@ public class PrincipalActivity extends AppCompatActivity
         mAdapter = new AnuncioAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
 
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fabCadastrarAnuncio);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-//                Intent intent = new Intent(this, CadastroAnuncioActivity.class);
-//                startActivity(intent);
-            }
-        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

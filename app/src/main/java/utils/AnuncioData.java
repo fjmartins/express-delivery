@@ -12,10 +12,10 @@ public class AnuncioData {
 
     public static List<Anuncio> getAnuncio() {
         List<Anuncio> list = new ArrayList<>();
-        list.add(new Anuncio("ANUNCIO 1", "ESSE ANUNCIO É FODA", "1"));
-        list.add(new Anuncio("ANUNCIO 2", "ESSE ANUNCIO É FODA", "2"));
-        list.add(new Anuncio("ANUNCIO 3 ", "ESSE ANUNCIO É FODA", "3"));
-        list.add(new Anuncio("ANUNCIO 4", "ESSE ANUNCIO É FODA", "4"));
+        list.add(new Anuncio("TITULO ANUNCIO 1", "DESCRIÇÃO DO ANUNCIO", "1"));
+        list.add(new Anuncio("TITULO ANUNCIO 2",  "DESCRIÇÃO DO ANUNCIO", "2"));
+        list.add(new Anuncio("TITULO ANUNCIO 3 ",  "DESCRIÇÃO DO ANUNCIO", "3"));
+        list.add(new Anuncio("TITULO ANUNCIO 4",  "DESCRIÇÃO DO ANUNCIO", "4"));
         return list;
     }
 }

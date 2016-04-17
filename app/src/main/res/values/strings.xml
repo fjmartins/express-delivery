@@ -8,6 +8,9 @@
     <string name="password_confirm">Confimar Senha</string>
     <string name="cadastrar">Cadastrar</string>
     <string name="configuracao">Configurações</string>
+    <string name="novo_anuncio">Criar um anúncio</string>
+    <string name="abrir_anuncio">Abrir</string>
+    <string name="salvar_anuncio">Salvar</string>
 
     <string name="mensagem_cadatrar">Não tem conta? Crie uma agora.</string>
     <string name="title_activity_main">MainActivity</string>
