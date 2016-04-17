@@ -19,6 +19,7 @@
     <string name="title_activity_principal">PrincipalActivity</string>
 
     <string name="title_activity_detalhe_anuncio">DetalheAnuncioActivity</string>
+    <string name="cadastrar_anuncio">Cadastrar Anúncio</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>
