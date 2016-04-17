@@ -1,28 +1,20 @@
 package views;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
-import android.media.Image;
 import android.os.Bundle;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toolbar;
 
 import com.example.anderson.expressdelivery.R;
 
-public class DetalheAnuncioActivity extends AppCompatActivity {
+import models.Anuncio;
+
+public class DetalheAnuncioActivity extends Activity {
 
     private TextView titulo, descricao, telefone, endereco;
     private ImageView foto;
+    private Anuncio anuncio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,21 +40,17 @@ public class DetalheAnuncioActivity extends AppCompatActivity {
 //        startActivity(intent);
     }
 
-    public void goBack(View v) {
-        Intent intent = new Intent(this, PrincipalActivity.class);
-        startActivity(intent);
-    }
-
     public void carregaDados() {
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
-            this.titulo.setText(extras.getString("titulo"));
-            this.descricao.setText(extras.getString("descricao"));
-            this.telefone.setText(extras.getString("telefone"));
-            this.endereco.setText(extras.getString("endereco"));
-            Bitmap bitmap = (Bitmap)extras.getParcelable("fotoBitmap");
-            this.foto.setImageBitmap(bitmap);
+            this.anuncio = (Anuncio)extras.get("anuncio");
+
+            this.titulo.setText(anuncio.getTitulo());
+            this.descricao.setText(anuncio.getDescricao());
+            this.telefone.setText(anuncio.getTelefone());
+            this.endereco.setText(anuncio.getEndereco());
+            this.foto.setImageBitmap(anuncio.getFotos()[0]);
         }
     }
 }
