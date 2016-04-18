@@ -20,6 +20,11 @@ public class LoginActivity extends Activity {
         startActivity(intent);
     }
 
+    public void visitar(View view){
+        Intent intent = new Intent(this, PrincipalActivity.class);
+        startActivity(intent);
+    }
+
     public void cadastrar(View view){
         Intent intent = new Intent(this, CadastroActivity.class);
         startActivity(intent);

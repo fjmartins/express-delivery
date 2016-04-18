@@ -32,7 +32,6 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioV
         Anuncio anuncio = mList.get(i);
         viewHolder.viewTitulo.setText(anuncio.getTitulo());
         viewHolder.viewDescricao.setText(anuncio.getDescricao());
-        viewHolder.viewTelefone.setText(anuncio.getTelefone());
     }
 
     @Override
@@ -44,7 +43,6 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioV
 
         protected TextView viewTitulo;
         protected TextView viewDescricao;
-        protected TextView viewTelefone;
 
         public AnuncioViewHolder(View itemView) {
             super(itemView);
@@ -52,7 +50,6 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioV
 
             viewTitulo = (TextView) itemView.findViewById(R.id.txtTitulo);
             viewDescricao = (TextView) itemView.findViewById(R.id.txtDescricao);
-            viewTelefone = (TextView) itemView.findViewById(R.id.txtTelefone);
         }
     }
 }

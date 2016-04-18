@@ -1,5 +1,12 @@
 package utils;
 
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.widget.ImageView;
+
+import com.example.anderson.expressdelivery.R;
+
 import models.Anuncio;
 
 import java.util.ArrayList;
@@ -12,10 +19,14 @@ public class AnuncioData {
 
     public static List<Anuncio> getAnuncio() {
         List<Anuncio> list = new ArrayList<>();
-        list.add(new Anuncio("ANUNCIO 1", "ESSE ANUNCIO É FODA", "1"));
-        list.add(new Anuncio("ANUNCIO 2", "ESSE ANUNCIO É FODA", "2"));
-        list.add(new Anuncio("ANUNCIO 3 ", "ESSE ANUNCIO É FODA", "3"));
-        list.add(new Anuncio("ANUNCIO 4", "ESSE ANUNCIO É FODA", "4"));
+        Bitmap[] fotos = new Bitmap[1];
+        Bitmap btm = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_menu_camera);
+        fotos[0] = btm;
+        for (int i = 1; i <= 10; i++){
+            Anuncio anuncio = new Anuncio(null, "TÍTULO ANUNCIO "+i, "DESCRIÇÃO DO ANUNCIO "+i,
+                    "Rua dos Lobos, N zero"+i, "(81)912345678", fotos);
+            list.add(anuncio);
+        }
         return list;
     }
 }
