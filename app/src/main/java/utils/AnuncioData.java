@@ -19,12 +19,10 @@ public class AnuncioData {
 
     public static List<Anuncio> getAnuncio() {
         List<Anuncio> list = new ArrayList<>();
-        Bitmap[] fotos = new Bitmap[1];
-        Bitmap btm = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_menu_camera);
-        fotos[0] = btm;
+        Bitmap foto = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_menu_camera);
         for (int i = 1; i <= 10; i++){
             Anuncio anuncio = new Anuncio(null, "TÍTULO ANUNCIO "+i, "DESCRIÇÃO DO ANUNCIO "+i,
-                    "Rua dos Lobos, N zero"+i, "(81)912345678", fotos);
+                    "Rua dos Lobos, N zero"+i, "(81)912345678", foto);
             list.add(anuncio);
         }
         return list;

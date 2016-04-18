@@ -50,7 +50,7 @@ public class DetalheAnuncioActivity extends Activity {
             this.descricao.setText(anuncio.getDescricao());
             this.telefone.setText(anuncio.getTelefone());
             this.endereco.setText(anuncio.getEndereco());
-            this.foto.setImageBitmap(anuncio.getFotos()[0]);
+            this.foto.setImageBitmap(anuncio.getFoto());
         }
     }
 }
