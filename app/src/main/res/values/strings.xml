@@ -21,4 +21,9 @@
     <string name="title_activity_detalhe_anuncio">DetalheAnuncioActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="titulo">Título</string>
+    <string name="descrição">Descrição</string>
+    <string name="endereço">Endereço</string>
+    <string name="telefone">Telefone</string>
 </resources>
