@@ -24,7 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtCadAnuncioDesc"
-        android:hint="@string/descrição"
+        android:hint="@string/descricao"
         android:textSize="25sp"
         android:layout_weight="0.31" />
 
@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/txtCadAnuncioEndereco"
-        android:hint="@string/endereço"
+        android:hint="@string/endereco"
         android:textSize="35sp"
         android:layout_weight="0.18" />
 

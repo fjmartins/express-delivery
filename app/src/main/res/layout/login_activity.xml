@@ -72,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:onClick="cadastrar"
-            android:text="@string/mensagem_cadatrar"
+            android:text="@string/mensagem_cadastrar"
             android:gravity="center"
             android:textSize="16dip"/>
 

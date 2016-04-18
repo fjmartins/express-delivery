@@ -12,7 +12,7 @@
     <string name="abrir_anuncio">Abrir</string>
     <string name="salvar_anuncio">Salvar</string>
 
-    <string name="mensagem_cadatrar">Não tem conta? Crie uma agora.</string>
+    <string name="mensagem_cadastrar">Não tem conta? Crie uma agora.</string>
     <string name="title_activity_main">MainActivity</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -28,7 +28,7 @@
 
     <string name="title_activity_cadastro_anuncio">CadastroAnuncioActivity</string>
     <string name="titulo">Título</string>
-    <string name="descrição">Descrição</string>
-    <string name="endereço">Endereço</string>
+    <string name="descricao">Descrição</string>
+    <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
 </resources>

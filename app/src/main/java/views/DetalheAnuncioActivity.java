@@ -1,17 +1,18 @@
 package views;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.support.v7.widget.Toolbar;
 
 import com.example.anderson.expressdelivery.R;
 
 import models.Anuncio;
 
-public class DetalheAnuncioActivity extends Activity {
+public class DetalheAnuncioActivity extends AppCompatActivity {
 
     private TextView titulo, descricao, telefone, endereco;
     private ImageView foto;
