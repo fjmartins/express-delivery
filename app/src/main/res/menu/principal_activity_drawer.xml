@@ -3,9 +3,14 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/nav_manage"
+            android:id="@+id/nav_manage_cadastro_anuncio"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/novo_anuncio" />
+
+        <item
+            android:id="@+id/nav_manage_cadastro_usuario"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/mensagem_cadastrar" />
     </group>
 
 </menu>

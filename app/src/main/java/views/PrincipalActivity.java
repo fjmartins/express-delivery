@@ -3,7 +3,6 @@ package views;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -126,12 +125,19 @@ public class PrincipalActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_manage) {
-
+        if (id == R.id.nav_manage_cadastro_anuncio) {
+            this.goToActivity(this, CadastroAnuncioActivity.class);
+        } else if(id == R.id.nav_manage_cadastro_usuario) {
+            this.goToActivity(this, CadastroActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void goToActivity(Context context, Class activity) {
+        Intent intent = new Intent(context, activity);
+        context.startActivity(intent);
     }
 }
