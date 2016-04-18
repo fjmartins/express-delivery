@@ -1,6 +1,7 @@
 package views;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,13 +32,9 @@ public class DetalheAnuncioActivity extends Activity {
     }
 
     public void atualizar(View v) {
-//        Intent intent = new Intent(this, CadastroAnuncioActivity.class);
-//        intent.putExtra("titulo", this.titulo.getText().toString());
-//        intent.putExtra("descricao", this.descricao.getText().toString());
-//        intent.putExtra("telefone", this.telefone.getText().toString());
-//        intent.putExtra("endereco", this.endereco.getText().toString());
-//        intent.putExtra("fotoBitmap", this.foto.getDrawingCache());
-//        startActivity(intent);
+        Intent intent = new Intent(this, CadastroAnuncioActivity.class);
+        intent.putExtra("anuncio", this.anuncio);
+        startActivity(intent);
     }
 
     public void carregaDados() {
@@ -50,7 +47,7 @@ public class DetalheAnuncioActivity extends Activity {
             this.descricao.setText(anuncio.getDescricao());
             this.telefone.setText(anuncio.getTelefone());
             this.endereco.setText(anuncio.getEndereco());
-            this.foto.setImageBitmap(anuncio.getFoto());
+//            this.foto.setImageBitmap(anuncio.getFoto());
         }
     }
 }

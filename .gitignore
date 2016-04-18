@@ -7,9 +7,9 @@
 .DS_Store
 /build
 /captures
-.idea/
+.idea
 *.properties
-gradle/
+/gradle
 gradlew
 gradlew.bat
 settings.gradle
