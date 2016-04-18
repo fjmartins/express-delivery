@@ -1,11 +1,11 @@
 package views;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.anderson.expressdelivery.R;
 
-public class CadastroActivity extends Activity {
+public class CadastroActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
