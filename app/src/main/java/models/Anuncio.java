@@ -1,7 +1,6 @@
 package models;
 
 import android.graphics.Bitmap;
-import android.widget.ImageView;
 
 import java.io.Serializable;
 
@@ -14,16 +13,16 @@ public class Anuncio implements Serializable {
     private String descricao;
     private String endereco;
     private String telefone;
-    private Bitmap[] fotos;
+    private Bitmap foto;
     private Usuario usuario;
 
-    public Anuncio(Usuario usuario, String titulo, String descricao, String endereco, String telefone, Bitmap[] fotos) {
+    public Anuncio(Usuario usuario, String titulo, String descricao, String endereco, String telefone, Bitmap foto) {
         this.usuario = usuario;
         this.titulo = titulo;
         this.descricao = descricao;
         this.endereco = endereco;
         this.telefone = telefone;
-        this.fotos = fotos;
+        this.foto = foto;
     }
 
     public Anuncio(String titulo, String descricao, String telefone) {
@@ -64,12 +63,12 @@ public class Anuncio implements Serializable {
         this.telefone = telefone;
     }
 
-    public Bitmap[] getFotos() {
-        return fotos;
+    public Bitmap getFoto() {
+        return foto;
     }
 
-    public void setFotos(Bitmap[] fotos) {
-        this.fotos = fotos;
+    public void setFoto(Bitmap foto) {
+        this.foto = foto;
     }
 
     public Usuario getUsuario() {
