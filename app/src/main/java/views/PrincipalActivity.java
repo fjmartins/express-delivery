@@ -52,7 +52,7 @@ public class PrincipalActivity extends AppCompatActivity
             @Override
             public void onItemClick(View view, int position) {
                 Context contexto = getApplicationContext();
-                Intent intent = new Intent(contexto, DetalheAnuncioActivity.class);
+                Intent intent = new Intent(contexto, AnuncioDetalheActivity.class);
                 Anuncio anuncio = mList.get(position);
                 intent.putExtra("anuncio", anuncio);
                 startActivity(intent);
@@ -126,7 +126,7 @@ public class PrincipalActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_manage_cadastro_anuncio) {
-            this.goToActivity(this, CadastroAnuncioActivity.class);
+            this.goToActivity(this, AnuncioCadastroActivity.class);
         } else if(id == R.id.nav_manage_cadastro_usuario) {
             this.goToActivity(this, CadastroActivity.class);
         }

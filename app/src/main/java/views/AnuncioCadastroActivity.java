@@ -8,7 +8,7 @@ import com.example.anderson.expressdelivery.R;
 /**
  * Created by Allan-PC on 17/04/2016.
  */
-public class CadastroAnuncioActivity extends Activity {
+public class AnuncioCadastroActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
