@@ -11,24 +11,30 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="35"
         android:id="@+id/txtCadUser"
         android:hint="@string/user"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:maxLength="30"
         android:id="@+id/txtCadMail"
         android:hint="@string/email"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:password="true"
+        android:maxLength="10"
         android:id="@+id/txtCadPassword"
         android:hint="@string/password"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:password="true"
+        android:maxLength="10"
         android:id="@+id/txtCadConfirmPassword"
         android:hint="@string/password_confirm"/>
 
