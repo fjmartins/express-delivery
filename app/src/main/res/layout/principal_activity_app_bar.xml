@@ -12,6 +12,6 @@
         android:layout_height="match_parent" />
 
     <include
-        layout="@layout/content_principal" />
+        layout="@layout/principal_activity_content" />
 
 </android.support.design.widget.CoordinatorLayout>

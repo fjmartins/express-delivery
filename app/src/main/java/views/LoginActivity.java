@@ -1,7 +1,6 @@
 package views;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -9,7 +8,6 @@ import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.example.anderson.expressdelivery.R;
 
@@ -59,7 +57,7 @@ public class LoginActivity extends Activity {
     }
 
     public void cadastrar(View view){
-        Intent intent = new Intent(this, CadastroActivity.class);
+        Intent intent = new Intent(this, UsuarioCadastroActivity.class);
         startActivity(intent);
     }
 

@@ -8,19 +8,19 @@ import android.widget.Button;
 
 import com.example.anderson.expressdelivery.R;
 
-public class CadastroActivity extends AppCompatActivity {
+public class UsuarioCadastroActivity extends AppCompatActivity {
 
     private Button btnCadastrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cadastro_activity);
+        setContentView(R.layout.usuario_cadastro_activity);
 
         this.btnCadastrar = (Button) findViewById(R.id.btnCadCadastrar);
     }
 
-    public void logar(View view) {
+    public void cadastrarUser(View view) {
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
     }

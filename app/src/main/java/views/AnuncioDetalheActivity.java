@@ -20,7 +20,7 @@ public class AnuncioDetalheActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.detalhe_anuncio_activity);
+        setContentView(R.layout.anuncio_detalhe_activity);
 
         this.titulo = (TextView)findViewById(R.id.txtDetAnuncTitulo);
         this.descricao = (TextView)findViewById(R.id.txtDetAnuncDesc);

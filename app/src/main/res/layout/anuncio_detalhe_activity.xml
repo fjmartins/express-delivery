@@ -7,6 +7,6 @@
     tools:context="views.AnuncioDetalheActivity"
     android:id="@+id/layoutDetAnunc">
 
-    <include layout="@layout/content_detalhe_anuncio"></include>
+    <include layout="@layout/anuncio_detalhe_activity_content"></include>
 
 </android.support.design.widget.CoordinatorLayout>

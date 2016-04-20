@@ -23,7 +23,7 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioV
     }
     @Override
     public AnuncioViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.principal_adapter, viewGroup, false);
+        View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.principal_activity_adapter, viewGroup, false);
         return new AnuncioViewHolder(itemView);
     }
 

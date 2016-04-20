@@ -13,6 +13,6 @@ public class AnuncioCadastroActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
-        setContentView(R.layout.cadastro_anuncio_activity);
+        setContentView(R.layout.anuncio_cadastro_activity);
     }
 }

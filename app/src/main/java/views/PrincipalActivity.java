@@ -128,7 +128,7 @@ public class PrincipalActivity extends AppCompatActivity
         if (id == R.id.nav_manage_cadastro_anuncio) {
             this.goToActivity(this, AnuncioCadastroActivity.class);
         } else if(id == R.id.nav_manage_cadastro_usuario) {
-            this.goToActivity(this, CadastroActivity.class);
+            this.goToActivity(this, UsuarioCadastroActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
