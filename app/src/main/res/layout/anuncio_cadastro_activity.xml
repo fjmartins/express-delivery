@@ -75,7 +75,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtCadAnuncioTelefone"
                     android:hint="@string/telefone"
-                    android:layout_weight="0.11" />
+                    android:phoneNumber="true"
+                    android:layout_weight="0.11"
+                    android:maxLength="12" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton
