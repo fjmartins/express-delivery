@@ -31,4 +31,10 @@
     <string name="descricao">Descrição</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
+
+    <string name="aviso_email_invalido">Este email está num formato inválido.</string>
+    <string name="aviso_email_nao_preenchido">O campo de email não está preenchido.</string>
+    <string name="aviso_senha_nao_preenchida">O campo de senha não está preenchida.</string>
+
+    <string name="fechar">Fechar</string>
 </resources>
