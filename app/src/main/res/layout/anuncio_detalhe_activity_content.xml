@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:fitsSystemWindows="true"
     tools:context="views.AnuncioDetalheActivity"
-    android:id="@+id/layoutContDetAnunc">
+    android:scrollbars="horizontal">
 
     <ImageView
         android:layout_marginTop="40dp"
@@ -34,6 +34,7 @@
         android:id="@+id/txtDetAnuncDesc"
         android:text="Descrição"
         android:textSize="25dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/txtDetAnuncTitulo"/>
 
     <TextView
@@ -42,6 +43,7 @@
         android:id="@+id/txtDetAnuncEndereco"
         android:text="Endereço"
         android:textSize="25dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/txtDetAnuncDesc"/>
 
     <TextView
@@ -50,16 +52,7 @@
         android:id="@+id/txtDetAnuncTelefone"
         android:text="Telefone"
         android:textSize="25dp"
+        android:layout_marginTop="8dp"
         android:layout_below="@id/txtDetAnuncEndereco"/>
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabEditDetAnunc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_edit"
-        android:onClick="atualizar"/>
 
 </RelativeLayout>
