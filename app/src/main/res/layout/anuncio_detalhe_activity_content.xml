@@ -9,50 +9,59 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:fitsSystemWindows="true"
-    tools:context="views.AnuncioDetalheActivity"
-    android:scrollbars="horizontal">
+    tools:context="views.AnuncioDetalheActivity">
 
-    <ImageView
-        android:layout_marginTop="40dp"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:id="@+id/imgDetAnuncImagem"
-        android:src="@drawable/ic_menu_camera"
-        android:layout_centerHorizontal="true"/>
-
-    <TextView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtDetAnuncTitulo"
-        android:text="Título"
-        android:textSize="35dp"
-        android:layout_below="@id/imgDetAnuncImagem"/>
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtDetAnuncDesc"
-        android:text="Descrição"
-        android:textSize="25dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/txtDetAnuncTitulo"/>
+            <ImageView
+                android:layout_marginTop="40dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/imgDetAnuncImagem"
+                android:src="@drawable/ic_menu_camera"
+                android:layout_centerHorizontal="true"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtDetAnuncEndereco"
-        android:text="Endereço"
-        android:textSize="25dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/txtDetAnuncDesc"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDetAnuncTitulo"
+                android:text="Título"
+                android:textSize="35dp"
+                android:layout_below="@id/imgDetAnuncImagem"/>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/txtDetAnuncTelefone"
-        android:text="Telefone"
-        android:textSize="25dp"
-        android:layout_marginTop="8dp"
-        android:layout_below="@id/txtDetAnuncEndereco"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDetAnuncDesc"
+                android:text="Descrição"
+                android:textSize="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/txtDetAnuncTitulo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDetAnuncEndereco"
+                android:text="Endereço"
+                android:textSize="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/txtDetAnuncDesc"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDetAnuncTelefone"
+                android:text="Telefone"
+                android:textSize="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/txtDetAnuncEndereco"/>
+
+        </RelativeLayout>
+    </ScrollView>
 
 </RelativeLayout>

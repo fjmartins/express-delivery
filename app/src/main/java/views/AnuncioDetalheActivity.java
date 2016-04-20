@@ -37,7 +37,7 @@ public class AnuncioDetalheActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void carregaDados() {
+    private void carregaDados() {
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
@@ -47,7 +47,7 @@ public class AnuncioDetalheActivity extends AppCompatActivity {
             this.descricao.setText(anuncio.getDescricao());
             this.telefone.setText(anuncio.getTelefone());
             this.endereco.setText(anuncio.getEndereco());
-//            this.foto.setImageBitmap(anuncio.getFoto());
+            this.foto.setImageBitmap(anuncio.getFoto());
         }
     }
 }

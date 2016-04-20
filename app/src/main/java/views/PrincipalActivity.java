@@ -71,7 +71,7 @@ public class PrincipalActivity extends AppCompatActivity
 
         //PREENCHER OS ANUNCIO AQUI
         mLayoutGrid = false;
-        mList = AnuncioData.getAnuncio();
+        mList = AnuncioData.getInstance().getAnuncios();
         mAdapter = new AnuncioAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
 

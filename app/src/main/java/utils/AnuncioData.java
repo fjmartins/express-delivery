@@ -17,14 +17,31 @@ import java.util.List;
  */
 public class AnuncioData {
 
-    public static List<Anuncio> getAnuncio() {
-        List<Anuncio> list = new ArrayList<>();
+    private List<Anuncio> list = new ArrayList<>();
+    private static AnuncioData instance;
+
+    private AnuncioData() {
+        this.criaAnuncios();
+    }
+
+    public static AnuncioData getInstance() {
+        return (instance == null) ? new AnuncioData() : instance;
+    }
+
+    private void criaAnuncios() {
         Bitmap foto = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_menu_camera);
-        for (int i = 1; i <= 10; i++){
+        for (int i = 1; i <= 4; i++){
             Anuncio anuncio = new Anuncio(null, "TÍTULO ANUNCIO "+i, "DESCRIÇÃO DO ANUNCIO "+i,
                     "Rua dos Lobos, N zero"+i, "(81)912345678", foto);
-            list.add(anuncio);
+            this.list.add(anuncio);
         }
-        return list;
+    }
+
+    public List<Anuncio> getAnuncios() {
+        return this.list;
+    }
+
+    public void insertAnuncio(Anuncio anuncio) {
+        this.list.add(anuncio);
     }
 }
