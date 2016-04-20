@@ -11,7 +11,7 @@ import com.example.anderson.expressdelivery.R;
 
 import models.Anuncio;
 
-public class AnuncioDetalheActivity extends AppCompatActivity {
+public class AnuncioDetalheActivity extends GenericActivity {
 
     private TextView titulo, descricao, telefone, endereco;
     private ImageView foto;
@@ -32,9 +32,9 @@ public class AnuncioDetalheActivity extends AppCompatActivity {
     }
 
     public void atualizar(View v) {
-        Intent intent = new Intent(this, AnuncioCadastroActivity.class);
-        intent.putExtra("anuncio", this.anuncio);
-        startActivity(intent);
+        Bundle extras = new Bundle();
+        extras.putSerializable("anuncio", this.anuncio);
+        redirect(this, AnuncioCadastroActivity.class, extras);
     }
 
     private void carregaDados() {

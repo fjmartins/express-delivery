@@ -24,7 +24,7 @@ import utils.AnuncioData;
 
 import java.util.List;
 
-public class PrincipalActivity extends AppCompatActivity
+public class PrincipalActivity extends GenericActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 

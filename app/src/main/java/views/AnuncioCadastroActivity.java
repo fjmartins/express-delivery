@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
@@ -18,7 +19,7 @@ import utils.AnuncioData;
 /**
  * Created by Allan-PC on 17/04/2016.
  */
-public class AnuncioCadastroActivity extends AppCompatActivity {
+public class AnuncioCadastroActivity extends GenericActivity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
@@ -65,14 +66,15 @@ public class AnuncioCadastroActivity extends AppCompatActivity {
             Anuncio anuncio = new Anuncio(null, this.titulo.getText().toString(), this.descricao.getText().toString(),
                     this.endereco.getText().toString(), this.telefone.getText().toString(), foto);
             AnuncioData.getInstance().insertAnuncio(anuncio);
+        } else {
+            Toast.makeText(this, "Preencha os campos obrigatórios", Toast.LENGTH_SHORT).show();
         }
 
-        Intent intent = new Intent(this, PrincipalActivity.class);
-        startActivity(intent);
+        redirect(this, PrincipalActivity.class);
     }
 
     private boolean valida() {
-        if (!this.titulo.getText().equals("") && !this.telefone.getText().equals(""))
+        if (!this.titulo.getText().toString().equals("") && !this.telefone.getText().toString().equals(""))
             return true;
         return false;
     }

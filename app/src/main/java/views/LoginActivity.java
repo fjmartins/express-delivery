@@ -11,7 +11,7 @@ import android.widget.EditText;
 
 import com.example.anderson.expressdelivery.R;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends GenericActivity {
 
     private EditText email;
     private EditText password;
