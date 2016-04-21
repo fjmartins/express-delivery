@@ -1,6 +1,5 @@
 package views;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,7 +10,7 @@ import android.widget.EditText;
 
 import com.example.anderson.expressdelivery.R;
 
-public class LoginActivity extends GenericActivity {
+public class UserLoginActivity extends GenericActivity {
 
     private EditText email;
     private EditText password;
@@ -40,7 +39,7 @@ public class LoginActivity extends GenericActivity {
     }
 
     public void logar(View view){
-        Intent intent = new Intent(this, PrincipalActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
 
         if(email.getText().equals("")){
             showWarning(R.string.aviso_email_nao_preenchido);
@@ -52,12 +51,12 @@ public class LoginActivity extends GenericActivity {
     }
 
     public void visitar(View view){
-        Intent intent = new Intent(this, PrincipalActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
 
     public void cadastrar(View view){
-        Intent intent = new Intent(this, UsuarioCadastroActivity.class);
+        Intent intent = new Intent(this, UserRegisterActivity.class);
         startActivity(intent);
     }
 

@@ -1,21 +1,19 @@
 package views;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.anderson.expressdelivery.R;
 
-import models.Anuncio;
+import models.Announcement;
 
-public class AnuncioDetalheActivity extends GenericActivity {
+public class AnnouncementDetailActivity extends GenericActivity {
 
     private TextView titulo, descricao, telefone, endereco;
     private ImageView foto;
-    private Anuncio anuncio;
+    private Announcement announcement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,21 +31,21 @@ public class AnuncioDetalheActivity extends GenericActivity {
 
     public void atualizar(View v) {
         Bundle extras = new Bundle();
-        extras.putSerializable("anuncio", this.anuncio);
-        redirect(this, AnuncioCadastroActivity.class, extras);
+        extras.putSerializable("announcement", this.announcement);
+        redirect(this, AnnouncementRegisterActivity.class, extras);
     }
 
     private void carregaDados() {
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
-            this.anuncio = (Anuncio)extras.get("anuncio");
+            this.announcement = (Announcement)extras.get("announcement");
 
-            this.titulo.setText(anuncio.getTitulo());
-            this.descricao.setText(anuncio.getDescricao());
-            this.telefone.setText(anuncio.getTelefone());
-            this.endereco.setText(anuncio.getEndereco());
-            this.foto.setImageBitmap(anuncio.getFoto());
+            this.titulo.setText(announcement.getTitle());
+            this.descricao.setText(announcement.getDescription());
+            this.telefone.setText(announcement.getTelefone());
+            this.endereco.setText(announcement.getEndereco());
+            this.foto.setImageBitmap(announcement.getPicture());
         }
     }
 }

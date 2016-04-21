@@ -27,8 +27,8 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_cadastro_anuncio">CadastroAnuncioActivity</string>
-    <string name="titulo">Título</string>
-    <string name="descricao">Descrição</string>
+    <string name="title">Título</string>
+    <string name="description">Descrição</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
 
@@ -37,4 +37,9 @@
     <string name="aviso_senha_nao_preenchida">O campo de senha não está preenchida.</string>
 
     <string name="fechar">Fechar</string>
+
+    <!-- DANGER AREA -->
+    <string name="parse_id">fdP0V6P2q11e6XjAQ6YMlK1ltc7v2uEUCCiL0S54</string>
+    <string name="parse_client_key">p7XkIb23IXrMqQJWQCFZrMXShi3yfTwJp2Pj1QK6</string>
+
 </resources>

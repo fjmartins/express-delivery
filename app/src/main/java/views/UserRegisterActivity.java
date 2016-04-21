@@ -1,8 +1,6 @@
 package views;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,7 +8,7 @@ import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
-public class UsuarioCadastroActivity extends GenericActivity {
+public class UserRegisterActivity extends GenericActivity {
 
     private Button btnCadastrar;
     private EditText nome, email, senha, confSenha;
@@ -29,7 +27,7 @@ public class UsuarioCadastroActivity extends GenericActivity {
 
     public void cadastrarUser(View view) {
         if (valida())
-            redirect(this, LoginActivity.class);
+            redirect(this, UserLoginActivity.class);
         else
             Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
     }

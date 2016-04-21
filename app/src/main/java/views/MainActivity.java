@@ -10,7 +10,6 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,19 +18,19 @@ import android.widget.Toast;
 import com.example.anderson.expressdelivery.R;
 import views.adapters.AnuncioAdapter;
 import views.adapters.RecyclerItemClickListener;
-import models.Anuncio;
+import models.Announcement;
 import utils.AnuncioData;
 
 import java.util.List;
 
-public class PrincipalActivity extends GenericActivity
+public class MainActivity extends GenericActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private RecyclerView mRecyclerView;
     private AnuncioAdapter mAdapter;
     private boolean mLayoutGrid;
-    private List<Anuncio> mList;
+    private List<Announcement> mList;
 
 
     @Override
@@ -52,9 +51,9 @@ public class PrincipalActivity extends GenericActivity
             @Override
             public void onItemClick(View view, int position) {
                 Context contexto = getApplicationContext();
-                Intent intent = new Intent(contexto, AnuncioDetalheActivity.class);
-                Anuncio anuncio = mList.get(position);
-                intent.putExtra("anuncio", anuncio);
+                Intent intent = new Intent(contexto, AnnouncementDetailActivity.class);
+                Announcement announcement = mList.get(position);
+                intent.putExtra("announcement", announcement);
                 startActivity(intent);
             }
 
@@ -126,9 +125,9 @@ public class PrincipalActivity extends GenericActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_manage_cadastro_anuncio) {
-            this.goToActivity(this, AnuncioCadastroActivity.class);
+            this.goToActivity(this, AnnouncementRegisterActivity.class);
         } else if(id == R.id.nav_manage_cadastro_usuario) {
-            this.goToActivity(this, UsuarioCadastroActivity.class);
+            this.goToActivity(this, UserRegisterActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

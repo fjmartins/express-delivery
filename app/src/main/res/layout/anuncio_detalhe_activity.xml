@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="views.AnuncioDetalheActivity"
+    tools:context="views.AnnouncementDetailActivity"
     android:id="@+id/layoutDetAnunc">
 
     <include layout="@layout/anuncio_detalhe_activity_content"></include>

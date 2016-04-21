@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.anderson.expressdelivery.R;
-import models.Anuncio;
+import models.Announcement;
 
 import java.util.List;
 
@@ -16,9 +16,9 @@ import java.util.List;
  */
 public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioViewHolder> {
 
-    private List<Anuncio> mList;
+    private List<Announcement> mList;
 
-    public AnuncioAdapter(List<Anuncio> list){
+    public AnuncioAdapter(List<Announcement> list){
         this.mList = list;
     }
     @Override
@@ -29,9 +29,9 @@ public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioV
 
     @Override
     public void onBindViewHolder(AnuncioViewHolder viewHolder, int i) {
-        Anuncio anuncio = mList.get(i);
-        viewHolder.viewTitulo.setText(anuncio.getTitulo());
-        viewHolder.viewDescricao.setText(anuncio.getDescricao());
+        Announcement announcement = mList.get(i);
+        viewHolder.viewTitulo.setText(announcement.getTitle());
+        viewHolder.viewDescricao.setText(announcement.getDescription());
     }
 
     @Override

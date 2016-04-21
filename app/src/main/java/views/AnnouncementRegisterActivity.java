@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,20 +11,24 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
+import com.parse.ParseFile;
+import com.parse.ParseObject;
 
-import models.Anuncio;
+import java.io.ByteArrayOutputStream;
+
+import models.Announcement;
 import utils.AnuncioData;
 
 /**
  * Created by Allan-PC on 17/04/2016.
  */
-public class AnuncioCadastroActivity extends GenericActivity {
+public class AnnouncementRegisterActivity extends GenericActivity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     private EditText titulo, descricao, telefone, endereco;
     private ImageButton foto;
-    private Anuncio anuncio;
+    private Announcement announcement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,7 @@ public class AnuncioCadastroActivity extends GenericActivity {
                     Bundle b = data.getExtras();
                     Bitmap btm = b.getParcelable("data");
                     btm = Bitmap.createScaledBitmap(btm, 200, 200, true);
-                    AnuncioCadastroActivity.this.foto.setImageBitmap(btm);
+                    AnnouncementRegisterActivity.this.foto.setImageBitmap(btm);
                 }
             }
         }
@@ -63,14 +66,14 @@ public class AnuncioCadastroActivity extends GenericActivity {
     public void salvar(View v) {
         if (valida()) {
             Bitmap foto = this.foto.getDrawingCache();
-            Anuncio anuncio = new Anuncio(null, this.titulo.getText().toString(), this.descricao.getText().toString(),
+            Announcement announcement = new Announcement(null, this.titulo.getText().toString(), this.descricao.getText().toString(),
                     this.endereco.getText().toString(), this.telefone.getText().toString(), foto);
-            AnuncioData.getInstance().insertAnuncio(anuncio);
+            AnuncioData.getInstance().insertAnuncio(announcement);
+
+            redirect(this, MainActivity.class);
         } else {
             Toast.makeText(this, "Preencha os campos obrigatórios", Toast.LENGTH_SHORT).show();
         }
-
-        redirect(this, PrincipalActivity.class);
     }
 
     private boolean valida() {
@@ -86,13 +89,13 @@ public class AnuncioCadastroActivity extends GenericActivity {
             Button btnCad = (Button)findViewById(R.id.btnCadAnuncioCadastrar);
             btnCad.setText("Atualizar");
 
-            this.anuncio = (Anuncio)extras.get("anuncio");
+            this.announcement = (Announcement)extras.get("announcement");
 
-            this.titulo.setText(anuncio.getTitulo());
-            this.descricao.setText(anuncio.getDescricao());
-            this.telefone.setText(anuncio.getTelefone());
-            this.endereco.setText(anuncio.getEndereco());
-            this.foto.setImageBitmap(anuncio.getFoto());
+            this.titulo.setText(announcement.getTitle());
+            this.descricao.setText(announcement.getDescription());
+            this.telefone.setText(announcement.getTelefone());
+            this.endereco.setText(announcement.getEndereco());
+            this.foto.setImageBitmap(announcement.getPicture());
         }
     }
  }
