@@ -23,14 +23,14 @@ public class UserLoginActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        email = (EditText) this.findViewById(R.id.input_email);
-        password = (EditText) this.findViewById(R.id.input_password);
+        email = (EditText) this.findViewById(R.id.edt_loginactivity_email);
+        password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
 
         mFCListener = new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if(!isValidEmail(email.getText())){
-                    showWarning(R.string.aviso_email_invalido);
+                    showWarning(R.string.aviso_login_email_invalido);
                 }
             }
         };
@@ -41,10 +41,12 @@ public class UserLoginActivity extends GenericActivity {
     public void logar(View view){
         Intent intent = new Intent(this, MainActivity.class);
 
-        if(email.getText().equals("")){
-            showWarning(R.string.aviso_email_nao_preenchido);
-        }else if(password.getText().equals("")){
-            showWarning(R.string.aviso_senha_nao_preenchida);
+        if(email.getText().toString().equals("")){
+            showWarning(R.string.aviso_login_email_nao_preenchido);
+            email.requestFocus();
+        }else if(password.getText().toString().equals("")){
+            showWarning(R.string.aviso_login_senha_nao_preenchida);
+            password.requestFocus();
         } else {
             startActivity(intent);
         }
