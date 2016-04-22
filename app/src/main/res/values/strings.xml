@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">Express Delivery</string>
+
+    <!--Login Activity Strings-->
+    <string name="aviso_login_email_invalido">Este email está num formato inválido.</string>
+    <string name="aviso_login_email_nao_preenchido">O campo de email não está preenchido.</string>
+    <string name="aviso_login_senha_nao_preenchida">O campo de senha não está preenchida.</string>
+    <string name="txt_login_email">Usuário</string>
+    <string name="txt_login_password">Senha</string>
+    <string name="btn_login_entrar">Entrar</string>
+    <string name="btn_login_visitar">Visitar</string>
+    <!--Login Activity Strings-->
+
     <string name="user">Usuário</string>
     <string name="password">Senha</string>
     <string name="entrar">Entrar</string>
@@ -31,10 +42,6 @@
     <string name="description">Descrição</string>
     <string name="endereco">Endereço</string>
     <string name="telefone">Telefone</string>
-
-    <string name="aviso_email_invalido">Este email está num formato inválido.</string>
-    <string name="aviso_email_nao_preenchido">O campo de email não está preenchido.</string>
-    <string name="aviso_senha_nao_preenchida">O campo de senha não está preenchida.</string>
 
     <string name="fechar">Fechar</string>
 
