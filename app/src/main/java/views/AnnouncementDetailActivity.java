@@ -18,7 +18,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.anuncio_detalhe_activity);
+        setContentView(R.layout.announcement_detail_activity);
 
         this.titulo = (TextView)findViewById(R.id.txtDetAnuncTitulo);
         this.descricao = (TextView)findViewById(R.id.txtDetAnuncDesc);

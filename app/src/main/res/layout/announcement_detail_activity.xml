@@ -7,7 +7,7 @@
     tools:context="views.AnnouncementDetailActivity"
     android:id="@+id/layoutDetAnunc">
 
-    <include layout="@layout/anuncio_detalhe_activity_content"></include>
+    <include layout="@layout/announcement_detail_activity_content"></include>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabEditDetAnunc"

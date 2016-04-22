@@ -16,7 +16,7 @@ public class UserRegisterActivity extends GenericActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.usuario_cadastro_activity);
+        setContentView(R.layout.user_register_activity);
 
         this.nome = (EditText)findViewById(R.id.txtCadUser);
         this.email = (EditText)findViewById(R.id.txtCadMail);

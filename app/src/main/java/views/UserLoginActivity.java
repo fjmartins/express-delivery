@@ -21,7 +21,7 @@ public class UserLoginActivity extends GenericActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.login_activity);
+        setContentView(R.layout.user_login_activity);
 
         email = (EditText) this.findViewById(R.id.input_email);
         password = (EditText) this.findViewById(R.id.input_password);

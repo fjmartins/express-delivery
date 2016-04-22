@@ -17,14 +17,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageButton
+            <ImageView
+                android:id="@+id/img_announcement_activity"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/btnCadAnuncioImagem"
-                android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/ic_menu_camera"
-                android:onClick="tirarFoto"/>
+                android:clickable="true"
+                android:onClick="tirarFoto"
+                android:src="@drawable/ic_menu_camera"/>
+
+            <!--<Button-->
+                <!--android:layout_width="40dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:id="@+id/btnCadAnuncioImagem"-->
+                <!--android:layout_centerHorizontal="true"-->
+                <!--android:layout_gravity="center_horizontal"-->
+                <!--android:background="@drawable/ic_menu_camera"-->
+                <!--android:onClick="tirarFoto"/>-->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
