@@ -16,6 +16,10 @@ import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
+
+import controllers.UserAuthController;
+import models.User;
+import services.IResultUser;
 import views.adapters.AnuncioAdapter;
 import views.adapters.RecyclerItemClickListener;
 import models.Announcement;
@@ -99,7 +103,7 @@ public class MainActivity extends GenericActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.principal, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -125,18 +129,35 @@ public class MainActivity extends GenericActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_manage_cadastro_anuncio) {
-            this.goToActivity(this, AnnouncementRegisterActivity.class);
+            redirect(this, AnnouncementRegisterActivity.class);
         } else if(id == R.id.nav_manage_cadastro_usuario) {
-            this.goToActivity(this, UserRegisterActivity.class);
+            redirect(this, UserRegisterActivity.class);
+        } else if (id == R.id.nav_manage_logout) {
+            UserAuthController.getCurrentUser(new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    UserAuthController.logOut(obj, new IResultUser<User>() {
+                        @Override
+                        public void onSuccess(User obj) {
+                            redirect(MainActivity.this, UserLoginActivity.class);
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(MainActivity.this, msg);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(MainActivity.this, msg);
+                }
+            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void goToActivity(Context context, Class activity) {
-        Intent intent = new Intent(context, activity);
-        context.startActivity(intent);
     }
 }

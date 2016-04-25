@@ -1,6 +1,7 @@
 package webservices;
 
 import com.parse.LogInCallback;
+import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
@@ -31,7 +32,28 @@ public class UserAuthParse implements IUserAuth {
     }
 
     @Override
-    public void logOut(User user, IResultUser<User> result) {
+    public void logOut(final User user, final IResultUser<User> result) {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        currentUser.logOutInBackground(new LogOutCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    result.onSuccess(user);
+                } else {
+                    result.onError(e.getMessage());
+                }
+            }
+        });
+    }
 
+    @Override
+    public void getCurrentUser(IResultUser<User> result) {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser == null) {
+            result.onError("Nenhum usuário logado");
+        } else {
+            User user = new User(currentUser.getUsername(), currentUser.getEmail());
+            result.onSuccess(user);
+        }
     }
 }
