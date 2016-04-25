@@ -5,9 +5,16 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
+
+import java.util.List;
+
+import controllers.UserAuthController;
+import controllers.UserController;
+import services.IResult;
+import models.User;
+import services.IResultUser;
 
 public class UserRegisterActivity extends GenericActivity {
 
@@ -27,8 +34,31 @@ public class UserRegisterActivity extends GenericActivity {
     }
 
     public void registerUser(View view) {
-        if (validate())
-            redirect(this, UserLoginActivity.class);
+        if (validate()) {
+            User user = new User(this.name.getText().toString(), this.email.getText().toString(),
+                    this.password.getText().toString());
+            UserController.signUp(user, new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    UserAuthController.logIn(obj, new IResultUser<User>() {
+                        @Override
+                        public void onSuccess(User obj) {
+                            redirect(UserRegisterActivity.this, MainActivity.class);
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(UserRegisterActivity.this, msg);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(UserRegisterActivity.this, msg);
+                }
+            });
+        }
     }
 
     private boolean validate() {

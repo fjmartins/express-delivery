@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import models.Announcement;
+import services.IResult;
 
 /**
  * Created by kleber on 21/04/16.

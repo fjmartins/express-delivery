@@ -4,17 +4,14 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
-import com.parse.ParseFile;
-import com.parse.ParseObject;
-
-import java.io.ByteArrayOutputStream;
 
 import models.Announcement;
 import utils.AnuncioData;
@@ -27,19 +24,19 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
     private EditText titulo, descricao, telefone, endereco;
-    private ImageButton foto;
+    private ImageView foto;
     private Announcement announcement;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.anuncio_cadastro_activity);
+        setContentView(R.layout.announcement_register_activity);
 
         this.titulo = (EditText)findViewById(R.id.txtCadAnuncioTitulo);
         this.descricao = (EditText)findViewById(R.id.txtCadAnuncioDesc);
         this.telefone = (EditText)findViewById(R.id.txtCadAnuncioTelefone);
         this.endereco = (EditText)findViewById(R.id.txtCadAnuncioEndereco);
-        this.foto = (ImageButton)findViewById(R.id.btnCadAnuncioImagem);
+        this.foto = (ImageView)findViewById(R.id.img_announcement_activity);
 
         carregaDados();
     }
@@ -57,6 +54,8 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                     Bundle b = data.getExtras();
                     Bitmap btm = b.getParcelable("data");
                     btm = Bitmap.createScaledBitmap(btm, 200, 200, true);
+                    AnnouncementRegisterActivity.this.foto.setDrawingCacheEnabled(true);
+                    AnnouncementRegisterActivity.this.foto.buildDrawingCache();
                     AnnouncementRegisterActivity.this.foto.setImageBitmap(btm);
                 }
             }
@@ -66,6 +65,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     public void salvar(View v) {
         if (valida()) {
             Bitmap foto = this.foto.getDrawingCache();
+            Log.i("foto", foto + "");
             Announcement announcement = new Announcement(null, this.titulo.getText().toString(), this.descricao.getText().toString(),
                     this.endereco.getText().toString(), this.telefone.getText().toString(), foto);
             AnuncioData.getInstance().insertAnuncio(announcement);
