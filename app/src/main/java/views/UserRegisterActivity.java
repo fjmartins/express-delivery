@@ -1,6 +1,7 @@
 package views;
 
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,32 +11,60 @@ import com.example.anderson.expressdelivery.R;
 
 public class UserRegisterActivity extends GenericActivity {
 
-    private Button btnCadastrar;
-    private EditText nome, email, senha, confSenha;
+    private Button btnRegister;
+    private EditText name, email, password, passwordConfirm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_register_activity);
 
-        this.nome = (EditText)findViewById(R.id.txtCadUser);
-        this.email = (EditText)findViewById(R.id.txtCadMail);
-        this.senha = (EditText)findViewById(R.id.txtCadPassword);
-        this.confSenha = (EditText)findViewById(R.id.txtCadConfirmPassword);
-        this.btnCadastrar = (Button) findViewById(R.id.btnCadCadastrar);
+        this.name = (EditText)findViewById(R.id.txt_register_user_activity_name);
+        this.email = (EditText)findViewById(R.id.txt_register_user_activity_email);
+        this.password = (EditText)findViewById(R.id.txt_register_user_activity_password);
+        this.passwordConfirm = (EditText)findViewById(R.id.txt_register_user_activity_password_confirm);
+        this.btnRegister = (Button) findViewById(R.id.btn_register_user_activity_register);
     }
 
-    public void cadastrarUser(View view) {
-        if (valida())
+    public void registerUser(View view) {
+        if (validate())
             redirect(this, UserLoginActivity.class);
-        else
-            Toast.makeText(this, "Preencha todos os campos", Toast.LENGTH_SHORT).show();
     }
 
-    private boolean valida() {
-        if (!this.nome.getText().toString().equals("") && !this.email.getText().toString().equals("") &&
-                !this.senha.getText().toString().equals("") && !this.confSenha.getText().toString().equals(""))
-            return true;
-        return false;
+    private boolean validate() {
+        boolean result = true;
+
+        String name = this.name.getText().toString();
+        if (name.trim().isEmpty() || name.length() < 2){
+            this.name.setError("Pelo menos 2 caracteres");
+            result = false;
+        } else {
+            this.name.setError(null);
+        }
+
+        String email = this.email.getText().toString();
+        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+            this.email.setError("Email inválido");
+            result = false;
+        } else {
+            this.email.setError(null);
+        }
+
+        String password = this.password.getText().toString();
+        if (password.trim().isEmpty()){
+            this.password.setError("Senha inválida");
+            result = false;
+        } else {
+            this.password.setError(null);
+        }
+
+        String passwordConfirm = this.passwordConfirm.getText().toString();
+        if (!password.trim().equals(passwordConfirm.trim())){
+            this.passwordConfirm.setError("Senhas não conferem");
+            result = false;
+        } else {
+            this.passwordConfirm.setError(null);
+        }
+        return result;
     }
 }
