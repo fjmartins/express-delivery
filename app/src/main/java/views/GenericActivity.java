@@ -20,7 +20,7 @@ public class GenericActivity extends AppCompatActivity {
     public void redirect(Activity context, Class to, Bundle extras) {
         Intent i = new Intent(context, to);
         i.putExtras(extras);
-        context.startActivity(i);
+        startActivity(i);
     }
 
     public void showToastMessage(Context context, String msg) {

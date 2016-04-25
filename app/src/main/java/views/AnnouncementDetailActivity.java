@@ -11,8 +11,8 @@ import models.Announcement;
 
 public class AnnouncementDetailActivity extends GenericActivity {
 
-    private TextView titulo, descricao, telefone, endereco;
-    private ImageView foto;
+    private TextView title, description, phone, address;
+    private ImageView picture;
     private Announcement announcement;
 
     @Override
@@ -20,13 +20,13 @@ public class AnnouncementDetailActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcement_detail_activity);
 
-        this.titulo = (TextView)findViewById(R.id.txtDetAnuncTitulo);
-        this.descricao = (TextView)findViewById(R.id.txtDetAnuncDesc);
-        this.telefone = (TextView)findViewById(R.id.txtDetAnuncTelefone);
-        this.endereco = (TextView)findViewById(R.id.txtDetAnuncEndereco);
-        this.foto = (ImageView)findViewById(R.id.imgDetAnuncImagem);
+        this.title = (TextView)findViewById(R.id.txt_announcement_detail_activity_title);
+        this.description = (TextView)findViewById(R.id.txt_announcement_detail_activity_description);
+        this.phone = (TextView)findViewById(R.id.txt_announcement_detail_activity_phone);
+        this.address = (TextView)findViewById(R.id.txt_announcement_detail_activity_address);
+        this.picture = (ImageView)findViewById(R.id.img_announcement_detail_activity_picture);
 
-        carregaDados();
+        loadData();
     }
 
     public void atualizar(View v) {
@@ -35,17 +35,17 @@ public class AnnouncementDetailActivity extends GenericActivity {
         redirect(this, AnnouncementRegisterActivity.class, extras);
     }
 
-    private void carregaDados() {
+    private void loadData() {
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
             this.announcement = (Announcement)extras.get("announcement");
 
-            this.titulo.setText(announcement.getTitle());
-            this.descricao.setText(announcement.getDescription());
-            this.telefone.setText(announcement.getTelefone());
-            this.endereco.setText(announcement.getEndereco());
-            this.foto.setImageBitmap(announcement.getPicture());
+            this.title.setText(announcement.getTitle());
+            this.description.setText(announcement.getDescription());
+            this.phone.setText(announcement.getTelefone());
+            this.address.setText(announcement.getEndereco());
+            this.picture.setImageBitmap(announcement.getPicture());
         }
     }
 }

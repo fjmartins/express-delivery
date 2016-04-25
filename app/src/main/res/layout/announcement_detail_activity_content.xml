@@ -22,44 +22,44 @@
                 android:layout_marginTop="40dp"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:id="@+id/imgDetAnuncImagem"
+                android:id="@+id/img_announcement_detail_activity_picture"
                 android:src="@drawable/ic_menu_camera"
                 android:layout_centerHorizontal="true"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDetAnuncTitulo"
+                android:id="@+id/txt_announcement_detail_activity_title"
                 android:text="Título"
                 android:textSize="35dp"
-                android:layout_below="@id/imgDetAnuncImagem"/>
+                android:layout_below="@id/img_announcement_detail_activity_picture"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDetAnuncDesc"
+                android:id="@+id/txt_announcement_detail_activity_description"
                 android:text="Descrição"
                 android:textSize="25dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/txtDetAnuncTitulo"/>
+                android:layout_below="@id/txt_announcement_detail_activity_title"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDetAnuncEndereco"
+                android:id="@+id/txt_announcement_detail_activity_address"
                 android:text="Endereço"
                 android:textSize="25dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/txtDetAnuncDesc"/>
+                android:layout_below="@id/txt_announcement_detail_activity_description"/>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/txtDetAnuncTelefone"
+                android:id="@+id/txt_announcement_detail_activity_phone"
                 android:text="Telefone"
                 android:textSize="25dp"
                 android:layout_marginTop="8dp"
-                android:layout_below="@id/txtDetAnuncEndereco"/>
+                android:layout_below="@id/txt_announcement_detail_activity_address"/>
 
         </RelativeLayout>
     </ScrollView>
