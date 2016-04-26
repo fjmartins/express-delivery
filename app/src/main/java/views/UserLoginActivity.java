@@ -28,17 +28,6 @@ public class UserLoginActivity extends GenericActivity {
 
         username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
         password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
-
-        mFCListener = new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!isValidEmail(username.getText())){
-                    showWarning(R.string.aviso_login_email_invalido);
-                }
-            }
-        };
-
-        username.setOnFocusChangeListener(mFCListener);
     }
 
     public void logIn(View view){
@@ -68,27 +57,12 @@ public class UserLoginActivity extends GenericActivity {
         startActivity(intent);
     }
 
-    public void showWarning(int text){
-//        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG)
-//                .setAction(R.string.fechar, mOCListener)
-//                .setActionTextColor(Color.RED)
-//                .show();
-    }
-
-    public final static boolean isValidEmail(CharSequence target) {
-        if (TextUtils.isEmpty(target)) {
-            return false;
-        } else {
-            return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
-        }
-    }
-
     private boolean validate() {
         boolean result = true;
 
         String username = this.username.getText().toString();
         if (username.isEmpty()){
-            this.username.setError("Email inválido");
+            this.username.setError("Nome de usuário inválido");
             result = false;
         } else {
             this.username.setError(null);
