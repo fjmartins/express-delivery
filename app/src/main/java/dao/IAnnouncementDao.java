@@ -13,7 +13,7 @@ public interface IAnnouncementDao {
     void insert(Announcement announcement, IResult<Announcement> result);
     void update(Announcement announcement, IResult<Announcement> result);
     void remove(Announcement announcement, IResult<Announcement> result);
-    Announcement get(Announcement announcement, IResult<Announcement> result);
-    List<Announcement> getAll(IResult<Announcement> result);
+    void get(Announcement announcement, IResult<Announcement> result);
+    void getAll(IResult<Announcement> result);
 
 }
