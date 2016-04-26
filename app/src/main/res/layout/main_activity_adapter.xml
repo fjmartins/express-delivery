@@ -67,11 +67,11 @@
             </LinearLayout>
 
             <ImageView
-                android:id="@+id/imgPrincipalAnuncImagem"
+                android:id="@+id/img_main_announcment"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_centerHorizontal="true"
-                android:src="@drawable/ic_menu_camera" />
+                 />
 
             <LinearLayout
                 android:layout_width="match_parent"

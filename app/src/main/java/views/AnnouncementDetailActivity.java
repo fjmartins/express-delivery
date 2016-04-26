@@ -1,5 +1,6 @@
 package views;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +9,7 @@ import android.widget.TextView;
 import com.example.anderson.expressdelivery.R;
 
 import models.Announcement;
+import models.User;
 
 public class AnnouncementDetailActivity extends GenericActivity {
 
@@ -20,11 +22,11 @@ public class AnnouncementDetailActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcement_detail_activity);
 
-        this.title = (TextView)findViewById(R.id.txt_announcement_detail_activity_title);
-        this.description = (TextView)findViewById(R.id.txt_announcement_detail_activity_description);
-        this.phone = (TextView)findViewById(R.id.txt_announcement_detail_activity_phone);
-        this.address = (TextView)findViewById(R.id.txt_announcement_detail_activity_address);
-        this.picture = (ImageView)findViewById(R.id.img_announcement_detail_activity_picture);
+        this.title = (TextView) findViewById(R.id.txt_announcement_detail_activity_title);
+        this.description = (TextView) findViewById(R.id.txt_announcement_detail_activity_description);
+        this.phone = (TextView) findViewById(R.id.txt_announcement_detail_activity_phone);
+        this.address = (TextView) findViewById(R.id.txt_announcement_detail_activity_address);
+        this.picture = (ImageView) findViewById(R.id.img_announcement_detail_activity_picture);
 
         loadData();
     }
@@ -38,8 +40,13 @@ public class AnnouncementDetailActivity extends GenericActivity {
     private void loadData() {
         Bundle extras = getIntent().getExtras();
 
-        if(extras != null) {
-            this.announcement = (Announcement)extras.get("announcement");
+        if (extras != null) {
+            Bitmap bitmap = extras.getParcelable("picture");
+            Announcement announcement = new Announcement(null, extras.get("tittle").toString(),
+                    extras.get("description").toString(), extras.get("endereco").toString(),
+                    extras.get("telefone").toString(), bitmap);
+
+            this.announcement = announcement;
 
             this.title.setText(announcement.getTitle());
             this.description.setText(announcement.getDescription());

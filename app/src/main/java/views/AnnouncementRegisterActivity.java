@@ -68,7 +68,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             Log.i("foto", foto + "");
             Announcement announcement = new Announcement(null, this.titulo.getText().toString(), this.descricao.getText().toString(),
                     this.endereco.getText().toString(), this.telefone.getText().toString(), foto);
-            AnuncioData.getInstance().insertAnuncio(announcement);
+            AnuncioData.getInstance(getResources()).insertAnuncio(announcement);
 
             redirect(this, MainActivity.class);
         } else {

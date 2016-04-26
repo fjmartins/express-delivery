@@ -23,7 +23,6 @@
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:id="@+id/img_announcement_detail_activity_picture"
-                android:src="@drawable/ic_menu_camera"
                 android:layout_centerHorizontal="true"/>
 
             <TextView

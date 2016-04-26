@@ -57,7 +57,11 @@ public class MainActivity extends GenericActivity
                 Context contexto = getApplicationContext();
                 Intent intent = new Intent(contexto, AnnouncementDetailActivity.class);
                 Announcement announcement = mList.get(position);
-                intent.putExtra("announcement", announcement);
+                intent.putExtra("description", announcement.getDescription());
+                intent.putExtra("endereco", announcement.getEndereco());
+                intent.putExtra("picture", announcement.getPicture());
+                intent.putExtra("telefone", announcement.getTelefone());
+                intent.putExtra("tittle", announcement.getTitle());
                 startActivity(intent);
             }
 
@@ -74,7 +78,7 @@ public class MainActivity extends GenericActivity
 
         //PREENCHER OS ANUNCIO AQUI
         mLayoutGrid = false;
-        mList = AnuncioData.getInstance().getAnuncios();
+        mList = AnuncioData.getInstance(getResources()).getAnuncios();
         mAdapter = new AnuncioAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
 

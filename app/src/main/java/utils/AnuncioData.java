@@ -3,6 +3,7 @@ package utils;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.widget.ImageView;
 
 import com.example.anderson.expressdelivery.R;
 
@@ -19,16 +20,17 @@ public class AnuncioData {
     private List<Announcement> list = new ArrayList<>();
     private static AnuncioData instance;
 
-    private AnuncioData() {
-        this.criaAnuncios();
+    private AnuncioData(Resources res) {
+        this.criaAnuncios(res);
     }
 
-    public static AnuncioData getInstance() {
-        return (instance == null) ? new AnuncioData() : instance;
+    public static AnuncioData getInstance(Resources res) {
+        return (instance == null) ? new AnuncioData(res) : instance;
     }
 
-    private void criaAnuncios() {
-        Bitmap foto = BitmapFactory.decodeResource(Resources.getSystem(), R.drawable.ic_menu_camera);
+    ImageView image;
+    private void criaAnuncios(Resources res) {
+        Bitmap foto = BitmapFactory.decodeResource(res ,(R.drawable.ic_menu_camera));
         for (int i = 1; i <= 4; i++){
             Announcement announcement = new Announcement(null, "TÍTULO ANUNCIO "+i, "DESCRIÇÃO DO ANUNCIO "+i,
                     "Rua dos Lobos, N zero"+i, "(81)912345678", foto);
