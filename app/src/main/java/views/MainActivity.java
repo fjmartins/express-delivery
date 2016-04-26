@@ -10,34 +10,37 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
+
+import controllers.UserAuthController;
+import models.User;
+import services.IResultUser;
 import views.adapters.AnuncioAdapter;
 import views.adapters.RecyclerItemClickListener;
-import models.Anuncio;
+import models.Announcement;
 import utils.AnuncioData;
 
 import java.util.List;
 
-public class PrincipalActivity extends AppCompatActivity
+public class MainActivity extends GenericActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
 
     private RecyclerView mRecyclerView;
     private AnuncioAdapter mAdapter;
     private boolean mLayoutGrid;
-    private List<Anuncio> mList;
+    private List<Announcement> mList;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.principal_activity);
+        setContentView(R.layout.main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -52,9 +55,9 @@ public class PrincipalActivity extends AppCompatActivity
             @Override
             public void onItemClick(View view, int position) {
                 Context contexto = getApplicationContext();
-                Intent intent = new Intent(contexto, DetalheAnuncioActivity.class);
-                Anuncio anuncio = mList.get(position);
-                intent.putExtra("anuncio", anuncio);
+                Intent intent = new Intent(contexto, AnnouncementDetailActivity.class);
+                Announcement announcement = mList.get(position);
+                intent.putExtra("announcement", announcement);
                 startActivity(intent);
             }
 
@@ -71,7 +74,7 @@ public class PrincipalActivity extends AppCompatActivity
 
         //PREENCHER OS ANUNCIO AQUI
         mLayoutGrid = false;
-        mList = AnuncioData.getAnuncio();
+        mList = AnuncioData.getInstance().getAnuncios();
         mAdapter = new AnuncioAdapter(mList);
         mRecyclerView.setAdapter(mAdapter);
 
@@ -100,7 +103,7 @@ public class PrincipalActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.principal, menu);
+        getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
@@ -126,18 +129,35 @@ public class PrincipalActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_manage_cadastro_anuncio) {
-            this.goToActivity(this, CadastroAnuncioActivity.class);
+            redirect(this, AnnouncementRegisterActivity.class);
         } else if(id == R.id.nav_manage_cadastro_usuario) {
-            this.goToActivity(this, CadastroActivity.class);
+            redirect(this, UserRegisterActivity.class);
+        } else if (id == R.id.nav_manage_logout) {
+            UserAuthController.getCurrentUser(new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    UserAuthController.logOut(obj, new IResultUser<User>() {
+                        @Override
+                        public void onSuccess(User obj) {
+                            redirect(MainActivity.this, UserLoginActivity.class);
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(MainActivity.this, msg);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(MainActivity.this, msg);
+                }
+            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
-    }
-
-    private void goToActivity(Context context, Class activity) {
-        Intent intent = new Intent(context, activity);
-        context.startActivity(intent);
     }
 }

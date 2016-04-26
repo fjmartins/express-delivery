@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:fitsSystemWindows="true"
+    tools:context="views.AnnouncementDetailActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginTop="40dp"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:id="@+id/img_announcement_detail_activity_picture"
+                android:src="@drawable/ic_menu_camera"
+                android:layout_centerHorizontal="true"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_announcement_detail_activity_title"
+                android:text="Título"
+                android:textSize="35dp"
+                android:layout_below="@id/img_announcement_detail_activity_picture"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_announcement_detail_activity_description"
+                android:text="Descrição"
+                android:textSize="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/txt_announcement_detail_activity_title"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_announcement_detail_activity_address"
+                android:text="Endereço"
+                android:textSize="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/txt_announcement_detail_activity_description"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/txt_announcement_detail_activity_phone"
+                android:text="Telefone"
+                android:textSize="25dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/txt_announcement_detail_activity_address"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

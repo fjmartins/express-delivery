@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="views.PrincipalActivity">
+    tools:context="views.MainActivity">
 
     <include
         layout="@layout/app_bar"
@@ -12,6 +12,6 @@
         android:layout_height="match_parent" />
 
     <include
-        layout="@layout/content_principal" />
+        layout="@layout/main_activity_content" />
 
 </android.support.design.widget.CoordinatorLayout>
