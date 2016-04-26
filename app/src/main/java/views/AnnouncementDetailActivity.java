@@ -31,7 +31,8 @@ public class AnnouncementDetailActivity extends GenericActivity {
         loadData();
     }
 
-    public void atualizar(View v) {
+    public void update(View v) {
+        this.isUserAuth(this);
         Bundle extras = new Bundle();
         extras.putString("description", announcement.getDescription());
         extras.putString("endereco", announcement.getEndereco());

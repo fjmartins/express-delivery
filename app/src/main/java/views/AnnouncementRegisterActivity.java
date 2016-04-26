@@ -37,6 +37,8 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcement_register_activity);
 
+        this.isUserAuth(this);
+
         this.title = (EditText)findViewById(R.id.txtCadAnuncioTitulo);
         this.description = (EditText)findViewById(R.id.txtCadAnuncioDesc);
         this.phone = (EditText)findViewById(R.id.txtCadAnuncioTelefone);
@@ -44,6 +46,12 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         this.picture = (ImageView)findViewById(R.id.img_announcement_activity);
 
         loadData();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        this.isUserAuth(this);
     }
 
     public void makePicture(View v) {
@@ -141,12 +149,13 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             btnCad.setText("Atualizar");
 
             this.announcement = (Announcement)extras.get("announcement");
-
-            this.title.setText(announcement.getTitle());
-            this.description.setText(announcement.getDescription());
-            this.phone.setText(announcement.getTelefone());
-            this.address.setText(announcement.getEndereco());
-            this.picture.setImageBitmap(announcement.getPicture());
+            if (this.announcement != null) {
+                this.title.setText(announcement.getTitle());
+                this.description.setText(announcement.getDescription());
+                this.phone.setText(announcement.getTelefone());
+                this.address.setText(announcement.getEndereco());
+                this.picture.setImageBitmap(announcement.getPicture());
+            }
         }
     }
  }

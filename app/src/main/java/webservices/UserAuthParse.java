@@ -50,7 +50,7 @@ public class UserAuthParse implements IUserAuth {
     public void getCurrentUser(IResultUser<User> result) {
         ParseUser currentUser = ParseUser.getCurrentUser();
         if (currentUser == null) {
-            result.onError("Nenhum usuário logado");
+            result.onError("Faça login para continuar");
         } else {
             User user = new User();
             user.setUsername(currentUser.getUsername());
