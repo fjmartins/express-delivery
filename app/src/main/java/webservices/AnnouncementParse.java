@@ -11,8 +11,6 @@ import dao.IAnnouncementDao;
 import services.IResult;
 import models.Announcement;
 
-import com.parse.FindCallback;
-import com.parse.GetDataCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
@@ -37,7 +35,7 @@ public class AnnouncementParse implements IAnnouncementDao {
         imageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if (e == null){
+                if (e == null) {
                     ParseObject parseObject = new ParseObject("Announcement");
                     parseObject.put("User", announcement.getUser());
                     parseObject.put("Title", announcement.getTitle());
@@ -56,7 +54,7 @@ public class AnnouncementParse implements IAnnouncementDao {
                             }
                         }
                     });
-                }else{
+                } else {
                     result.onError(e.getMessage());
                 }
             }
@@ -79,42 +77,29 @@ public class AnnouncementParse implements IAnnouncementDao {
 
     }
 
-
     @Override
     public void getAll(final IResult<Announcement> result) {
         final List<Announcement> announcementsList = new ArrayList<Announcement>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
-        query.findInBackground(new FindCallback<ParseObject>() {
-            @Override
-            public void done(List<ParseObject> objects, ParseException e) {
-                if (e != null) {
-                    result.onError(e.getMessage());
-                } else {
-                    for (ParseObject parseObject : objects) {
-                        String user = parseObject.get("User").toString();
-                        String title = parseObject.get("Title").toString();
-                        String endereco = parseObject.get("Endereco").toString();
-                        String description = parseObject.get("Description").toString();
-                        String telefone = parseObject.get("Description").toString();
-                        final Announcement announcement = new Announcement(user, title, description,
-                                endereco, telefone, null);
-                        ParseFile imageFile = (ParseFile) parseObject.get("Picture");
-                        imageFile.getDataInBackground(new GetDataCallback() {
-                            @Override
-                            public void done(byte[] data, ParseException e) {
-                                if (e != null) {
-                                    result.onError(e.getMessage());
-                                } else {
-                                    Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                                    announcement.setPicture(bitmap);
-                                    announcementsList.add(announcement);
-                                }
-                            }
-                        });
-                    }
-                    result.onSuccess(announcementsList);
-                }
+        try {
+            List<ParseObject> objects = query.find();
+            for (ParseObject parseObject : objects) {
+                String user = parseObject.get("User").toString();
+                String title = parseObject.get("Title").toString();
+                String endereco = parseObject.get("Endereco").toString();
+                String description = parseObject.get("Description").toString();
+                String telefone = parseObject.get("Description").toString();
+                final Announcement announcement = new Announcement(user, title, description,
+                        endereco, telefone, null);
+                ParseFile imageFile = (ParseFile) parseObject.get("Picture");
+                byte[] data = imageFile.getData();
+                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                announcement.setPicture(bitmap);
+                announcementsList.add(announcement);
             }
-        });
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        result.onSuccess(announcementsList);
     }
 }

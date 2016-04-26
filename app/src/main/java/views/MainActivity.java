@@ -96,7 +96,13 @@ public class MainActivity extends GenericActivity
 
     }
 
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void>{
+    @Override
+    protected void onResume() {
+        super.onResume();
+        new RemoteDataTask().execute();
+    }
+
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -104,7 +110,9 @@ public class MainActivity extends GenericActivity
             AnnouncementController.getAll(new IResult<Announcement>() {
                 @Override
                 public void onSuccess(List<Announcement> list) {
+                    mLayoutGrid = false;
                     mList = list;
+
                 }
 
                 @Override
@@ -117,31 +125,21 @@ public class MainActivity extends GenericActivity
 
                 }
             });
+
         }
 
         @Override
         protected Void doInBackground(Void... params) {
 
-            AnnouncementParse announcementParse = new AnnouncementParse();
-            announcementParse.getAll(new IResult<Announcement>() {
-                @Override
-                public void onSuccess(List<Announcement> list) {
-
-                    mAdapter = new AnuncioAdapter(mList);
-                    mRecyclerView.setAdapter(mAdapter);
-                }
-
-                @Override
-                public void onSuccess(Announcement obj) {
-
-                }
-
-                @Override
-                public void onError(String msg) {
-
-                }
-            });
             return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mAdapter = new AnuncioAdapter(mList);
+            mRecyclerView.setAdapter(mAdapter);
         }
     }
 
