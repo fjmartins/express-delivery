@@ -30,6 +30,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     private EditText title, description, phone, address;
     private ImageView picture;
     private Announcement announcement;
+    private Bitmap pictureMake;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +59,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                     Bundle b = data.getExtras();
                     Bitmap btm = b.getParcelable("data");
                     btm = Bitmap.createScaledBitmap(btm, 200, 200, true);
-                    AnnouncementRegisterActivity.this.picture.setDrawingCacheEnabled(true);
-                    AnnouncementRegisterActivity.this.picture.buildDrawingCache();
+                    this.pictureMake = btm;
                     AnnouncementRegisterActivity.this.picture.setImageBitmap(btm);
                 }
             }
@@ -72,7 +72,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             final String phone = this.phone.getText().toString();
             final String description = this.description.getText().toString();
             final String address = this.address.getText().toString();
-            final Bitmap picture = this.picture.getDrawingCache();
+            final Bitmap picture = this.pictureMake;
 
             UserAuthController.getCurrentUser(new IResultUser<User>() {
                 @Override
