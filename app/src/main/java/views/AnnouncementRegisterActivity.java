@@ -4,17 +4,21 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
+import java.util.List;
+
+import controllers.AnnouncementController;
+import controllers.UserAuthController;
 import models.Announcement;
-import utils.AnuncioData;
+import models.User;
+import services.IResult;
+import services.IResultUser;
 
 /**
  * Created by Allan-PC on 17/04/2016.
@@ -23,8 +27,8 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 
     private static final int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 100;
 
-    private EditText titulo, descricao, telefone, endereco;
-    private ImageView foto;
+    private EditText title, description, phone, address;
+    private ImageView picture;
     private Announcement announcement;
 
     @Override
@@ -32,16 +36,16 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcement_register_activity);
 
-        this.titulo = (EditText)findViewById(R.id.txtCadAnuncioTitulo);
-        this.descricao = (EditText)findViewById(R.id.txtCadAnuncioDesc);
-        this.telefone = (EditText)findViewById(R.id.txtCadAnuncioTelefone);
-        this.endereco = (EditText)findViewById(R.id.txtCadAnuncioEndereco);
-        this.foto = (ImageView)findViewById(R.id.img_announcement_activity);
+        this.title = (EditText)findViewById(R.id.txtCadAnuncioTitulo);
+        this.description = (EditText)findViewById(R.id.txtCadAnuncioDesc);
+        this.phone = (EditText)findViewById(R.id.txtCadAnuncioTelefone);
+        this.address = (EditText)findViewById(R.id.txtCadAnuncioEndereco);
+        this.picture = (ImageView)findViewById(R.id.img_announcement_activity);
 
-        carregaDados();
+        loadData();
     }
 
-    public void tirarFoto(View v) {
+    public void makePicture(View v) {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         startActivityForResult(intent, CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE);
     }
@@ -54,35 +58,82 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                     Bundle b = data.getExtras();
                     Bitmap btm = b.getParcelable("data");
                     btm = Bitmap.createScaledBitmap(btm, 200, 200, true);
-                    AnnouncementRegisterActivity.this.foto.setDrawingCacheEnabled(true);
-                    AnnouncementRegisterActivity.this.foto.buildDrawingCache();
-                    AnnouncementRegisterActivity.this.foto.setImageBitmap(btm);
+                    AnnouncementRegisterActivity.this.picture.setDrawingCacheEnabled(true);
+                    AnnouncementRegisterActivity.this.picture.buildDrawingCache();
+                    AnnouncementRegisterActivity.this.picture.setImageBitmap(btm);
                 }
             }
         }
     }
 
-    public void salvar(View v) {
-        if (valida()) {
-            Bitmap foto = this.foto.getDrawingCache();
-            Log.i("foto", foto + "");
-            Announcement announcement = new Announcement(null, this.titulo.getText().toString(), this.descricao.getText().toString(),
-                    this.endereco.getText().toString(), this.telefone.getText().toString(), foto);
-            AnuncioData.getInstance(getResources()).insertAnuncio(announcement);
+    public void save(View v) {
+        if (validate()) {
+            final String title = this.title.getText().toString();
+            final String phone = this.phone.getText().toString();
+            final String description = this.description.getText().toString();
+            final String address = this.address.getText().toString();
+            final Bitmap picture = this.picture.getDrawingCache();
 
-            redirect(this, MainActivity.class);
-        } else {
-            Toast.makeText(this, "Preencha os campos obrigatórios", Toast.LENGTH_SHORT).show();
+            UserAuthController.getCurrentUser(new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    Announcement announcement = new Announcement(obj.getUsername(),
+                            title, description, address, phone, picture);
+                    AnnouncementController.insert(announcement, new IResult<Announcement>() {
+                        @Override
+                        public void onSuccess(List<Announcement> list) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Announcement obj) {
+                            Bundle extras = new Bundle();
+                            extras.putString("description", obj.getDescription());
+                            extras.putString("endereco", obj.getEndereco());
+                            extras.putString("telefone", obj.getTelefone());
+                            extras.putString("tittle", obj.getTitle());
+                            extras.putParcelable("picture", obj.getPicture());
+                            redirect(AnnouncementRegisterActivity.this, AnnouncementDetailActivity.class, extras);
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(AnnouncementRegisterActivity.this, msg);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(AnnouncementRegisterActivity.this, "Você não está logado");
+                }
+            });
         }
     }
 
-    private boolean valida() {
-        if (!this.titulo.getText().toString().equals("") && !this.telefone.getText().toString().equals(""))
-            return true;
-        return false;
+    private boolean validate() {
+        boolean result = true;
+
+        String title = this.title.getText().toString();
+        if (title.trim().isEmpty()){
+            this.title.setError("Campo obrigatório");
+            result = false;
+        } else {
+            this.title.setError(null);
+        }
+
+        String phone = this.phone.getText().toString();
+        if (phone.trim().isEmpty()){
+            this.phone.setError("Campo obrigatório");
+            result = false;
+        } else {
+            this.phone.setError(null);
+        }
+
+        return result;
     }
 
-    private void carregaDados() {
+    private void loadData() {
         Bundle extras = getIntent().getExtras();
 
         if(extras != null) {
@@ -91,11 +142,11 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 
             this.announcement = (Announcement)extras.get("announcement");
 
-            this.titulo.setText(announcement.getTitle());
-            this.descricao.setText(announcement.getDescription());
-            this.telefone.setText(announcement.getTelefone());
-            this.endereco.setText(announcement.getEndereco());
-            this.foto.setImageBitmap(announcement.getPicture());
+            this.title.setText(announcement.getTitle());
+            this.description.setText(announcement.getDescription());
+            this.phone.setText(announcement.getTelefone());
+            this.address.setText(announcement.getEndereco());
+            this.picture.setImageBitmap(announcement.getPicture());
         }
     }
  }

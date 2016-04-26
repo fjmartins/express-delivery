@@ -2,18 +2,15 @@ package webservices;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.widget.EditText;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
 import dao.IAnnouncementDao;
-import models.User;
 import services.IResult;
 import models.Announcement;
 
-import com.example.anderson.expressdelivery.R;
 import com.parse.FindCallback;
 import com.parse.GetDataCallback;
 import com.parse.ParseException;
@@ -35,7 +32,7 @@ public class AnnouncementParse implements IAnnouncementDao {
         announcement.getPicture().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] image = stream.toByteArray();
 
-        final ParseFile imageFile = new ParseFile(announcement.getUser()+
+        final ParseFile imageFile = new ParseFile(announcement.getUser() + System.currentTimeMillis() +
                 ".png", image);
         imageFile.saveInBackground(new SaveCallback() {
             @Override

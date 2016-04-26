@@ -33,7 +33,11 @@ public class AnnouncementDetailActivity extends GenericActivity {
 
     public void atualizar(View v) {
         Bundle extras = new Bundle();
-        extras.putSerializable("announcement", this.announcement);
+        extras.putString("description", announcement.getDescription());
+        extras.putString("endereco", announcement.getEndereco());
+        extras.putString("telefone", announcement.getTelefone());
+        extras.putString("tittle", announcement.getTitle());
+        extras.putParcelable("picture", announcement.getPicture());
         redirect(this, AnnouncementRegisterActivity.class, extras);
     }
 

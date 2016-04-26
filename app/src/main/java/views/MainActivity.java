@@ -49,23 +49,6 @@ public class MainActivity extends GenericActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Announcement announcement = AnuncioData.getInstance(getResources()).getAnuncios().get(0);
-        AnnouncementController.insert(announcement, new IResult<Announcement>() {
-            @Override
-            public void onSuccess(List<Announcement> list) {
-
-            }
-
-            @Override
-            public void onSuccess(Announcement obj) {
-                Log.e("NAO DEU ERRO ", obj.getUser());
-            }
-
-            @Override
-            public void onError(String msg) {
-                Log.e("DEU ERRO ", msg);
-            }
-        });
 
         mLayoutGrid = false;
         new RemoteDataTask().execute();

@@ -10,15 +10,17 @@ public class User {
     private String password;
 
     public User(String username, String email, String password) {
-        this.username = username;
-        this.email = email;
-        this.password = password;
+        this.setUsername(username);
+        this.setEmail(email);
+        this.setPassword(password);
     }
 
-    public User(String username, String email) {
-        this.username = username;
-        this.email = email;
+    public User(String username, String password) {
+        this.setUsername(username);
+        this.setPassword(password);
     }
+
+    public User() { }
 
     public String getUsername() {
         return username;

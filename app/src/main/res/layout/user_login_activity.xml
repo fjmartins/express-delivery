@@ -28,7 +28,6 @@
             <EditText android:id="@+id/edt_loginactivity_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textEmailAddress"
                 android:hint="@string/txt_login_email" />
         </android.support.design.widget.TextInputLayout>
 
@@ -53,7 +52,7 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="24dp"
             android:padding="12dp"
-            android:onClick="logar"
+            android:onClick="logIn"
             android:background="@color/colorAccent"
             android:text="@string/btn_login_entrar"/>
 

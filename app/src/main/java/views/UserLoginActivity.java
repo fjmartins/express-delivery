@@ -1,18 +1,21 @@
 package views;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.EditText;
 
 import com.example.anderson.expressdelivery.R;
 
+import controllers.UserAuthController;
+import models.User;
+import services.IResultUser;
+
 public class UserLoginActivity extends GenericActivity {
 
-    private EditText email;
+    private EditText username;
     private EditText password;
 
     View.OnClickListener mOCListener;
@@ -23,32 +26,35 @@ public class UserLoginActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login_activity);
 
-        email = (EditText) this.findViewById(R.id.edt_loginactivity_email);
+        username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
         password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
 
         mFCListener = new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                if(!isValidEmail(email.getText())){
+                if(!isValidEmail(username.getText())){
                     showWarning(R.string.aviso_login_email_invalido);
                 }
             }
         };
 
-        email.setOnFocusChangeListener(mFCListener);
+        username.setOnFocusChangeListener(mFCListener);
     }
 
-    public void logar(View view){
-        Intent intent = new Intent(this, MainActivity.class);
+    public void logIn(View view){
+        if (validate()) {
+            User user = new User(username.getText().toString(), password.getText().toString());
+            UserAuthController.logIn(user, new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    redirect(UserLoginActivity.this, MainActivity.class);
+                }
 
-        if(email.getText().toString().equals("")){
-            showWarning(R.string.aviso_login_email_nao_preenchido);
-            email.requestFocus();
-        }else if(password.getText().toString().equals("")){
-            showWarning(R.string.aviso_login_senha_nao_preenchida);
-            password.requestFocus();
-        } else {
-            startActivity(intent);
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(UserLoginActivity.this, msg);
+                }
+            });
         }
     }
 
@@ -63,10 +69,10 @@ public class UserLoginActivity extends GenericActivity {
     }
 
     public void showWarning(int text){
-        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG)
-                .setAction(R.string.fechar, mOCListener)
-                .setActionTextColor(Color.RED)
-                .show();
+//        Snackbar.make(findViewById(android.R.id.content), text, Snackbar.LENGTH_LONG)
+//                .setAction(R.string.fechar, mOCListener)
+//                .setActionTextColor(Color.RED)
+//                .show();
     }
 
     public final static boolean isValidEmail(CharSequence target) {
@@ -75,6 +81,28 @@ public class UserLoginActivity extends GenericActivity {
         } else {
             return android.util.Patterns.EMAIL_ADDRESS.matcher(target).matches();
         }
+    }
+
+    private boolean validate() {
+        boolean result = true;
+
+        String username = this.username.getText().toString();
+        if (username.isEmpty()){
+            this.username.setError("Email inválido");
+            result = false;
+        } else {
+            this.username.setError(null);
+        }
+
+        String password = this.password.getText().toString();
+        if (password.trim().isEmpty()){
+            this.password.setError("Senha inválida");
+            result = false;
+        } else {
+            this.password.setError(null);
+        }
+
+        return result;
     }
 
 }
