@@ -2,9 +2,11 @@ package views;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,13 +19,16 @@ import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
+import controllers.AnnouncementController;
 import controllers.UserAuthController;
 import models.User;
+import services.IResult;
 import services.IResultUser;
 import views.adapters.AnuncioAdapter;
 import views.adapters.RecyclerItemClickListener;
 import models.Announcement;
 import utils.AnuncioData;
+import webservices.AnnouncementParse;
 
 import java.util.List;
 
@@ -43,6 +48,27 @@ public class MainActivity extends GenericActivity
         setContentView(R.layout.main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Announcement announcement = AnuncioData.getInstance(getResources()).getAnuncios().get(0);
+        AnnouncementController.insert(announcement, new IResult<Announcement>() {
+            @Override
+            public void onSuccess(List<Announcement> list) {
+
+            }
+
+            @Override
+            public void onSuccess(Announcement obj) {
+                Log.e("NAO DEU ERRO ", obj.getUser());
+            }
+
+            @Override
+            public void onError(String msg) {
+                Log.e("DEU ERRO ", msg);
+            }
+        });
+
+        mLayoutGrid = false;
+        new RemoteDataTask().execute();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
@@ -75,14 +101,6 @@ public class MainActivity extends GenericActivity
             }
         }));
 
-
-        //PREENCHER OS ANUNCIO AQUI
-        mLayoutGrid = false;
-        mList = AnuncioData.getInstance(getResources()).getAnuncios();
-        mAdapter = new AnuncioAdapter(mList);
-        mRecyclerView.setAdapter(mAdapter);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -92,6 +110,56 @@ public class MainActivity extends GenericActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
+
+    }
+
+    private class RemoteDataTask extends AsyncTask<Void, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            AnnouncementController.getAll(new IResult<Announcement>() {
+                @Override
+                public void onSuccess(List<Announcement> list) {
+                    mList = list;
+                }
+
+                @Override
+                public void onSuccess(Announcement obj) {
+
+                }
+
+                @Override
+                public void onError(String msg) {
+
+                }
+            });
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            AnnouncementParse announcementParse = new AnnouncementParse();
+            announcementParse.getAll(new IResult<Announcement>() {
+                @Override
+                public void onSuccess(List<Announcement> list) {
+
+                    mAdapter = new AnuncioAdapter(mList);
+                    mRecyclerView.setAdapter(mAdapter);
+                }
+
+                @Override
+                public void onSuccess(Announcement obj) {
+
+                }
+
+                @Override
+                public void onError(String msg) {
+
+                }
+            });
+            return null;
+        }
     }
 
     @Override

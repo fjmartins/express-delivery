@@ -35,29 +35,35 @@ public class AnnouncementParse implements IAnnouncementDao {
         announcement.getPicture().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] image = stream.toByteArray();
 
-        ParseFile imageFile = new ParseFile(announcement.getUser() + announcement.getTitle() +
+        final ParseFile imageFile = new ParseFile(announcement.getUser()+
                 ".png", image);
-        imageFile.saveInBackground();
-
-        ParseObject parseObject = new ParseObject("Announcement");
-        parseObject.put("User", announcement.getUser());
-        parseObject.put("Title", announcement.getTitle());
-        parseObject.put("Endereco", announcement.getEndereco());
-        parseObject.put("Description", announcement.getDescription());
-        parseObject.put("Telefone", announcement.getTelefone());
-        parseObject.put("Picture", imageFile);
-
-        parseObject.saveInBackground(new SaveCallback() {
+        imageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
-                if (e != null) {
+                if (e == null){
+                    ParseObject parseObject = new ParseObject("Announcement");
+                    parseObject.put("User", announcement.getUser());
+                    parseObject.put("Title", announcement.getTitle());
+                    parseObject.put("Endereco", announcement.getEndereco());
+                    parseObject.put("Description", announcement.getDescription());
+                    parseObject.put("Telefone", announcement.getTelefone());
+                    parseObject.put("Picture", imageFile);
+
+                    parseObject.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if (e != null) {
+                                result.onError(e.getMessage());
+                            } else {
+                                result.onSuccess(announcement);
+                            }
+                        }
+                    });
+                }else{
                     result.onError(e.getMessage());
-                } else {
-                    result.onSuccess(announcement);
                 }
             }
         });
-
     }
 
     @Override
@@ -88,7 +94,7 @@ public class AnnouncementParse implements IAnnouncementDao {
                     result.onError(e.getMessage());
                 } else {
                     for (ParseObject parseObject : objects) {
-                        User user = (User) parseObject.get("User");
+                        String user = parseObject.get("User").toString();
                         String title = parseObject.get("Title").toString();
                         String endereco = parseObject.get("Endereco").toString();
                         String description = parseObject.get("Description").toString();

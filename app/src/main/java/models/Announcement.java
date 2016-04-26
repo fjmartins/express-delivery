@@ -14,9 +14,9 @@ public class Announcement implements Serializable {
     private String endereco;
     private String telefone;
     private Bitmap picture;
-    private User user;
+    private String user;
 
-    public Announcement(User user, String title, String description, String endereco, String telefone, Bitmap picture) {
+    public Announcement(String user, String title, String description, String endereco, String telefone, Bitmap picture) {
         this.user = user;
         this.title = title;
         this.description = description;
@@ -71,11 +71,11 @@ public class Announcement implements Serializable {
         this.picture = picture;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
     }
 }

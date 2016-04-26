@@ -32,7 +32,7 @@ public class AnuncioData {
     private void criaAnuncios(Resources res) {
         Bitmap foto = BitmapFactory.decodeResource(res ,(R.drawable.ic_menu_camera));
         for (int i = 1; i <= 4; i++){
-            Announcement announcement = new Announcement(null, "TÍTULO ANUNCIO "+i, "DESCRIÇÃO DO ANUNCIO "+i,
+            Announcement announcement = new Announcement("user" , "TÍTULO ANUNCIO "+i, "DESCRIÇÃO DO ANUNCIO "+i,
                     "Rua dos Lobos, N zero"+i, "(81)912345678", foto);
             this.list.add(announcement);
         }
