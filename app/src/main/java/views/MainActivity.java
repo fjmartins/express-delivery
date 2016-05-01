@@ -1,12 +1,14 @@
 package views;
 
+import android.annotation.TargetApi;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -24,11 +26,9 @@ import controllers.UserAuthController;
 import models.User;
 import services.IResult;
 import services.IResultUser;
-import views.adapters.AnuncioAdapter;
+import views.adapters.AnnouncementAdapter;
 import views.adapters.RecyclerItemClickListener;
 import models.Announcement;
-import utils.AnuncioData;
-import webservices.AnnouncementParse;
 
 import java.util.List;
 
@@ -36,7 +36,7 @@ public class MainActivity extends GenericActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     private RecyclerView mRecyclerView;
-    private AnuncioAdapter mAdapter;
+    private AnnouncementAdapter mAdapter;
     private boolean mLayoutGrid;
     private List<Announcement> mList;
 
@@ -101,12 +101,79 @@ public class MainActivity extends GenericActivity
         new RemoteDataTask().execute();
     }
 
+    ProgressDialog mProgressDialog;
+
+    private int limit = 2;
+
     private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            AnnouncementController.getAll( 2 ,new IResult<Announcement>() {
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            AnnouncementController.getAll(limit, new IResult<Announcement>() {
+                @Override
+                public void onSuccess(List<Announcement> list) {
+                    mLayoutGrid = false;
+                    mList = list;
+
+                }
+
+                @Override
+                public void onSuccess(Announcement obj) {
+
+                }
+
+                @Override
+                public void onError(String msg) {
+
+                }
+            });
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            mAdapter = new AnnouncementAdapter(mList);
+            mRecyclerView.setAdapter(mAdapter);
+
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+                @Override
+                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                    super.onScrolled(recyclerView, dx, dy);
+
+                }
+                @Override
+                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                    super.onScrollStateChanged(recyclerView, newState);
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        Toast.makeText(getBaseContext(), "PEGOU", Toast.LENGTH_LONG).show();
+                        new LoadMoreDataTask().execute();
+                    }
+
+                }
+            });
+
+        }
+    }
+
+    private class LoadMoreDataTask extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+
+            AnnouncementController.getAll(limit += 1, new IResult<Announcement>() {
                 @Override
                 public void onSuccess(List<Announcement> list) {
                     mLayoutGrid = false;
@@ -125,22 +192,21 @@ public class MainActivity extends GenericActivity
                 }
             });
 
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
 
             return null;
         }
 
 
+        @TargetApi(Build.VERSION_CODES.M)
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            mAdapter = new AnuncioAdapter(mList);
+            mAdapter = new AnnouncementAdapter(mList);
             mRecyclerView.setAdapter(mAdapter);
+
         }
     }
+
 
     @Override
     public void onBackPressed() {
@@ -182,7 +248,7 @@ public class MainActivity extends GenericActivity
 
         if (id == R.id.nav_manage_cadastro_anuncio) {
             redirect(this, AnnouncementRegisterActivity.class);
-        } else if(id == R.id.nav_manage_cadastro_usuario) {
+        } else if (id == R.id.nav_manage_cadastro_usuario) {
             redirect(this, UserRegisterActivity.class);
         } else if (id == R.id.nav_manage_logout) {
             UserAuthController.getCurrentUser(new IResultUser<User>() {

@@ -15,11 +15,11 @@ import java.util.List;
 /**
  * Created by morte on 16/04/2016.
  */
-public class AnuncioAdapter extends RecyclerView.Adapter<AnuncioAdapter.AnuncioViewHolder> {
+public class AnnouncementAdapter extends RecyclerView.Adapter<AnnouncementAdapter.AnuncioViewHolder> {
 
     private List<Announcement> mList;
 
-    public AnuncioAdapter(List<Announcement> list){
+    public AnnouncementAdapter(List<Announcement> list){
         this.mList = list;
     }
     @Override
