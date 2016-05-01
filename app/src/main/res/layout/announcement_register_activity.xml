@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:fillViewport="true"
     tools:context="views.AnnouncementRegisterActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -27,13 +29,13 @@
                 android:src="@drawable/ic_menu_camera"/>
 
             <!--<Button-->
-                <!--android:layout_width="40dp"-->
-                <!--android:layout_height="40dp"-->
-                <!--android:id="@+id/btnCadAnuncioImagem"-->
-                <!--android:layout_centerHorizontal="true"-->
-                <!--android:layout_gravity="center_horizontal"-->
-                <!--android:background="@drawable/ic_menu_camera"-->
-                <!--android:onClick="makePicture"/>-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:id="@+id/btnCadAnuncioImagem"-->
+            <!--android:layout_centerHorizontal="true"-->
+            <!--android:layout_gravity="center_horizontal"-->
+            <!--android:background="@drawable/ic_menu_camera"-->
+            <!--android:onClick="makePicture"/>-->
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -98,6 +100,7 @@
                 android:padding="12dp"
                 android:onClick="save"
                 android:background="@color/colorAccent"
+                android:textColor="@color/primaryText"
                 android:text="@string/cadastrar"/>
 
         </LinearLayout>

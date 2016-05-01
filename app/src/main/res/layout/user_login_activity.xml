@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/colorPrimary"
+    android:background="#607D8B"
     android:fitsSystemWindows="true">
 
     <LinearLayout
@@ -24,11 +24,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="#FFFFFF">
             <EditText android:id="@+id/edt_loginactivity_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txt_login_email" />
+                android:hint="@string/txt_login_email"
+                android:textColor="@color/primaryText"/>
         </android.support.design.widget.TextInputLayout>
 
         <!-- Password Label -->
@@ -36,12 +38,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="8dp"
+            android:textColorHint="@color/primaryText">
             <EditText android:id="@+id/edt_loginactivity_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword"
                 android:maxLength="20"
+                android:textColor="#FFFFFF"
                 android:hint="@string/txt_login_password"/>
         </android.support.design.widget.TextInputLayout>
 
@@ -54,6 +58,7 @@
             android:padding="12dp"
             android:onClick="logIn"
             android:background="@color/colorAccent"
+            android:textColor="@color/primaryText"
             android:text="@string/btn_login_entrar"/>
 
         <android.support.v7.widget.AppCompatButton
@@ -65,6 +70,7 @@
             android:padding="12dp"
             android:onClick="visitar"
             android:background="@color/colorAccent"
+            android:textColor="@color/primaryText"
             android:text="@string/btn_login_visitar"/>
 
         <TextView android:id="@+id/link_loginactivity_signup"
@@ -74,7 +80,8 @@
             android:onClick="cadastrar"
             android:text="@string/mensagem_cadastrar"
             android:gravity="center"
-            android:textSize="16dip"/>
+            android:textSize="16dip"
+            android:textColor="@color/primaryText"/>
 
     </LinearLayout>
 </ScrollView>

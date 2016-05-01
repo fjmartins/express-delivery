@@ -5,7 +5,9 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="views.UserRegisterActivity"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
 
 
     <android.support.design.widget.TextInputLayout
@@ -42,7 +44,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:password="true"
+            android:inputType="textPassword"
             android:maxLength="20"
             android:id="@+id/txt_register_user_activity_password"
             android:hint="@string/password"/>
@@ -56,7 +58,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:password="true"
+            android:inputType="textPassword"
             android:maxLength="20"
             android:id="@+id/txt_register_user_activity_password_confirm"
             android:hint="@string/password_confirm"/>
@@ -71,6 +73,7 @@
         android:padding="12dp"
         android:onClick="registerUser"
         android:background="@color/colorAccent"
+        android:textColor="@color/primaryText"
         android:text="@string/cadastrar"/>
 
 </LinearLayout>
