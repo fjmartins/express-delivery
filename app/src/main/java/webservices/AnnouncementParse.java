@@ -78,9 +78,15 @@ public class AnnouncementParse implements IAnnouncementDao {
     }
 
     @Override
-    public void getAll(final IResult<Announcement> result) {
+    public void getAll(int limit,final IResult<Announcement> result) {
         final List<Announcement> announcementsList = new ArrayList<Announcement>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
+
+        query.orderByDescending("createdAt");
+        if ((limit > 0) ? true : false){
+            query.setLimit(limit);
+        }
+
         try {
             List<ParseObject> objects = query.find();
             for (ParseObject parseObject : objects) {

@@ -35,7 +35,6 @@ import java.util.List;
 public class MainActivity extends GenericActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-
     private RecyclerView mRecyclerView;
     private AnuncioAdapter mAdapter;
     private boolean mLayoutGrid;
@@ -107,7 +106,7 @@ public class MainActivity extends GenericActivity
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            AnnouncementController.getAll(new IResult<Announcement>() {
+            AnnouncementController.getAll( 2 ,new IResult<Announcement>() {
                 @Override
                 public void onSuccess(List<Announcement> list) {
                     mLayoutGrid = false;

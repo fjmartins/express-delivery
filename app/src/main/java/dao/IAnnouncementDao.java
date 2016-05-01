@@ -14,6 +14,6 @@ public interface IAnnouncementDao {
     void update(Announcement announcement, IResult<Announcement> result);
     void remove(Announcement announcement, IResult<Announcement> result);
     void get(Announcement announcement, IResult<Announcement> result);
-    void getAll(IResult<Announcement> result);
+    void getAll( int limit, IResult<Announcement> result);
 
 }
