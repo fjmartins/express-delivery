@@ -7,7 +7,8 @@
     tools:context="views.UserRegisterActivity"
     android:orientation="vertical"
     android:paddingLeft="24dp"
-    android:paddingRight="24dp">
+    android:paddingRight="24dp"
+    android:background="@drawable/fundo_marcinza">
 
 
     <android.support.design.widget.TextInputLayout
@@ -20,7 +21,8 @@
             android:layout_height="wrap_content"
             android:maxLength="60"
             android:id="@+id/txt_register_user_activity_name"
-            android:hint="@string/user"/>
+            android:hint="@string/user"
+            android:textColor="@color/primaryText" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -33,7 +35,8 @@
             android:layout_height="wrap_content"
             android:id="@+id/txt_register_user_activity_email"
             android:hint="@string/email"
-            android:inputType="textEmailAddress"/>
+            android:inputType="textEmailAddress"
+            android:textColor="@color/design_fab_shadow_end_color" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -61,18 +64,19 @@
             android:inputType="textPassword"
             android:maxLength="20"
             android:id="@+id/txt_register_user_activity_password_confirm"
-            android:hint="@string/password_confirm"/>
+            android:hint="@string/password_confirm"
+            android:textColor="#fefefe" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/btn_register_user_activity_register"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="24dp"
         android:padding="12dp"
         android:onClick="registerUser"
-        android:background="@color/colorAccent"
+        android:background="@color/black_overlay"
         android:textColor="@color/primaryText"
         android:text="@string/cadastrar"/>
 

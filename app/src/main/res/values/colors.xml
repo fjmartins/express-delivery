@@ -5,7 +5,7 @@
     <color name="colorAccent">#0097A7</color>
     <color name="lightPrimary">#FFCCBC</color>
     <color name="textIcons">#FFFFFF</color>
-    <color name="primaryText">#FFFFFF</color>
+    <color name="primaryText">#fffefe</color>
     <color name="secondaryText">#727272</color>
 
     <color name="black_overlay">#66000000</color>
