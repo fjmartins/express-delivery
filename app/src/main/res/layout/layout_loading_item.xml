@@ -5,9 +5,11 @@
     android:orientation="vertical" >
 
     <ProgressBar
+        style="@android:style/Widget.ProgressBar.Horizontal"
         android:id="@+id/progress_main_announcement"
         android:layout_width="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        />
 
 </LinearLayout>

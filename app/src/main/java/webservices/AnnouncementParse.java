@@ -94,7 +94,7 @@ public class AnnouncementParse implements IAnnouncementDao {
                 String title = parseObject.get("Title").toString();
                 String endereco = parseObject.get("Endereco").toString();
                 String description = parseObject.get("Description").toString();
-                String telefone = parseObject.get("Description").toString();
+                String telefone = parseObject.get("Telefone").toString();
                 final Announcement announcement = new Announcement(user, title, description,
                         endereco, telefone, null);
                 ParseFile imageFile = (ParseFile) parseObject.get("Picture");

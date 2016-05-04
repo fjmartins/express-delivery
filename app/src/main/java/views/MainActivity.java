@@ -101,7 +101,7 @@ public class MainActivity extends GenericActivity
 
                         int index = mList.size();
 
-                        AnnouncementController.getAll(index+5, new IResult<Announcement>() {
+                        AnnouncementController.getAll(index + 5, new IResult<Announcement>() {
                             @Override
                             public void onSuccess(List<Announcement> list) {
                                 mList = list;
@@ -149,8 +149,6 @@ public class MainActivity extends GenericActivity
                 toast.show();
             }
         }));
-
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -243,7 +241,7 @@ public class MainActivity extends GenericActivity
         }
     }
 
-    static class AnuncioViewHolder extends RecyclerView.ViewHolder{
+    static class AnuncioViewHolder extends RecyclerView.ViewHolder {
 
         protected TextView viewTitulo;
         protected TextView viewDescricao;
