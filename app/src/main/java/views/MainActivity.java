@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -41,6 +42,8 @@ public class MainActivity extends GenericActivity
     private AnnouncementAdapter mAdapter;
     private boolean mLayoutGrid;
     private List<Announcement> mList;
+
+    private NavigationView navigationView;
 
 
     @Override
@@ -151,8 +154,9 @@ public class MainActivity extends GenericActivity
         drawer.setDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        this.navigationView = (NavigationView) findViewById(R.id.nav_view);
+        setVisibleMenuItem(this.navigationView);
+        this.navigationView.setNavigationItemSelectedListener(this);
 
 
     }
@@ -262,6 +266,8 @@ public class MainActivity extends GenericActivity
     @Override
     protected void onResume() {
         super.onResume();
+
+        this.setVisibleMenuItem(this.navigationView);
     }
 
     @Override
@@ -329,10 +335,26 @@ public class MainActivity extends GenericActivity
                     showToastMessage(MainActivity.this, msg);
                 }
             });
+        } else if (id == R.id.nav_login) {
+            redirect(this, UserLoginActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void setVisibleMenuItem(NavigationView navigationView) {
+        if (this.getUsername().equals("")) {
+            this.setVisible(navigationView, false, true, false, true);
+        } else {
+            this.setVisible(navigationView, true, false, true, false);
+        }
+    }
+
+    private void setVisible(NavigationView navigationView, boolean... value) {
+        for (int i = 0; i < value.length; i++) {
+            navigationView.getMenu().getItem(i).setVisible(value[i]);
+        }
     }
 }

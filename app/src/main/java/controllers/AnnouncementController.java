@@ -33,6 +33,25 @@ public class AnnouncementController {
         });
     }
 
+    public static void update(Announcement announcement, final IResult<Announcement> result){
+        announcementDao.update(announcement, new IResult<Announcement>() {
+            @Override
+            public void onSuccess(List<Announcement> list) {
+
+            }
+
+            @Override
+            public void onSuccess(Announcement obj) {
+                result.onSuccess(obj);
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+    }
+
     public static void getAll(int limit, final IResult<Announcement> result) {
 
         announcementDao.getAll(limit , new IResult<Announcement>() {
