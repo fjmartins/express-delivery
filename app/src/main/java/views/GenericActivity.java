@@ -53,6 +53,12 @@ public class GenericActivity extends AppCompatActivity {
         });
     }
 
+    public void goToMainIfUserAuth() {
+        if (!getUsername().equals("")){
+            redirect(GenericActivity.this, MainActivity.class);
+        }
+    }
+
     public String getUsername(){
         User user = UserAuthController.getCurrentUser();
         return (user == null) ? "" : user.getUsername();

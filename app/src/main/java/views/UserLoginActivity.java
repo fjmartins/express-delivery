@@ -18,9 +18,6 @@ public class UserLoginActivity extends GenericActivity {
     private EditText username;
     private EditText password;
 
-    View.OnClickListener mOCListener;
-    View.OnFocusChangeListener mFCListener;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +25,8 @@ public class UserLoginActivity extends GenericActivity {
 
         username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
         password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
+
+        this.goToMainIfUserAuth();
     }
 
     public void logIn(View view){
@@ -79,4 +78,8 @@ public class UserLoginActivity extends GenericActivity {
         return result;
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }
