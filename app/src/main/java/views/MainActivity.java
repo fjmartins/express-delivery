@@ -2,13 +2,19 @@ package views;
 
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.support.v4.view.ViewPager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +23,10 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
@@ -26,7 +36,7 @@ import controllers.UserAuthController;
 import models.User;
 import services.IResult;
 import services.IResultUser;
-import views.adapters.AnnouncementAdapter;
+import views.adapters.OnLoadMoreListener;
 import views.adapters.RecyclerItemClickListener;
 import models.Announcement;
 
@@ -48,15 +58,72 @@ public class MainActivity extends GenericActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-
         mLayoutGrid = false;
-        new RemoteDataTask().execute();
-
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setHasFixedSize(true);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
+
+        AnnouncementController.getAll(5, new IResult<Announcement>() {
+            @Override
+            public void onSuccess(List<Announcement> list) {
+                mList = list;
+            }
+
+            @Override
+            public void onSuccess(Announcement obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mAdapter = new AnnouncementAdapter();
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+            @Override
+            public void onLoadMore() {
+                mList.add(null);
+                mAdapter.notifyItemInserted(mList.size() - 1);
+
+                new Handler().post(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        mList.remove(mList.size() - 1);
+                        mAdapter.notifyItemRemoved(mList.size());
+
+                        int index = mList.size();
+
+                        AnnouncementController.getAll(index+5, new IResult<Announcement>() {
+                            @Override
+                            public void onSuccess(List<Announcement> list) {
+                                mList = list;
+                            }
+
+                            @Override
+                            public void onSuccess(Announcement obj) {
+
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+
+                            }
+                        });
+
+                        mAdapter.notifyDataSetChanged();
+                        mAdapter.setLoaded();
+                    }
+                });
+            }
+        });
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView, new RecyclerItemClickListener.OnItemClickListener() {
 
@@ -83,6 +150,9 @@ public class MainActivity extends GenericActivity
             }
         }));
 
+
+
+
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -95,118 +165,112 @@ public class MainActivity extends GenericActivity
 
     }
 
-    @Override
-    protected void onResume() {
-        super.onResume();
-        new RemoteDataTask().execute();
-    }
+    class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    ProgressDialog mProgressDialog;
+        private final int VIEW_TYPE_ITEM = 0;
+        private final int VIEW_TYPE_LOADING = 1;
 
-    private int limit = 2;
+        private OnLoadMoreListener mOnLoadMoreListener;
 
-    private class RemoteDataTask extends AsyncTask<Void, Void, Void> {
+        private boolean isLoading;
+        private int visibleThreshold = 5;
+        private int lastVisibleItem, totalItemCount;
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-        }
-
-        @Override
-        protected Void doInBackground(Void... params) {
-            AnnouncementController.getAll(limit, new IResult<Announcement>() {
-                @Override
-                public void onSuccess(List<Announcement> list) {
-                    mLayoutGrid = false;
-                    mList = list;
-
-                }
-
-                @Override
-                public void onSuccess(Announcement obj) {
-
-                }
-
-                @Override
-                public void onError(String msg) {
-
-                }
-            });
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            mAdapter = new AnnouncementAdapter(mList);
-            mRecyclerView.setAdapter(mAdapter);
-
+        public AnnouncementAdapter() {
+            final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
             mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
                 @Override
                 public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                     super.onScrolled(recyclerView, dx, dy);
 
-                }
-                @Override
-                public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                    super.onScrollStateChanged(recyclerView, newState);
-                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
-                        Toast.makeText(getBaseContext(), "PEGOU", Toast.LENGTH_LONG).show();
-                        new LoadMoreDataTask().execute();
+                    totalItemCount = linearLayoutManager.getItemCount();
+                    lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
+
+                    if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
+                        if (mOnLoadMoreListener != null) {
+                            mOnLoadMoreListener.onLoadMore();
+                        }
+                        isLoading = true;
                     }
-
                 }
             });
-
         }
-    }
 
-    private class LoadMoreDataTask extends AsyncTask<Void, Void, Void> {
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
+        public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
+            this.mOnLoadMoreListener = mOnLoadMoreListener;
         }
 
         @Override
-        protected Void doInBackground(Void... params) {
+        public int getItemViewType(int position) {
+            return mList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
+        }
 
-            AnnouncementController.getAll(limit += 1, new IResult<Announcement>() {
-                @Override
-                public void onSuccess(List<Announcement> list) {
-                    mLayoutGrid = false;
-                    mList = list;
-
-                }
-
-                @Override
-                public void onSuccess(Announcement obj) {
-
-                }
-
-                @Override
-                public void onError(String msg) {
-
-                }
-            });
-
-
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if (viewType == VIEW_TYPE_ITEM) {
+                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.main_activity_adapter, parent, false);
+                return new AnuncioViewHolder(view);
+            } else if (viewType == VIEW_TYPE_LOADING) {
+                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout_loading_item, parent, false);
+                return new LoadingViewHolder(view);
+            }
             return null;
         }
 
-
-        @TargetApi(Build.VERSION_CODES.M)
         @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            mAdapter = new AnnouncementAdapter(mList);
-            mRecyclerView.setAdapter(mAdapter);
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if (holder instanceof AnuncioViewHolder) {
 
+                Announcement announcement = mList.get(position);
+                AnuncioViewHolder announcementViewHolder = (AnuncioViewHolder) holder;
+                announcementViewHolder.imageAnuncio.setImageBitmap(announcement.getPicture());
+                announcementViewHolder.viewTitulo.setText(announcement.getTitle());
+                announcementViewHolder.viewDescricao.setText(announcement.getDescription());
+
+            } else if (holder instanceof LoadingViewHolder) {
+                LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
+                loadingViewHolder.progressBar.setIndeterminate(true);
+            }
+        }
+
+        @Override
+        public int getItemCount() {
+            return mList == null ? 0 : mList.size();
+        }
+
+        public void setLoaded() {
+            isLoading = false;
         }
     }
 
+    static class AnuncioViewHolder extends RecyclerView.ViewHolder{
+
+        protected TextView viewTitulo;
+        protected TextView viewDescricao;
+        protected ImageView imageAnuncio;
+
+        public AnuncioViewHolder(View itemView) {
+            super(itemView);
+
+            imageAnuncio = (ImageView) itemView.findViewById(R.id.img_main_announcment);
+            viewTitulo = (TextView) itemView.findViewById(R.id.txtTitulo);
+            viewDescricao = (TextView) itemView.findViewById(R.id.txtDescricao);
+        }
+    }
+
+    static class LoadingViewHolder extends RecyclerView.ViewHolder {
+        public ProgressBar progressBar;
+
+        public LoadingViewHolder(View itemView) {
+            super(itemView);
+            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_main_announcement);
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     @Override
     public void onBackPressed() {
@@ -244,6 +308,7 @@ public class MainActivity extends GenericActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_manage_cadastro_anuncio) {

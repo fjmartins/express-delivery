@@ -31,17 +31,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="72dp">
 
-                <ImageView
-                    android:id="@+id/imageView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:paddingTop="@dimen/nav_header_vertical_spacing"
-                    android:src="@android:drawable/sym_def_app_icon" />
-
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
+                    android:layout_height="75dp"
                     android:orientation="vertical"
                     android:paddingBottom="16dp"
                     android:paddingLeft="16dp"
@@ -56,12 +49,6 @@
                         android:text="@string/app_name"
                         android:textSize="18sp"
                         android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/txtUsuarioTitulo"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/user" />
 
                 </LinearLayout>
             </LinearLayout>
