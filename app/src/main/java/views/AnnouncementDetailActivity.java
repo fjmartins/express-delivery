@@ -37,6 +37,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
         extras.putString("address", announcement.getAddress());
         extras.putString("phone", announcement.getPhone());
         extras.putString("tittle", announcement.getTitle());
+        extras.putString("id", announcement.getId());
         extras.putParcelable("picture", announcement.getPicture());
         redirect(this, AnnouncementRegisterActivity.class, extras);
     }
@@ -49,6 +50,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
             Announcement announcement = new Announcement(null, extras.get("tittle").toString(),
                     extras.get("description").toString(), extras.get("address").toString(),
                     extras.get("phone").toString(), bitmap);
+            announcement.setId(extras.get("id").toString());
 
             this.announcement = announcement;
 

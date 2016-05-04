@@ -62,7 +62,43 @@ public class AnnouncementParse implements IAnnouncementDao {
     }
 
     @Override
-    public void update(Announcement announcement, IResult<Announcement> result) {
+    public void update(final Announcement announcement, final IResult<Announcement> result) {
+
+        final ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        announcement.getPicture().compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] image = stream.toByteArray();
+
+        final ParseFile imageFile = new ParseFile(announcement.getUser() + System.currentTimeMillis() +
+                ".png", image);
+        imageFile.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
+                    ParseObject parseObject = null;
+                    try {
+                        parseObject = query.get(announcement.getId());
+                    } catch (ParseException erro) {
+                        result.onError(erro.getMessage());
+                    }
+                    parseObject.put("User", announcement.getUser());
+                    parseObject.put("Title", announcement.getTitle());
+                    parseObject.put("Address", announcement.getAddress());
+                    parseObject.put("Description", announcement.getDescription());
+                    parseObject.put("Phone", announcement.getPhone());
+                    parseObject.put("Picture", imageFile);
+
+                    try {
+                        parseObject.save();
+                    } catch (ParseException erro) {
+                        erro.printStackTrace();
+                    }
+
+                } else {
+                    result.onError(e.getMessage());
+                }
+            }
+        });
 
     }
 
@@ -78,12 +114,12 @@ public class AnnouncementParse implements IAnnouncementDao {
     }
 
     @Override
-    public void getAll(int limit,final IResult<Announcement> result) {
+    public void getAll(int limit, final IResult<Announcement> result) {
         final List<Announcement> announcementsList = new ArrayList<Announcement>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
 
         query.orderByDescending("createdAt");
-        if ((limit > 0) ? true : false){
+        if ((limit > 0) ? true : false) {
             query.setLimit(limit);
         }
 

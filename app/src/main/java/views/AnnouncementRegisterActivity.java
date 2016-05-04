@@ -32,6 +32,8 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     private Announcement announcement;
     private Bitmap pictureMake;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,11 +41,11 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 
         this.isUserAuth(this);
 
-        this.title = (EditText)findViewById(R.id.txtCadAnuncioTitulo);
-        this.description = (EditText)findViewById(R.id.txtCadAnuncioDesc);
-        this.phone = (EditText)findViewById(R.id.txtCadAnuncioTelefone);
-        this.address = (EditText)findViewById(R.id.txtCadAnuncioEndereco);
-        this.picture = (ImageView)findViewById(R.id.img_announcement_activity);
+        this.title = (EditText) findViewById(R.id.txtCadAnuncioTitulo);
+        this.description = (EditText) findViewById(R.id.txtCadAnuncioDesc);
+        this.phone = (EditText) findViewById(R.id.txtCadAnuncioTelefone);
+        this.address = (EditText) findViewById(R.id.txtCadAnuncioEndereco);
+        this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
 
         loadData();
     }
@@ -87,28 +89,66 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                 public void onSuccess(User obj) {
                     Announcement announcement = new Announcement(obj.getUsername(),
                             title, description, address, phone, picture);
-                    AnnouncementController.insert(announcement, new IResult<Announcement>() {
-                        @Override
-                        public void onSuccess(List<Announcement> list) {
+                    Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);
+                    if (btnCad.getText().toString().equalsIgnoreCase("Atualizar")) {
 
-                        }
+                        final Bundle extrasEntrada = getIntent().getExtras();
 
-                        @Override
-                        public void onSuccess(Announcement obj) {
-                            Bundle extras = new Bundle();
-                            extras.putString("description", obj.getDescription());
-                            extras.putString("address", obj.getAddress());
-                            extras.putString("phone", obj.getPhone());
-                            extras.putString("tittle", obj.getTitle());
-                            extras.putParcelable("picture", obj.getPicture());
-                            redirect(AnnouncementRegisterActivity.this, AnnouncementDetailActivity.class, extras);
-                        }
+                        announcement.setId(extrasEntrada.get("id").toString());
 
-                        @Override
-                        public void onError(String msg) {
-                            showToastMessage(AnnouncementRegisterActivity.this, msg);
-                        }
-                    });
+                        AnnouncementController.update(announcement, new IResult<Announcement>() {
+                            @Override
+                            public void onSuccess(List<Announcement> list) {
+
+                            }
+
+                            @Override
+                            public void onSuccess(Announcement obj) {
+                                Bundle extrasSaida = new Bundle();
+                                extrasSaida.putString("description", obj.getDescription());
+                                extrasSaida.putString("address", obj.getAddress());
+                                extrasSaida.putString("phone", obj.getPhone());
+                                extrasSaida.putString("tittle", obj.getTitle());
+                                extrasSaida.putParcelable("picture", obj.getPicture());
+                                redirect(AnnouncementRegisterActivity.this, AnnouncementDetailActivity.class, extrasSaida);
+                                finish();
+
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+
+                            }
+                        });
+                    } else if (btnCad.getText().toString().equalsIgnoreCase("Cadastrar")) {
+
+                        AnnouncementController.insert(announcement, new IResult<Announcement>() {
+                            @Override
+                            public void onSuccess(List<Announcement> list) {
+
+                            }
+
+                            @Override
+                            public void onSuccess(Announcement obj) {
+                                Bundle extrasSaida = new Bundle();
+                                extrasSaida.putString("description", obj.getDescription());
+                                extrasSaida.putString("address", obj.getAddress());
+                                extrasSaida.putString("phone", obj.getPhone());
+                                extrasSaida.putString("tittle", obj.getTitle());
+                                extrasSaida.putParcelable("picture", obj.getPicture());
+                                redirect(AnnouncementRegisterActivity.this, AnnouncementDetailActivity.class, extrasSaida);
+                                finish();
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+                                showToastMessage(AnnouncementRegisterActivity.this, msg);
+                            }
+                        });
+                    }
+
+
+
                 }
 
                 @Override
@@ -123,7 +163,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         boolean result = true;
 
         String title = this.title.getText().toString();
-        if (title.trim().isEmpty()){
+        if (title.trim().isEmpty()) {
             this.title.setError("Campo obrigatório");
             result = false;
         } else {
@@ -131,7 +171,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         }
 
         String phone = this.phone.getText().toString();
-        if (phone.trim().isEmpty()){
+        if (phone.trim().isEmpty()) {
             this.phone.setError("Campo obrigatório");
             result = false;
         } else {
@@ -141,14 +181,15 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         return result;
     }
 
+
     private void loadData() {
         Bundle extras = getIntent().getExtras();
 
-        if(extras != null) {
-            Button btnCad = (Button)findViewById(R.id.btnCadAnuncioCadastrar);
+        if (extras != null) {
+            Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);
             btnCad.setText("Atualizar");
 
-            this.announcement = (Announcement)extras.get("announcement");
+            this.announcement = (Announcement) extras.get("announcement");
             if (this.announcement != null) {
                 this.title.setText(announcement.getTitle());
                 this.description.setText(announcement.getDescription());
@@ -158,4 +199,4 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             }
         }
     }
- }
+}
