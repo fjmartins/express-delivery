@@ -39,9 +39,9 @@ public class AnnouncementParse implements IAnnouncementDao {
                     ParseObject parseObject = new ParseObject("Announcement");
                     parseObject.put("User", announcement.getUser());
                     parseObject.put("Title", announcement.getTitle());
-                    parseObject.put("Endereco", announcement.getEndereco());
+                    parseObject.put("Address", announcement.getAddress());
                     parseObject.put("Description", announcement.getDescription());
-                    parseObject.put("Telefone", announcement.getTelefone());
+                    parseObject.put("Phone", announcement.getPhone());
                     parseObject.put("Picture", imageFile);
 
                     parseObject.saveInBackground(new SaveCallback() {
@@ -92,11 +92,13 @@ public class AnnouncementParse implements IAnnouncementDao {
             for (ParseObject parseObject : objects) {
                 String user = parseObject.get("User").toString();
                 String title = parseObject.get("Title").toString();
-                String endereco = parseObject.get("Endereco").toString();
+                String endereco = parseObject.get("Address").toString();
                 String description = parseObject.get("Description").toString();
-                String telefone = parseObject.get("Telefone").toString();
+                String telefone = parseObject.get("Phone").toString();
+                String id = parseObject.getObjectId();
                 final Announcement announcement = new Announcement(user, title, description,
                         endereco, telefone, null);
+                announcement.setId(id);
                 ParseFile imageFile = (ParseFile) parseObject.get("Picture");
                 byte[] data = imageFile.getData();
                 Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);

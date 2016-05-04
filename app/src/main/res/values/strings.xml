@@ -40,8 +40,8 @@
     <string name="title_activity_cadastro_anuncio">CadastroAnuncioActivity</string>
     <string name="title">Título</string>
     <string name="description">Descrição</string>
-    <string name="endereco">Endereço</string>
-    <string name="telefone">Telefone</string>
+    <string name="address">Endereço</string>
+    <string name="phone">Telefone</string>
 
     <string name="fechar">Fechar</string>
     <string name="exit">Sair</string>

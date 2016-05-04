@@ -72,7 +72,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtCadAnuncioEndereco"
-                    android:hint="@string/endereco"
+                    android:hint="@string/address"
                     android:layout_weight="0.18" />
             </android.support.design.widget.TextInputLayout>
 
@@ -85,7 +85,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:id="@+id/txtCadAnuncioTelefone"
-                    android:hint="@string/telefone"
+                    android:hint="@string/phone"
                     android:phoneNumber="true"
                     android:layout_weight="0.11"
                     android:maxLength="12" />

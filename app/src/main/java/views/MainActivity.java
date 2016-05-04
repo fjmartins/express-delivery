@@ -1,19 +1,11 @@
 package views;
 
-import android.annotation.TargetApi;
-import android.app.ProgressDialog;
-import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.view.ViewPager;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -133,10 +125,11 @@ public class MainActivity extends GenericActivity
                 Intent intent = new Intent(contexto, AnnouncementDetailActivity.class);
                 Announcement announcement = mList.get(position);
                 intent.putExtra("description", announcement.getDescription());
-                intent.putExtra("endereco", announcement.getEndereco());
+                intent.putExtra("address", announcement.getAddress());
                 intent.putExtra("picture", announcement.getPicture());
-                intent.putExtra("telefone", announcement.getTelefone());
+                intent.putExtra("phone", announcement.getPhone());
                 intent.putExtra("tittle", announcement.getTitle());
+                intent.putExtra("id", announcement.getId());
                 startActivity(intent);
             }
 

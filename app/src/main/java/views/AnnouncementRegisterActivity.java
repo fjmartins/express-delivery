@@ -97,8 +97,8 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                         public void onSuccess(Announcement obj) {
                             Bundle extras = new Bundle();
                             extras.putString("description", obj.getDescription());
-                            extras.putString("endereco", obj.getEndereco());
-                            extras.putString("telefone", obj.getTelefone());
+                            extras.putString("address", obj.getAddress());
+                            extras.putString("phone", obj.getPhone());
                             extras.putString("tittle", obj.getTitle());
                             extras.putParcelable("picture", obj.getPicture());
                             redirect(AnnouncementRegisterActivity.this, AnnouncementDetailActivity.class, extras);
@@ -152,8 +152,8 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             if (this.announcement != null) {
                 this.title.setText(announcement.getTitle());
                 this.description.setText(announcement.getDescription());
-                this.phone.setText(announcement.getTelefone());
-                this.address.setText(announcement.getEndereco());
+                this.phone.setText(announcement.getPhone());
+                this.address.setText(announcement.getAddress());
                 this.picture.setImageBitmap(announcement.getPicture());
             }
         }

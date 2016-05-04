@@ -11,24 +11,25 @@ public class Announcement implements Serializable {
 
     private String title;
     private String description;
-    private String endereco;
-    private String telefone;
+    private String address;
+    private String phone;
     private Bitmap picture;
     private String user;
+    private String id;
 
-    public Announcement(String user, String title, String description, String endereco, String telefone, Bitmap picture) {
+    public Announcement(String user, String title, String description, String address, String phone, Bitmap picture) {
         this.user = user;
         this.title = title;
         this.description = description;
-        this.endereco = endereco;
-        this.telefone = telefone;
+        this.address = address;
+        this.phone = phone;
         this.picture = picture;
     }
 
-    public Announcement(String title, String description, String telefone) {
+    public Announcement(String title, String description, String phone) {
         this.title = title;
         this.description = description;
-        this.telefone = telefone;
+        this.phone = phone;
     }
 
     public String getTitle() {
@@ -47,20 +48,20 @@ public class Announcement implements Serializable {
         this.description = description;
     }
 
-    public String getEndereco() {
-        return endereco;
+    public String getAddress() {
+        return address;
     }
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getTelefone() {
-        return telefone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Bitmap getPicture() {
@@ -77,5 +78,13 @@ public class Announcement implements Serializable {
 
     public void setUser(String user) {
         this.user = user;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+        return id;
     }
 }

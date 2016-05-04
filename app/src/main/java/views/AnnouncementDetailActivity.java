@@ -9,7 +9,6 @@ import android.widget.TextView;
 import com.example.anderson.expressdelivery.R;
 
 import models.Announcement;
-import models.User;
 
 public class AnnouncementDetailActivity extends GenericActivity {
 
@@ -35,8 +34,8 @@ public class AnnouncementDetailActivity extends GenericActivity {
         this.isUserAuth(this);
         Bundle extras = new Bundle();
         extras.putString("description", announcement.getDescription());
-        extras.putString("endereco", announcement.getEndereco());
-        extras.putString("telefone", announcement.getTelefone());
+        extras.putString("address", announcement.getAddress());
+        extras.putString("phone", announcement.getPhone());
         extras.putString("tittle", announcement.getTitle());
         extras.putParcelable("picture", announcement.getPicture());
         redirect(this, AnnouncementRegisterActivity.class, extras);
@@ -48,15 +47,15 @@ public class AnnouncementDetailActivity extends GenericActivity {
         if (extras != null) {
             Bitmap bitmap = extras.getParcelable("picture");
             Announcement announcement = new Announcement(null, extras.get("tittle").toString(),
-                    extras.get("description").toString(), extras.get("endereco").toString(),
-                    extras.get("telefone").toString(), bitmap);
+                    extras.get("description").toString(), extras.get("address").toString(),
+                    extras.get("phone").toString(), bitmap);
 
             this.announcement = announcement;
 
             this.title.setText(announcement.getTitle());
             this.description.setText(announcement.getDescription());
-            this.phone.setText(announcement.getTelefone());
-            this.address.setText(announcement.getEndereco());
+            this.phone.setText(announcement.getPhone());
+            this.address.setText(announcement.getAddress());
             this.picture.setImageBitmap(announcement.getPicture());
         }
     }
