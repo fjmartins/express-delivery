@@ -10,4 +10,5 @@ public interface IUserAuth {
     void logIn(User user, IResultUser<User> result);
     void logOut(User user, IResultUser<User> result);
     void getCurrentUser(IResultUser<User> result);
+    User getCurrentUser();
 }

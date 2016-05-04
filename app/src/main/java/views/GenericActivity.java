@@ -52,4 +52,9 @@ public class GenericActivity extends AppCompatActivity {
             }
         });
     }
+
+    public String getUsername(){
+        User user = UserAuthController.getCurrentUser();
+        return (user == null) ? "" : user.getUsername();
+    }
 }

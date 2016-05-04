@@ -130,6 +130,7 @@ public class MainActivity extends GenericActivity
                 intent.putExtra("phone", announcement.getPhone());
                 intent.putExtra("tittle", announcement.getTitle());
                 intent.putExtra("id", announcement.getId());
+                intent.putExtra("username", announcement.getUser());
                 startActivity(intent);
             }
 

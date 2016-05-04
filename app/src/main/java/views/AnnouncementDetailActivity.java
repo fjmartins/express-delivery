@@ -2,6 +2,7 @@ package views;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
 
     private TextView title, description, phone, address;
     private ImageView picture;
+    private FloatingActionButton btnDetail;
     private Announcement announcement;
 
     @Override
@@ -26,6 +28,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
         this.phone = (TextView) findViewById(R.id.txt_announcement_detail_activity_phone);
         this.address = (TextView) findViewById(R.id.txt_announcement_detail_activity_address);
         this.picture = (ImageView) findViewById(R.id.img_announcement_detail_activity_picture);
+        this.btnDetail = (FloatingActionButton) findViewById(R.id.fabEditDetAnunc);
 
         loadData();
     }
@@ -46,9 +49,10 @@ public class AnnouncementDetailActivity extends GenericActivity {
 
         if (extras != null) {
             Bitmap bitmap = extras.getParcelable("picture");
-            Announcement announcement = new Announcement(null, extras.get("tittle").toString(),
-                    extras.get("description").toString(), extras.get("address").toString(),
-                    extras.get("phone").toString(), bitmap);
+            Announcement announcement = new Announcement(null, extras.getString("tittle"),
+                    extras.getString("description"), extras.getString("address"),
+                    extras.getString("phone"), bitmap);
+            announcement.setUser(extras.getString("username"));
 
             this.announcement = announcement;
 
@@ -57,6 +61,10 @@ public class AnnouncementDetailActivity extends GenericActivity {
             this.phone.setText(announcement.getPhone());
             this.address.setText(announcement.getAddress());
             this.picture.setImageBitmap(announcement.getPicture());
+
+            if(!this.getUsername().equals(announcement.getUser())){
+                this.btnDetail.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }

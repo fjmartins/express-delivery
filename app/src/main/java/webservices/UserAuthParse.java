@@ -57,4 +57,15 @@ public class UserAuthParse implements IUserAuth {
             result.onSuccess(user);
         }
     }
+
+    @Override
+    public User getCurrentUser() {
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if(currentUser != null) {
+            User user = new User();
+            user.setUsername(currentUser.getUsername());
+            return user;
+        }
+        return null;
+    }
 }

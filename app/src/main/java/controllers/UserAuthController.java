@@ -54,4 +54,8 @@ public class UserAuthController {
         });
     }
 
+    public static User getCurrentUser() {
+        return userAuth.getCurrentUser();
+    }
+
 }
