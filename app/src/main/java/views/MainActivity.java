@@ -45,6 +45,7 @@ public class MainActivity extends GenericActivity
 
     private NavigationView navigationView;
 
+    private static final int NUMBER_FIND = 5;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,7 +61,7 @@ public class MainActivity extends GenericActivity
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(layoutManager);
 
-        AnnouncementController.getAll(5, new IResult<Announcement>() {
+        AnnouncementController.getAll(NUMBER_FIND, 0, new IResult<Announcement>() {
             @Override
             public void onSuccess(List<Announcement> list) {
                 mList = list;
@@ -94,12 +95,12 @@ public class MainActivity extends GenericActivity
                         mList.remove(mList.size() - 1);
                         mAdapter.notifyItemRemoved(mList.size());
 
-                        int index = mList.size();
-
-                        AnnouncementController.getAll(index + 5, new IResult<Announcement>() {
+                        AnnouncementController.getAll(NUMBER_FIND, mList.size(), new IResult<Announcement>() {
                             @Override
                             public void onSuccess(List<Announcement> list) {
-                                mList = list;
+                                for (Announcement a : list) {
+                                    mList.add(a);
+                                }
                             }
 
                             @Override
