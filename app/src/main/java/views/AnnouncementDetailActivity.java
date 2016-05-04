@@ -67,4 +67,10 @@ public class AnnouncementDetailActivity extends GenericActivity {
             }
         }
     }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        finish();
+    }
 }
