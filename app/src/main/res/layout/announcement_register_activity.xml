@@ -99,7 +99,7 @@
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
                 android:onClick="save"
-                android:background="@color/colorAccent"
+                android:background="@color/colorPrimaryDark"
                 android:textColor="@color/primaryText"
                 android:text="@string/cadastrar"/>
 
