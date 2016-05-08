@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_height="match_parent"
-    android:layout_width="match_parent"
-    android:fillViewport="true"
-    tools:context="views.AnnouncementRegisterActivity"
     android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context="views.SubmitProposalActivity"
     android:paddingLeft="24dp"
     android:paddingRight="24dp"
     android:background="@drawable/fundobranco">
@@ -20,33 +20,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
-                android:id="@+id/img_announcement_activity"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_gravity="center_horizontal"
-                android:clickable="true"
-                android:onClick="makePicture"
-                android:src="@drawable/ic_menu_camera"/>
-
-            <!--<Button-->
-            <!--android:layout_width="40dp"-->
-            <!--android:layout_height="40dp"-->
-            <!--android:id="@+id/btnCadAnuncioImagem"-->
-            <!--android:layout_centerHorizontal="true"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:background="@drawable/ic_menu_camera"-->
-            <!--android:onClick="makePicture"/>-->
-
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="8dp">
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtCadAnuncioTitulo"
+                    android:id="@+id/txtEnvioPropostaTitulo"
                     android:hint="@string/title"
                     android:layout_weight="0.22" />
             </android.support.design.widget.TextInputLayout>
@@ -59,7 +41,7 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtCadAnuncioDesc"
+                    android:id="@+id/txtEnvioPropostaDesc"
                     android:hint="@string/description"
                     android:layout_weight="0.31" />
             </android.support.design.widget.TextInputLayout>
@@ -72,37 +54,22 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/txtCadAnuncioEndereco"
-                    android:hint="@string/address"
+                    android:id="@+id/txtEnvioPropostaValor"
+                    android:hint="@string/valor"
                     android:layout_weight="0.18" />
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtCadAnuncioTelefone"
-                    android:hint="@string/phone"
-                    android:phoneNumber="true"
-                    android:layout_weight="0.11"
-                    android:maxLength="12" />
-            </android.support.design.widget.TextInputLayout>
-
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnCadAnuncioCadastrar"
+                android:id="@+id/btnEnvioProposta"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
                 android:onClick="save"
                 android:background="@color/colorPrimaryDark"
                 android:textColor="@color/primaryText"
-                android:text="@string/cadastrar"/>
+                android:text="@string/enviar_proposta"/>
 
         </LinearLayout>
 

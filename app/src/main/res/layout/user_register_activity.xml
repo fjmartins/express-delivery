@@ -7,73 +7,85 @@
     tools:context="views.UserRegisterActivity"
     android:orientation="vertical"
     android:paddingLeft="24dp"
-    android:paddingRight="24dp">
+    android:paddingRight="24dp"
+    android:background="@drawable/fundobranco">
 
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="8dp">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:maxLength="60"
-            android:id="@+id/txt_register_user_activity_name"
-            android:hint="@string/user"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/txt_register_user_activity_email"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:maxLength="20"
-            android:id="@+id/txt_register_user_activity_password"
-            android:hint="@string/password"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp">
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:maxLength="20"
-            android:id="@+id/txt_register_user_activity_password_confirm"
-            android:hint="@string/password_confirm"/>
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.v7.widget.AppCompatButton
-        android:id="@+id/btn_register_user_activity_register"
+    <ScrollView
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="24dp"
-        android:padding="12dp"
-        android:onClick="registerUser"
-        android:background="@color/colorPrimaryDark"
-        android:textColor="@color/primaryText"
-        android:text="@string/cadastrar"/>
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView">
 
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="8dp">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:maxLength="60"
+                    android:id="@+id/txt_register_user_activity_name"
+                    android:hint="@string/user"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/txt_register_user_activity_email"
+                    android:hint="@string/email"
+                    android:inputType="textEmailAddress"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:id="@+id/txt_register_user_activity_password"
+                    android:hint="@string/password"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:id="@+id/txt_register_user_activity_password_confirm"
+                    android:hint="@string/password_confirm"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_register_user_activity_register"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:onClick="registerUser"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/primaryText"
+                android:text="@string/cadastrar"/>
+
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>

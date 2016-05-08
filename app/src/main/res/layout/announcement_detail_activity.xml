@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="views.AnnouncementDetailActivity"
-    android:id="@+id/layoutDetAnunc">
+    android:id="@+id/layoutDetAnunc"
+    android:background="@drawable/fundobranco">
 
     <include layout="@layout/announcement_detail_activity_content"></include>
 

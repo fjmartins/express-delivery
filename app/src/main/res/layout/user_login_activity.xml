@@ -1,83 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:background="#FFFFFF"
-    android:fitsSystemWindows="true">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    android:background="@drawable/fundobranco"
+    android:paddingLeft="24dp"
+    android:paddingRight="24dp">
 
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="56dp"
-        android:paddingLeft="24dp"
-        android:paddingRight="24dp">
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:id="@+id/scrollView2" >
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="72dp"
-            android:layout_marginBottom="24dp"
-            android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo3"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
 
-        <!-- Email Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp" >
-            <EditText android:id="@+id/edt_loginactivity_email"
+            <ImageView
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@drawable/logoexpress" />
+
+            <!-- Email Label -->
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <EditText android:id="@+id/edt_loginactivity_email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/txt_login_email" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Password Label -->
+            <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txt_login_email" />
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp">
+                <EditText android:id="@+id/edt_loginactivity_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    android:maxLength="20"
+                    android:hint="@string/txt_login_password"/>
+            </android.support.design.widget.TextInputLayout>
 
-        <!-- Password Label -->
-        <android.support.design.widget.TextInputLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginBottom="8dp">
-            <EditText android:id="@+id/edt_loginactivity_password"
-                android:layout_width="match_parent"
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_loginactivity_login"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"
-                android:maxLength="20"
-                android:hint="@string/txt_login_password"/>
-        </android.support.design.widget.TextInputLayout>
+                android:layout_marginTop="24dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:onClick="logIn"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/primaryText"
+                android:text="@string/btn_login_entrar"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_loginactivity_login"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:onClick="logIn"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/primaryText"
-            android:text="@string/btn_login_entrar"/>
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_loginactivity_visitar"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:onClick="visitar"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@color/primaryText"
+                android:text="@string/btn_login_visitar"/>
 
-        <android.support.v7.widget.AppCompatButton
-            android:id="@+id/btn_loginactivity_visitar"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="24dp"
-            android:padding="12dp"
-            android:onClick="visitar"
-            android:background="@color/colorPrimaryDark"
-            android:textColor="@color/primaryText"
-            android:text="@string/btn_login_visitar"/>
+            <TextView android:id="@+id/link_loginactivity_signup"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:onClick="cadastrar"
+                android:text="@string/mensagem_cadastrar"
+                android:gravity="center"
+                android:textSize="16sp" />
 
-        <TextView android:id="@+id/link_loginactivity_signup"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:onClick="cadastrar"
-            android:text="@string/mensagem_cadastrar"
-            android:gravity="center"
-            android:textSize="16dip" />
+        </LinearLayout>
 
-    </LinearLayout>
-</ScrollView>
+    </ScrollView>
+
+</LinearLayout>
