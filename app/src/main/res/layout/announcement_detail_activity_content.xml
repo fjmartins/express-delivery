@@ -13,15 +13,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fillViewport="false">
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <ImageView
                 android:layout_marginTop="40dp"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="350dp"
+                android:layout_height="200dp"
                 android:id="@+id/img_announcement_detail_activity_picture"
                 android:layout_centerHorizontal="true"/>
 
@@ -31,6 +32,9 @@
                 android:id="@+id/txt_announcement_detail_activity_title"
                 android:text="Título"
                 android:textSize="35dp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_below="@id/img_announcement_detail_activity_picture"/>
 
             <TextView
