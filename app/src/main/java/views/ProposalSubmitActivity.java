@@ -8,7 +8,7 @@ import com.example.anderson.expressdelivery.R;
 /**
  * Created by Allan-PC on 08/05/2016.
  */
-public class SubmitProposalActivity extends GenericActivity {
+public class ProposalSubmitActivity extends GenericActivity {
 
     private EditText title, description, valor;
 

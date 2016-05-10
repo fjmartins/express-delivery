@@ -83,7 +83,7 @@ public class AnnouncementController {
 
             @Override
             public void onSuccess(Announcement obj) {
-
+                result.onSuccess(obj);
             }
 
             @Override
