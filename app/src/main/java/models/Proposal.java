@@ -5,8 +5,13 @@ package models;
  */
 public class Proposal {
 
-    private String id, title, description;
+    private String id;
+    private String title;
+    private String description;
+    private String announcementId;
     private double value;
+    private User userFrom;
+    private boolean isAccept;
 
     public Proposal() { }
 
@@ -28,6 +33,33 @@ public class Proposal {
     public Proposal withId(String id) {
         this.id = id;
         return this;
+    }
+
+    public Proposal withUserFrom(User user) {
+        this.userFrom = user;
+        return this;
+    }
+
+    public Proposal withAnnouncementId(String announcementId) {
+        this.announcementId = announcementId;
+        return this;
+    }
+
+    public Proposal withIsAccept(boolean isAccept) {
+        this.isAccept = isAccept;
+        return this;
+    }
+
+    public boolean isAccept() {
+        return isAccept;
+    }
+
+    public String getAnnouncementId() {
+        return announcementId;
+    }
+
+    public User getUserFrom() {
+        return userFrom;
     }
 
     public String getId() {
