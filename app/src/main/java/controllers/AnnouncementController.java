@@ -52,9 +52,9 @@ public class AnnouncementController {
         });
     }
 
-    public static void getAll(int limit, int size, final IResult<Announcement> result) {
+    public static void getAll(final IResult<Announcement> result) {
 
-        announcementDao.getAll(limit , size , new IResult<Announcement>() {
+        announcementDao.getAll(new IResult<Announcement>() {
             @Override
             public void onSuccess(List<Announcement> list) {
                 result.onSuccess(list);

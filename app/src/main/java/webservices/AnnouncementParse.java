@@ -11,11 +11,14 @@ import dao.IAnnouncementDao;
 import services.IResult;
 import models.Announcement;
 
+import com.parse.DeleteCallback;
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.SaveCallback;
 import com.parse.ParseFile;
 import com.parse.ParseQuery;
+import com.parse.GetCallback;
 
 
 /**
@@ -103,50 +106,61 @@ public class AnnouncementParse implements IAnnouncementDao {
     }
 
     @Override
-    public void remove(Announcement announcement, IResult<Announcement> result) {
+    public void remove(Announcement announcement, final IResult<Announcement> result) {
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
+        query.getInBackground(announcement.getId(), new GetCallback<ParseObject>() {
+            public void done(ParseObject object, ParseException e) {
+                if (e == null) {
+                   object.deleteInBackground(new DeleteCallback() {
+                       @Override
+                       public void done(ParseException e) {
+                           result.onError(e.getMessage());
+                       }
+                   });
+                } else {
+                    result.onError(e.getMessage());
+                }
+            }
+        });
 
     }
 
     @Override
-    public void get(Announcement announcement, IResult<Announcement> result) {
+    public void get(int size, int skip , IResult<Announcement> result) {
 
 
     }
 
     @Override
-    public void getAll(int limit, int size, final IResult<Announcement> result) {
+    public void getAll(final IResult<Announcement> result) {
         final List<Announcement> announcementsList = new ArrayList<Announcement>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
         query.orderByDescending("createdAt");
-
-        if (limit > 0) {
-            query.setLimit(limit);
-        }
-        if (size > 0) {
-            query.setSkip(size);
-        }
-
-        try {
-            List<ParseObject> objects = query.find();
-            for (ParseObject parseObject : objects) {
-                String user = parseObject.get("User").toString();
-                String title = parseObject.get("Title").toString();
-                String endereco = parseObject.get("Address").toString();
-                String description = parseObject.get("Description").toString();
-                String telefone = parseObject.get("Phone").toString();
-                String id = parseObject.getObjectId();
-                final Announcement announcement = new Announcement(user, title, description,
-                        endereco, telefone, null);
-                announcement.setId(id);
-                ParseFile imageFile = (ParseFile) parseObject.get("Picture");
-                byte[] data = imageFile.getData();
-                Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
-                announcement.setPicture(bitmap);
-                announcementsList.add(announcement);
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                for (ParseObject parseObject : objects) {
+                    String user = parseObject.get("User").toString();
+                    String title = parseObject.get("Title").toString();
+                    String address = parseObject.get("Address").toString();
+                    String description = parseObject.get("Description").toString();
+                    String phone = parseObject.get("Phone").toString();
+                    String id = parseObject.getObjectId();
+                    final Announcement announcement = new Announcement(user, title, description,
+                            address, phone, null);
+                    announcement.setId(id);
+                    ParseFile imageFile = (ParseFile) parseObject.get("Picture");
+                    try {
+                        byte[] data = imageFile.getData();
+                        Bitmap bitmap = BitmapFactory.decodeByteArray(data, 0, data.length);
+                        announcement.setPicture(bitmap);
+                    } catch (Exception erro) {
+                        result.onError(erro.getMessage());
+                    }
+                    announcementsList.add(announcement);
+                }
             }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        });
         result.onSuccess(announcementsList);
     }
 }
