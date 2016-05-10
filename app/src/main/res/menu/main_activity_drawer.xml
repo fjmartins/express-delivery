@@ -13,6 +13,11 @@
             android:title="@string/mensagem_cadastrar" />
 
         <item
+            android:id="@+id/nav_my_announcements"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/meus_anuncios" />
+
+        <item
             android:id="@+id/nav_manage_logout"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/exit" />
