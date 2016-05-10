@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.Message;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -88,10 +89,9 @@ public class MainActivity extends GenericActivity
                 mList.add(null);
                 mAdapter.notifyItemInserted(mList.size() - 1);
 
-                new Handler().post(new Runnable() {
+                new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-
                         mList.remove(mList.size() - 1);
                         mAdapter.notifyItemRemoved(mList.size());
 
@@ -117,7 +117,7 @@ public class MainActivity extends GenericActivity
                         mAdapter.notifyDataSetChanged();
                         mAdapter.setLoaded();
                     }
-                });
+                }, 200);
             }
         });
 

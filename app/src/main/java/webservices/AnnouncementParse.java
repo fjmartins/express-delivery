@@ -118,8 +118,11 @@ public class AnnouncementParse implements IAnnouncementDao {
         final List<Announcement> announcementsList = new ArrayList<Announcement>();
         ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
         query.orderByDescending("createdAt");
-        if ((limit > 0) && (size > 0) ? true : false) {
+
+        if (limit > 0) {
             query.setLimit(limit);
+        }
+        if (size > 0) {
             query.setSkip(size);
         }
 
