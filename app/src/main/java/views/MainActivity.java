@@ -12,7 +12,6 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -63,22 +62,7 @@ public class MainActivity extends GenericActivity
         setVisibleMenuItem(this.navigationView);
         this.navigationView.setNavigationItemSelectedListener(this);
 
-        AnnouncementController.get(5, 0, new IResult<Announcement>() {
-            @Override
-            public void onSuccess(List<Announcement> list) {
-                mList = list;
-            }
-
-            @Override
-            public void onSuccess(Announcement obj) {
-
-            }
-
-            @Override
-            public void onError(String msg) {
-
-            }
-        });
+        updateAnnouncment(5, 0);
 
         AnnouncementController.getSize(new IResultGeneric() {
             @Override
@@ -269,11 +253,31 @@ public class MainActivity extends GenericActivity
         }
     }
 
+    public void updateAnnouncment(int size, int skip){
+        AnnouncementController.get(size, skip, new IResult<Announcement>() {
+            @Override
+            public void onSuccess(List<Announcement> list) {
+                mList = list;
+            }
+
+            @Override
+            public void onSuccess(Announcement obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
         this.setVisibleMenuItem(this.navigationView);
+
     }
 
     @Override
@@ -317,6 +321,7 @@ public class MainActivity extends GenericActivity
 
         if (id == R.id.nav_manage_cadastro_anuncio) {
             redirect(this, AnnouncementRegisterActivity.class);
+            finish();
         } else if (id == R.id.nav_manage_cadastro_usuario) {
             redirect(this, UserRegisterActivity.class);
         } else if (id == R.id.nav_manage_logout) {

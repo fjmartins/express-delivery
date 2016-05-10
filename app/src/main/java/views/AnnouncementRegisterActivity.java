@@ -110,7 +110,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                                 extrasSaida.putString("phone", obj.getPhone());
                                 extrasSaida.putString("tittle", obj.getTitle());
                                 extrasSaida.putParcelable("picture", obj.getPicture());
-                                redirect(AnnouncementRegisterActivity.this, AnnouncementDetailActivity.class, extrasSaida);
+                                redirect(AnnouncementRegisterActivity.this, MainActivity.class, extrasSaida);
                                 finish();
 
                             }
@@ -136,7 +136,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                                 extrasSaida.putString("phone", obj.getPhone());
                                 extrasSaida.putString("tittle", obj.getTitle());
                                 extrasSaida.putParcelable("picture", obj.getPicture());
-                                redirect(AnnouncementRegisterActivity.this, AnnouncementDetailActivity.class, extrasSaida);
+                                redirect(AnnouncementRegisterActivity.this, MainActivity.class, extrasSaida);
                                 finish();
                             }
 
