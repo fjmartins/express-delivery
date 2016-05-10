@@ -93,6 +93,7 @@ public class AnnouncementParse implements IAnnouncementDao {
 
                     try {
                         parseObject.save();
+                        result.onSuccess(announcement);
                     } catch (ParseException erro) {
                         erro.printStackTrace();
                     }
@@ -111,12 +112,12 @@ public class AnnouncementParse implements IAnnouncementDao {
         query.getInBackground(announcement.getId(), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
-                   object.deleteInBackground(new DeleteCallback() {
-                       @Override
-                       public void done(ParseException e) {
-                           result.onError(e.getMessage());
-                       }
-                   });
+                    object.deleteInBackground(new DeleteCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            result.onError(e.getMessage());
+                        }
+                    });
                 } else {
                     result.onError(e.getMessage());
                 }
@@ -126,9 +127,46 @@ public class AnnouncementParse implements IAnnouncementDao {
     }
 
     @Override
-    public void get(int size, int skip , IResult<Announcement> result) {
+    public void get(int size, int skip, IResult<Announcement> result) {
+        List<ParseObject> parseObjectList = new ArrayList<>();
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
+        query.orderByDescending("createdAt");
+        query.setSkip(skip);
+        query.setLimit(size);
 
+        try {
+            parseObjectList = query.find();
+        } catch (ParseException e) {
+            result.onError(e.getMessage());
+        }
 
+        List<Announcement> announcementsList = new ArrayList<Announcement>();
+        Announcement announcement;
+
+        for (ParseObject parseObject : parseObjectList) {
+
+            String user = parseObject.get("User").toString();
+            String title = parseObject.get("Title").toString();
+            String address = parseObject.get("Address").toString();
+            String description = parseObject.get("Description").toString();
+            String phone = parseObject.get("Phone").toString();
+            String id = parseObject.getObjectId();
+
+            ParseFile imageFile = (ParseFile) parseObject.get("Picture");
+            Bitmap picture = null;
+            try {
+                byte[] data = imageFile.getData();
+                picture = BitmapFactory.decodeByteArray(data, 0, data.length);
+            } catch (Exception erro) {
+                result.onError(erro.getMessage());
+            }
+
+            announcement = new Announcement(user, title, description, address, phone, picture);
+            announcement.setId(id);
+            announcementsList.add(announcement);
+        }
+
+        result.onSuccess(announcementsList);
     }
 
     @Override

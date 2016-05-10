@@ -52,6 +52,26 @@ public class AnnouncementController {
         });
     }
 
+    public static void get(int size, int skip, final IResult<Announcement> result){
+        announcementDao.get(size, skip, new IResult<Announcement>() {
+            @Override
+            public void onSuccess(List<Announcement> list) {
+                result.onSuccess(list);
+            }
+
+            @Override
+            public void onSuccess(Announcement obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+
+    }
+
     public static void getAll(final IResult<Announcement> result) {
 
         announcementDao.getAll(new IResult<Announcement>() {
