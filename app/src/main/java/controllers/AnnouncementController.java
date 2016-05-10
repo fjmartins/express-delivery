@@ -4,6 +4,7 @@ import java.util.List;
 
 import dao.IAnnouncementDao;
 import models.Announcement;
+import models.User;
 import services.IResult;
 import services.IResultGeneric;
 import webservices.AnnouncementParse;
@@ -96,6 +97,25 @@ public class AnnouncementController {
     public static void getAll(final IResult<Announcement> result) {
 
         announcementDao.getAll(new IResult<Announcement>() {
+            @Override
+            public void onSuccess(List<Announcement> list) {
+                result.onSuccess(list);
+            }
+
+            @Override
+            public void onSuccess(Announcement obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+    }
+
+    public static void getMy(User user, final IResult<Announcement> result){
+        announcementDao.getMy(user, new IResult<Announcement>() {
             @Override
             public void onSuccess(List<Announcement> list) {
                 result.onSuccess(list);

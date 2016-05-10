@@ -3,6 +3,7 @@ package dao;
 import java.util.List;
 
 import models.Announcement;
+import models.User;
 import services.IResult;
 import services.IResultGeneric;
 
@@ -16,7 +17,7 @@ public interface IAnnouncementDao {
     void remove(Announcement announcement, IResult<Announcement> result);
     void get(int size, int skip , IResult<Announcement> result);
     void getAll(IResult<Announcement> result);
-    void getMy(IResult<Announcement> result);
+    void getMy(User user, IResult<Announcement> result);
     void getSize(IResultGeneric result);
 
 }

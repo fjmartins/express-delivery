@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import dao.IAnnouncementDao;
+import models.User;
 import services.IResult;
 import models.Announcement;
 import services.IResultGeneric;
@@ -205,8 +206,45 @@ public class AnnouncementParse implements IAnnouncementDao {
     }
 
     @Override
-    public void getMy(IResult<Announcement> result) {
+    public void getMy(User user, IResult<Announcement> result) {
+        List<ParseObject> parseObjectList = new ArrayList<>();
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
+        query.whereEqualTo("User", user.getUsername());
+        query.orderByDescending("createdAt");
 
+        try {
+            parseObjectList = query.find();
+        } catch (ParseException e) {
+            result.onError(e.getMessage());
+        }
+
+        List<Announcement> announcementsList = new ArrayList<Announcement>();
+        Announcement announcement;
+
+        for (ParseObject parseObject : parseObjectList) {
+
+            String username = parseObject.get("User").toString();
+            String title = parseObject.get("Title").toString();
+            String address = parseObject.get("Address").toString();
+            String description = parseObject.get("Description").toString();
+            String phone = parseObject.get("Phone").toString();
+            String id = parseObject.getObjectId();
+
+            ParseFile imageFile = (ParseFile) parseObject.get("Picture");
+            Bitmap picture = null;
+            try {
+                byte[] data = imageFile.getData();
+                picture = BitmapFactory.decodeByteArray(data, 0, data.length);
+            } catch (Exception erro) {
+                result.onError(erro.getMessage());
+            }
+
+            announcement = new Announcement(username, title, description, address, phone, picture);
+            announcement.setId(id);
+            announcementsList.add(announcement);
+        }
+
+        result.onSuccess(announcementsList);
     }
 
     @Override
