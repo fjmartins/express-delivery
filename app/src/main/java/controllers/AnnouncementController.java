@@ -72,6 +72,26 @@ public class AnnouncementController {
 
     }
 
+    public static void remove(Announcement announcement, final IResult<Announcement> result){
+        announcementDao.remove(announcement, new IResult<Announcement>() {
+            @Override
+            public void onSuccess(List<Announcement> list) {
+
+            }
+
+            @Override
+            public void onSuccess(Announcement obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+
+    }
+
     public static void getAll(final IResult<Announcement> result) {
 
         announcementDao.getAll(new IResult<Announcement>() {
