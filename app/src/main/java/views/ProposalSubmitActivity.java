@@ -15,7 +15,7 @@ public class ProposalSubmitActivity extends GenericActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.submit_proposal_activity);
+        setContentView(R.layout.proposal_submit_activity);
 
         this.isUserAuth(this);
 
