@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import controllers.AnnouncementController;
@@ -348,6 +349,29 @@ public class MainActivity extends GenericActivity
             });
         } else if (id == R.id.nav_login) {
             redirect(this, UserLoginActivity.class);
+        } else if (id == R.id.nav_my_announcements) {
+            User user = UserAuthController.getCurrentUser();
+            AnnouncementController.getMy(user, new IResult<Announcement>() {
+                @Override
+                public void onSuccess(List<Announcement> list) {
+                    String names = "";
+                    for (Announcement announcement : list) {
+                        names += announcement.getTitle()+"\n";
+                    }
+
+                    showToastMessage(MainActivity.this, names);
+                }
+
+                @Override
+                public void onSuccess(Announcement obj) {
+
+                }
+
+                @Override
+                public void onError(String msg) {
+
+                }
+            });
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -357,9 +381,9 @@ public class MainActivity extends GenericActivity
 
     private void setVisibleMenuItem(NavigationView navigationView) {
         if (this.getUsername().equals("")) {
-            this.setVisible(navigationView, false, true, false, true);
+            this.setVisible(navigationView, false, true, false, false, true);
         } else {
-            this.setVisible(navigationView, true, false, true, false);
+            this.setVisible(navigationView, true, false, true, true, false);
         }
     }
 

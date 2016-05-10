@@ -43,6 +43,7 @@
     <string name="description">Descrição</string>
     <string name="address">Endereço</string>
     <string name="phone">Telefone</string>
+    <string name="meus_anuncios">Meus Anúncios</string>
 
     <string name="fechar">Fechar</string>
     <string name="exit">Sair</string>
