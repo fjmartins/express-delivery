@@ -9,7 +9,11 @@ import android.widget.TextView;
 
 import com.example.anderson.expressdelivery.R;
 
+import java.util.List;
+
+import controllers.AnnouncementController;
 import models.Announcement;
+import services.IResult;
 
 public class AnnouncementDetailActivity extends GenericActivity {
 
@@ -55,7 +59,8 @@ public class AnnouncementDetailActivity extends GenericActivity {
                     extras.get("description").toString(), extras.get("address").toString(),
                     extras.get("phone").toString(), bitmap);
             announcement.setUser(extras.getString("username"));
-            announcement.setId(extras.get("id").toString());
+            if (extras.get("id") != null)
+                announcement.setId(extras.get("id").toString());
 
             this.announcement = announcement;
 
@@ -75,5 +80,29 @@ public class AnnouncementDetailActivity extends GenericActivity {
     protected void onStop() {
         super.onStop();
         finish();
+    }
+
+    public void remove(View v){
+        this.isUserAuth(this);
+        if (this.announcement.getId() != null) {
+            AnnouncementController.remove(this.announcement, new IResult<Announcement>() {
+                @Override
+                public void onSuccess(List<Announcement> list) {
+
+                }
+
+                @Override
+                public void onSuccess(Announcement obj) {
+                    finish();
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(
+                            AnnouncementDetailActivity.this, msg
+                    );
+                }
+            });
+        }
     }
 }
