@@ -108,7 +108,7 @@ public class AnnouncementParse implements IAnnouncementDao {
 
     @Override
     public void remove(Announcement announcement, final IResult<Announcement> result) {
-        ParseQuery<ParseObject> query = ParseQuery.getQuery("GameScore");
+        ParseQuery<ParseObject> query = ParseQuery.getQuery("Announcement");
         query.getInBackground(announcement.getId(), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
                 if (e == null) {
