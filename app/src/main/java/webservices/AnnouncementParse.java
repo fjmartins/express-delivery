@@ -110,7 +110,7 @@ public class AnnouncementParse implements IAnnouncementDao {
     }
 
     @Override
-    public void remove(Announcement announcement, final IResult<Announcement> result) {
+    public void remove(final Announcement announcement, final IResult<Announcement> result) {
         ParseQuery<ParseObject> query = ParseQuery.getQuery("Announcement");
         query.getInBackground(announcement.getId(), new GetCallback<ParseObject>() {
             public void done(ParseObject object, ParseException e) {
@@ -118,7 +118,11 @@ public class AnnouncementParse implements IAnnouncementDao {
                     object.deleteInBackground(new DeleteCallback() {
                         @Override
                         public void done(ParseException e) {
-                            result.onError(e.getMessage());
+                            if (e != null) {
+                                result.onError(e.getMessage());
+                            } else {
+                                result.onSuccess(announcement);
+                            }
                         }
                     });
                 } else {
