@@ -4,6 +4,7 @@ import java.util.List;
 
 import models.Announcement;
 import services.IResult;
+import services.IResultGeneric;
 
 /**
  * Created by kleber on 21/04/16.
@@ -15,5 +16,7 @@ public interface IAnnouncementDao {
     void remove(Announcement announcement, IResult<Announcement> result);
     void get(int size, int skip , IResult<Announcement> result);
     void getAll(IResult<Announcement> result);
+    void getMy(IResult<Announcement> result);
+    void getSize(IResultGeneric result);
 
 }

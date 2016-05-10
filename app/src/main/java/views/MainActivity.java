@@ -32,6 +32,7 @@ import controllers.UserAuthController;
 import models.Announcement;
 import models.User;
 import services.IResult;
+import services.IResultGeneric;
 import services.IResultUser;
 import views.adapters.OnLoadMoreListener;
 import views.adapters.RecyclerItemClickListener;
@@ -43,6 +44,7 @@ public class MainActivity extends GenericActivity
     private RecyclerView mRecyclerView;
     private AnnouncementAdapter mAdapter;
     private List<Announcement> mList;
+    private int maxListSize;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,6 +72,18 @@ public class MainActivity extends GenericActivity
             @Override
             public void onSuccess(Announcement obj) {
 
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+
+        AnnouncementController.getSize(new IResultGeneric() {
+            @Override
+            public void onSuccess(Integer value) {
+                maxListSize = value;
             }
 
             @Override
@@ -110,9 +124,11 @@ public class MainActivity extends GenericActivity
                     }
                 }));
 
+
         mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
             @Override
             public void onLoadMore() {
+
                 mList.add(null);
                 mAdapter.notifyItemInserted(mList.size() - 1);
 
@@ -120,6 +136,7 @@ public class MainActivity extends GenericActivity
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
+
                         //Remove loading item
                         mList.remove(mList.size() - 1);
                         mAdapter.notifyItemRemoved(mList.size());
@@ -141,8 +158,6 @@ public class MainActivity extends GenericActivity
 
                             }
                         });
-
-
                         mAdapter.notifyDataSetChanged();
                         mAdapter.setLoaded();
                     }

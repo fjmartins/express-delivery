@@ -7,6 +7,7 @@ import java.util.List;
  */
 public interface IResult<T> extends IResultUser<T> {
 
+
     void onSuccess(List<T> list);
 
 }

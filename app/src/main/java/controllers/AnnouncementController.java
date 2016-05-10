@@ -5,6 +5,7 @@ import java.util.List;
 import dao.IAnnouncementDao;
 import models.Announcement;
 import services.IResult;
+import services.IResultGeneric;
 import webservices.AnnouncementParse;
 
 /**
@@ -33,7 +34,7 @@ public class AnnouncementController {
         });
     }
 
-    public static void update(Announcement announcement, final IResult<Announcement> result){
+    public static void update(Announcement announcement, final IResult<Announcement> result) {
         announcementDao.update(announcement, new IResult<Announcement>() {
             @Override
             public void onSuccess(List<Announcement> list) {
@@ -52,7 +53,7 @@ public class AnnouncementController {
         });
     }
 
-    public static void get(int size, int skip, final IResult<Announcement> result){
+    public static void get(int size, int skip, final IResult<Announcement> result) {
         announcementDao.get(size, skip, new IResult<Announcement>() {
             @Override
             public void onSuccess(List<Announcement> list) {
@@ -72,7 +73,7 @@ public class AnnouncementController {
 
     }
 
-    public static void remove(Announcement announcement, final IResult<Announcement> result){
+    public static void remove(Announcement announcement, final IResult<Announcement> result) {
         announcementDao.remove(announcement, new IResult<Announcement>() {
             @Override
             public void onSuccess(List<Announcement> list) {
@@ -103,6 +104,20 @@ public class AnnouncementController {
             @Override
             public void onSuccess(Announcement obj) {
 
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+    }
+
+    public static void getSize(final IResultGeneric result) {
+        announcementDao.getSize(new IResultGeneric() {
+            @Override
+            public void onSuccess(Integer value) {
+                result.onSuccess(value);
             }
 
             @Override

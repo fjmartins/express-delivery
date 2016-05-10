@@ -10,7 +10,9 @@ import java.util.List;
 import dao.IAnnouncementDao;
 import services.IResult;
 import models.Announcement;
+import services.IResultGeneric;
 
+import com.parse.CountCallback;
 import com.parse.DeleteCallback;
 import com.parse.FindCallback;
 import com.parse.ParseException;
@@ -200,5 +202,25 @@ public class AnnouncementParse implements IAnnouncementDao {
             }
         });
         result.onSuccess(announcementsList);
+    }
+
+    @Override
+    public void getMy(IResult<Announcement> result) {
+
+    }
+
+    @Override
+    public void getSize(final IResultGeneric result) {
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Announcement");
+        query.countInBackground(new CountCallback() {
+            @Override
+            public void done(int count, ParseException e) {
+                if (e == null){
+                    result.onSuccess(count);
+                }else{
+                    result.onError(e.getMessage());
+                }
+            }
+        });
     }
 }
