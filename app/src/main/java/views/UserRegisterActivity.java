@@ -44,6 +44,7 @@ public class UserRegisterActivity extends GenericActivity {
                         @Override
                         public void onSuccess(User obj) {
                             redirect(UserRegisterActivity.this, MainActivity.class);
+                            finish();
                         }
 
                         @Override

@@ -36,6 +36,7 @@ public class UserLoginActivity extends GenericActivity {
                 @Override
                 public void onSuccess(User obj) {
                     redirect(UserLoginActivity.this, MainActivity.class);
+                    finish();
                 }
 
                 @Override
@@ -54,6 +55,7 @@ public class UserLoginActivity extends GenericActivity {
     public void cadastrar(View view){
         Intent intent = new Intent(this, UserRegisterActivity.class);
         startActivity(intent);
+        finish();
     }
 
     private boolean validate() {
