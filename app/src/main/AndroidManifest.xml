@@ -45,6 +45,11 @@
             android:label="@string/title_activity_enviar_proposta">
         </activity>
 
+        <activity
+            android:name="views.MyAnnoucementActivity"
+            android:label="@string/title_activity_meus_anuncios">
+        </activity>
+
         <!-- DANGER AREA -->
         <meta-data
             android:name="com.parse.APPLICATION_ID"
