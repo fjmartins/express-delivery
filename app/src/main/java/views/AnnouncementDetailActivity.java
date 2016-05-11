@@ -3,6 +3,9 @@ package views;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -80,6 +83,31 @@ public class AnnouncementDetailActivity extends GenericActivity {
     protected void onStop() {
         super.onStop();
         finish();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_announcement_detail, menu);
+
+        if(announcement.getId() != null)
+            menu.getItem(1).setVisible(true);
+
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+
+        if (id == R.id.action_mn_excluir) {
+            //Fazer a chamada da função remover
+            //remove();
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void remove(View v){

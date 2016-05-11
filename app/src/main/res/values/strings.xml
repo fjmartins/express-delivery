@@ -37,6 +37,7 @@
     <string name="title_activity_detalhe_anuncio">Detalhes do Anúncio</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="excluir_anuncio">Excluir Anuncio</string>
 
     <string name="title_activity_cadastro_anuncio">Cadastro de Anúncios</string>
     <string name="title">Título</string>
