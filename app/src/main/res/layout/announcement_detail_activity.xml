@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layoutDetAnunc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="views.AnnouncementDetailActivity"
-    android:id="@+id/layoutDetAnunc"
-    android:background="@color/backgroundWhite">
+    android:background="@color/backgroundWhite"
+    tools:context="views.AnnouncementDetailActivity">
 
     <include layout="@layout/announcement_detail_activity_content"></include>
 
@@ -16,7 +15,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/ic_menu_edit"
-        android:onClick="update"/>
+        android:onClick="update"
+        android:src="@android:drawable/ic_menu_edit" />
+
+    <Button
+        android:id="@+id/btn_delete_announcment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Delete"
+        android:onClick="remove"/>
 
 </android.support.design.widget.CoordinatorLayout>

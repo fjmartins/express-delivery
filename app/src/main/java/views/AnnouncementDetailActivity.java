@@ -7,6 +7,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -24,6 +25,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
     private ImageView picture;
     private FloatingActionButton btnDetail;
     private Announcement announcement;
+    private Button btnDelete;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
         this.address = (TextView) findViewById(R.id.txt_announcement_detail_activity_address);
         this.picture = (ImageView) findViewById(R.id.img_announcement_detail_activity_picture);
         this.btnDetail = (FloatingActionButton) findViewById(R.id.fabEditDetAnunc);
+        this.btnDelete = (Button) findViewById(R.id.btn_delete_announcment);
 
         loadData();
     }
@@ -75,6 +78,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
 
             if(!this.getUsername().equals(announcement.getUser())){
                 this.btnDetail.setVisibility(View.INVISIBLE);
+                this.btnDelete.setVisibility(View.INVISIBLE);
             }
         }
     }

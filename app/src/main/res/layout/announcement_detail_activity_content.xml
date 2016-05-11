@@ -65,6 +65,7 @@
                 android:layout_below="@id/txt_announcement_detail_activity_address"/>
 
         </RelativeLayout>
+
     </ScrollView>
 
 </RelativeLayout>
