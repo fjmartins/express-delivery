@@ -85,31 +85,6 @@ public class AnnouncementDetailActivity extends GenericActivity {
         finish();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_announcement_detail, menu);
-
-        if(announcement.getId() != null)
-            menu.getItem(1).setVisible(true);
-
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-
-        if (id == R.id.action_mn_excluir) {
-            //Fazer a chamada da função remover
-            //remove();
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
     public void remove(View v){
         this.isUserAuth(this);
         if (this.announcement.getId() != null) {
