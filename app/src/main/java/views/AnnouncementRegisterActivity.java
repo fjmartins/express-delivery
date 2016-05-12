@@ -33,7 +33,6 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     private Bitmap pictureMake;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -148,7 +147,6 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                     }
 
 
-
                 }
 
                 @Override
@@ -189,14 +187,12 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);
             btnCad.setText("Atualizar");
 
-            this.announcement = (Announcement) extras.get("announcement");
-            if (this.announcement != null) {
-                this.title.setText(announcement.getTitle());
-                this.description.setText(announcement.getDescription());
-                this.phone.setText(announcement.getPhone());
-                this.address.setText(announcement.getAddress());
-                this.picture.setImageBitmap(announcement.getPicture());
-            }
+            this.title.setText(extras.getString("tittle"));
+            this.description.setText(extras.getString("description"));
+            this.phone.setText(extras.getString("phone"));
+            this.address.setText(extras.getString("address"));
+            this.picture.setImageBitmap((Bitmap) extras.getParcelable("picture"));
         }
     }
 }
+

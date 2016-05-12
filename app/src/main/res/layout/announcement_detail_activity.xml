@@ -20,9 +20,13 @@
 
     <Button
         android:id="@+id/btn_delete_announcment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Delete"
-        android:onClick="remove"/>
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="remove"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="15dp"
+        android:layout_gravity="end|bottom"
+        android:background="@mipmap/ic_excluir" />
 
 </android.support.design.widget.CoordinatorLayout>
