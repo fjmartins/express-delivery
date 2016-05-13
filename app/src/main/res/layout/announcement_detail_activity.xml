@@ -18,6 +18,15 @@
         android:onClick="update"
         android:src="@android:drawable/ic_menu_edit" />
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fabProposalSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="@dimen/fab_margin"
+        android:onClick="submitProposal"
+        android:src="@android:drawable/ic_menu_send" />
+
     <Button
         android:id="@+id/btn_delete_announcment"
         android:layout_width="60dp"

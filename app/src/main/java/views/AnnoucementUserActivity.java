@@ -31,15 +31,10 @@ import views.adapters.RecyclerItemClickListener;
  */
 public class AnnoucementUserActivity extends GenericActivity {
 
-    private TextView titulo;
-    private TextView currentDate;
-    private ImageView picture;
-
     private NavigationView navigationView;
     private RecyclerView mRecyclerView;
     private AnnouncementAdapter mAdapter;
     private List<Announcement> mList;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +43,7 @@ public class AnnoucementUserActivity extends GenericActivity {
 
         this.isUserAuth(this);
 
-        this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
-        this.titulo = (TextView) findViewById(R.id.txtTituloMeusAnuncios);
-        this.currentDate = (TextView) findViewById(R.id.txtDate);
-
-        updateAnnouncment(5, 0);
+        updateAnnouncment();
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -104,7 +95,7 @@ public class AnnoucementUserActivity extends GenericActivity {
                         mAdapter.notifyItemRemoved(mList.size());
 
                         //Load data
-                        AnnouncementController.getMy(UserAuthController.getCurrentUser() , new IResult<Announcement>() {
+                        AnnouncementController.getMy(UserAuthController.getCurrentUser(), new IResult<Announcement>() {
                             @Override
                             public void onSuccess(List<Announcement> list) {
                                 mList.addAll(list);
@@ -129,7 +120,7 @@ public class AnnoucementUserActivity extends GenericActivity {
 
     }
 
-    public void updateAnnouncment(int size, int skip){
+    public void updateAnnouncment() {
         AnnouncementController.getMy(UserAuthController.getCurrentUser(), new IResult<Announcement>() {
             @Override
             public void onSuccess(List<Announcement> list) {

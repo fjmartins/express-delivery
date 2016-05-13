@@ -23,7 +23,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
 
     private TextView title, description, phone, address;
     private ImageView picture;
-    private FloatingActionButton btnDetail;
+    private FloatingActionButton btnDetail, btnSubmitProposal;
     private Announcement announcement;
     private Button btnDelete;
 
@@ -39,6 +39,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
         this.picture = (ImageView) findViewById(R.id.img_announcement_detail_activity_picture);
         this.btnDetail = (FloatingActionButton) findViewById(R.id.fabEditDetAnunc);
         this.btnDelete = (Button) findViewById(R.id.btn_delete_announcment);
+        this.btnSubmitProposal = (FloatingActionButton) findViewById(R.id.fabProposalSubmit);
 
         loadData();
     }
@@ -79,7 +80,10 @@ public class AnnouncementDetailActivity extends GenericActivity {
             if(!this.getUsername().equals(announcement.getUser())){
                 this.btnDetail.setVisibility(View.INVISIBLE);
                 this.btnDelete.setVisibility(View.INVISIBLE);
+            }else{
+                this.btnSubmitProposal.setVisibility(View.INVISIBLE);
             }
+
         }
     }
 
@@ -87,6 +91,17 @@ public class AnnouncementDetailActivity extends GenericActivity {
     protected void onStop() {
         super.onStop();
         finish();
+    }
+
+    public void submitProposal(View view){
+        Bundle extras = new Bundle();
+        extras.putString("description", announcement.getDescription());
+        extras.putString("address", announcement.getAddress());
+        extras.putString("phone", announcement.getPhone());
+        extras.putString("tittle", announcement.getTitle());
+        extras.putString("id", announcement.getId());
+        extras.putParcelable("picture", announcement.getPicture());
+        redirect(this, ProposalSubmitActivity.class, extras);
     }
 
     public void remove(View v){
