@@ -93,45 +93,45 @@ public class AnnoucementUserActivity extends GenericActivity {
                 }));
 
 
-        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
-            @Override
-            public void onLoadMore() {
-
-                mList.add(null);
-                mAdapter.notifyItemInserted(mList.size() - 1);
-
-                //Load more data for reyclerview
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        //Remove loading item
-                        mList.remove(mList.size() - 1);
-                        mAdapter.notifyItemRemoved(mList.size());
-
-                        //Load data
-                        AnnouncementController.getMy(UserAuthController.getCurrentUser(), new IResult<Announcement>() {
-                            @Override
-                            public void onSuccess(List<Announcement> list) {
-                                mList.addAll(list);
-                            }
-
-                            @Override
-                            public void onSuccess(Announcement obj) {
-
-                            }
-
-                            @Override
-                            public void onError(String msg) {
-
-                            }
-                        });
-                        mAdapter.notifyDataSetChanged();
-                        mAdapter.setLoaded();
-                    }
-                }, 2500);
-            }
-        });
+//        mAdapter.setOnLoadMoreListener(new OnLoadMoreListener() {
+//            @Override
+//            public void onLoadMore() {
+//
+//                mList.add(null);
+//                mAdapter.notifyItemInserted(mList.size() - 1);
+//
+//                //Load more data for reyclerview
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//
+//                        //Remove loading item
+//                        mList.remove(mList.size() - 1);
+//                        mAdapter.notifyItemRemoved(mList.size());
+//
+//                        //Load data
+//                        AnnouncementController.getMy(UserAuthController.getCurrentUser(), new IResult<Announcement>() {
+//                            @Override
+//                            public void onSuccess(List<Announcement> list) {
+//                                mList.addAll(list);
+//                            }
+//
+//                            @Override
+//                            public void onSuccess(Announcement obj) {
+//
+//                            }
+//
+//                            @Override
+//                            public void onError(String msg) {
+//
+//                            }
+//                        });
+//                        mAdapter.notifyDataSetChanged();
+//                        mAdapter.setLoaded();
+//                    }
+//                }, 2500);
+//            }
+//        });
 
     }
 
