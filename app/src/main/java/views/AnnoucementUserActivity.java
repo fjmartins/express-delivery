@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -43,6 +45,16 @@ public class AnnoucementUserActivity extends GenericActivity {
         setContentView(R.layout.main_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        this.navigationView = (NavigationView) findViewById(R.id.nav_view);
+        setVisibleMenuItem(this.navigationView);
+
 
         this.isUserAuth(this);
 
@@ -146,6 +158,21 @@ public class AnnoucementUserActivity extends GenericActivity {
     protected void onResume() {
         super.onResume();
         this.isUserAuth(this);
+    }
+
+    public void setVisibleMenuItem(NavigationView navigationView) {
+        if (this.getUsername().equals("")) {
+            this.setVisible(navigationView, false, true, false, false, true);
+        } else {
+            this.setVisible(navigationView, true, false, false, true, false);
+        }
+    }
+
+
+    public void setVisible(NavigationView navigationView, boolean... value) {
+        for (int i = 0; i < value.length; i++) {
+            navigationView.getMenu().getItem(i).setVisible(value[i]);
+        }
     }
 
 }

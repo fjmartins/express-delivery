@@ -236,6 +236,7 @@ public class MainActivity extends GenericActivity
         return true;
     }
 
+
     private void setVisibleMenuItem(NavigationView navigationView) {
         if (this.getUsername().equals("")) {
             this.setVisible(navigationView, false, true, false, false, true);
