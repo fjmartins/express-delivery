@@ -34,6 +34,7 @@ import models.User;
 import services.IResult;
 import services.IResultGeneric;
 import services.IResultUser;
+import views.adapters.AnnouncementAdapter;
 import views.adapters.OnLoadMoreListener;
 import views.adapters.RecyclerItemClickListener;
 
@@ -79,7 +80,7 @@ public class MainActivity extends GenericActivity
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recyclerview);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        mAdapter = new AnnouncementAdapter();
+        mAdapter = new AnnouncementAdapter(this.mList, getBaseContext(), this.mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
@@ -150,108 +151,6 @@ public class MainActivity extends GenericActivity
             }
         });
 
-    }
-
-    class AnnouncementAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-        private final int VIEW_TYPE_ITEM = 0;
-        private final int VIEW_TYPE_LOADING = 1;
-
-        private OnLoadMoreListener mOnLoadMoreListener;
-
-        private boolean isLoading;
-        private int visibleThreshold = 5;
-        private int lastVisibleItem, totalItemCount;
-
-        public AnnouncementAdapter() {
-            final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) mRecyclerView.getLayoutManager();
-            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-                @Override
-                public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-                    super.onScrolled(recyclerView, dx, dy);
-
-                    totalItemCount = linearLayoutManager.getItemCount();
-                    lastVisibleItem = linearLayoutManager.findLastVisibleItemPosition();
-
-                    if (!isLoading && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-                        if (mOnLoadMoreListener != null) {
-                            mOnLoadMoreListener.onLoadMore();
-                        }
-                        isLoading = true;
-                    }
-                }
-            });
-        }
-
-        public void setOnLoadMoreListener(OnLoadMoreListener mOnLoadMoreListener) {
-            this.mOnLoadMoreListener = mOnLoadMoreListener;
-        }
-
-        @Override
-        public int getItemViewType(int position) {
-            return mList.get(position) == null ? VIEW_TYPE_LOADING : VIEW_TYPE_ITEM;
-        }
-
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if (viewType == VIEW_TYPE_ITEM) {
-                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.main_activity_adapter, parent, false);
-                return new AnuncioViewHolder(view);
-            } else if (viewType == VIEW_TYPE_LOADING) {
-                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.layout_loading_item, parent, false);
-                return new LoadingViewHolder(view);
-            }
-            return null;
-        }
-
-        @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-            if (holder instanceof AnuncioViewHolder) {
-
-                Announcement announcement = mList.get(position);
-                AnuncioViewHolder announcementViewHolder = (AnuncioViewHolder) holder;
-                announcementViewHolder.imageAnuncio.setImageBitmap(announcement.getPicture());
-                announcementViewHolder.viewTitulo.setText(announcement.getTitle());
-                announcementViewHolder.viewDescricao.setText(announcement.getDescription());
-
-            } else if (holder instanceof LoadingViewHolder) {
-                LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
-                loadingViewHolder.progressBar.setIndeterminate(true);
-            }
-        }
-
-        @Override
-        public int getItemCount() {
-            return mList == null ? 0 : mList.size();
-        }
-
-        public void setLoaded() {
-            isLoading = false;
-        }
-    }
-
-    static class AnuncioViewHolder extends RecyclerView.ViewHolder {
-
-        protected TextView viewTitulo;
-        protected TextView viewDescricao;
-        protected ImageView imageAnuncio;
-
-        public AnuncioViewHolder(View itemView) {
-            super(itemView);
-
-            imageAnuncio = (ImageView) itemView.findViewById(R.id.img_main_announcment);
-            viewTitulo = (TextView) itemView.findViewById(R.id.txtTitulo);
-            viewDescricao = (TextView) itemView.findViewById(R.id.txtDescricao);
-        }
-    }
-
-    static class LoadingViewHolder extends RecyclerView.ViewHolder {
-        public ProgressBar progressBar;
-
-        public LoadingViewHolder(View itemView) {
-            super(itemView);
-            progressBar = (ProgressBar) itemView.findViewById(R.id.progress_main_announcement);
-        }
     }
 
     public void updateAnnouncment(int size, int skip){
@@ -350,28 +249,7 @@ public class MainActivity extends GenericActivity
         } else if (id == R.id.nav_login) {
             redirect(this, UserLoginActivity.class);
         } else if (id == R.id.nav_my_announcements) {
-            User user = UserAuthController.getCurrentUser();
-            AnnouncementController.getMy(user, new IResult<Announcement>() {
-                @Override
-                public void onSuccess(List<Announcement> list) {
-                    String names = "";
-                    for (Announcement announcement : list) {
-                        names += announcement.getTitle()+"\n";
-                    }
-
-                    showToastMessage(MainActivity.this, names);
-                }
-
-                @Override
-                public void onSuccess(Announcement obj) {
-
-                }
-
-                @Override
-                public void onError(String msg) {
-
-                }
-            });
+            redirect(this, AnnoucementUserActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
