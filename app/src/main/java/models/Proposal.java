@@ -15,6 +15,11 @@ public class Proposal {
 
     public Proposal() { }
 
+    public Proposal(String title, String description, Double value){
+        this.title = title;
+        this.description = description;
+        this.value = value;
+    }
     public Proposal withTitle(String title) {
         this.title = title;
         return this;
