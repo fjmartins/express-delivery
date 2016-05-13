@@ -10,6 +10,7 @@ import android.widget.EditText;
 import com.example.anderson.expressdelivery.R;
 
 import controllers.UserAuthController;
+import controllers.UserController;
 import models.User;
 import services.IResultUser;
 
@@ -26,7 +27,10 @@ public class UserLoginActivity extends GenericActivity {
         username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
         password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
 
-        this.goToMainIfUserAuth();
+        if(UserAuthController.getCurrentUser() != null) {
+            this.goToMainIfUserAuth();
+            finish();
+        }
     }
 
     public void logIn(View view){
@@ -50,6 +54,7 @@ public class UserLoginActivity extends GenericActivity {
     public void visitar(View view){
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 
     public void cadastrar(View view){
