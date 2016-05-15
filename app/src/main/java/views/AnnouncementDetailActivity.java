@@ -25,7 +25,9 @@ public class AnnouncementDetailActivity extends GenericActivity {
 
     private TextView title, description, phone, address;
     private ImageView picture;
-    private FloatingActionButton btnDetail, btnSubmitProposal;
+    private FloatingActionButton btnDetail;
+    private FloatingActionButton btnSubmitProposal;
+    private Button btnShowProposal;
     private Announcement announcement;
     private Button btnDelete;
 
@@ -42,6 +44,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
         this.btnDetail = (FloatingActionButton) findViewById(R.id.fabEditDetAnunc);
         this.btnDelete = (Button) findViewById(R.id.btn_delete_announcment);
         this.btnSubmitProposal = (FloatingActionButton) findViewById(R.id.fabProposalSubmit);
+        this.btnShowProposal = (Button) findViewById(R.id.btn_show_proposal);
 
         loadData();
     }
@@ -103,6 +106,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
             if(!this.getUsername().equals(announcement.getUser())){
                 this.btnDetail.setVisibility(View.INVISIBLE);
                 this.btnDelete.setVisibility(View.INVISIBLE);
+                this.btnShowProposal.setVisibility(View.INVISIBLE);
             }else{
                 this.btnSubmitProposal.setVisibility(View.INVISIBLE);
             }

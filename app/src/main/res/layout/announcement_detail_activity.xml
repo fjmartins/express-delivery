@@ -39,7 +39,7 @@
         android:background="@mipmap/ic_excluir" />
 
     <Button
-        android:id="@+id/btn_list_proposal"
+        android:id="@+id/btn_show_proposal"
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:onClick="showProposal"
@@ -47,6 +47,6 @@
         android:layout_marginRight="80dp"
         android:layout_marginBottom="15dp"
         android:layout_gravity="bottom"
-        android:background="@android:drawable/ic_dialog_info" />
+        android:background="@android:drawable/ic_search_category_default" />
 
 </android.support.design.widget.CoordinatorLayout>
