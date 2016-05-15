@@ -32,9 +32,17 @@ public class ProposalSubmitActivity extends GenericActivity {
 
     }
 
-    public void send(View veiw) {
-        ProposalController.send(new Proposal(this.title.getText().toString(), this.description.getText().toString(),
-                Double.parseDouble(this.valor.getText().toString())), new IResult<Proposal>() {
+    public void send(View view) {
+
+        Bundle extras = getIntent().getExtras();
+
+        String announcementID = extras.get("id").toString();
+        Proposal proposal = new Proposal(this.title.getText().toString(), this.description.getText().toString(),
+                Double.parseDouble(this.valor.getText().toString())).withAnnouncementId(announcementID);
+
+        proposal.setUserFrom(this.getUsername());
+
+        ProposalController.send(proposal , new IResult<Proposal>() {
             @Override
             public void onSuccess(List<Proposal> list) {
 

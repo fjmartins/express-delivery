@@ -10,7 +10,12 @@ public class Proposal {
     private String description;
     private String announcementId;
     private double value;
-    private User userFrom;
+
+    public void setUserFrom(String userFrom) {
+        this.userFrom = userFrom;
+    }
+
+    private String userFrom;
     private boolean isAccept;
 
     public Proposal() { }
@@ -40,11 +45,6 @@ public class Proposal {
         return this;
     }
 
-    public Proposal withUserFrom(User user) {
-        this.userFrom = user;
-        return this;
-    }
-
     public Proposal withAnnouncementId(String announcementId) {
         this.announcementId = announcementId;
         return this;
@@ -63,7 +63,7 @@ public class Proposal {
         return announcementId;
     }
 
-    public User getUserFrom() {
+    public String getUserFrom() {
         return userFrom;
     }
 
