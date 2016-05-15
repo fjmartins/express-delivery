@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import dao.IProposalDao;
+import models.Announcement;
 import models.Proposal;
 import services.IResult;
 import webservices.ProposalParse;
@@ -24,6 +25,26 @@ public class ProposalController {
             @Override
             public void onSuccess(Proposal obj) {
                 result.onSuccess(obj);
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+    }
+
+
+    public static void getByAnnouncement(Announcement announcement, final IResult<Proposal> result){
+        proposalDao.getByAnnouncement(announcement, new IResult<Proposal>() {
+            @Override
+            public void onSuccess(List<Proposal> list) {
+                result.onSuccess(list);
+            }
+
+            @Override
+            public void onSuccess(Proposal obj) {
+
             }
 
             @Override

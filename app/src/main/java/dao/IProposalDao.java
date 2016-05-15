@@ -1,5 +1,6 @@
 package dao;
 
+import models.Announcement;
 import models.Proposal;
 import models.User;
 import services.IResult;
@@ -12,5 +13,6 @@ public interface IProposalDao {
     void send(Proposal proposal, IResult result);
     void analyze(Proposal proposal, IResult result);
     void getAll(User user, IResult result);
+    void getByAnnouncement(Announcement announcement, IResult<Proposal> result);
 
 }

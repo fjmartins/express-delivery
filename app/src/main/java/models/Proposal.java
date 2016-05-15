@@ -11,9 +11,7 @@ public class Proposal {
     private String announcementId;
     private double value;
 
-    public void setUserFrom(String userFrom) {
-        this.userFrom = userFrom;
-    }
+
 
     private String userFrom;
     private boolean isAccept;
@@ -25,34 +23,29 @@ public class Proposal {
         this.description = description;
         this.value = value;
     }
-    public Proposal withTitle(String title) {
-        this.title = title;
-        return this;
-    }
 
-    public Proposal withDescription(String description) {
-        this.description = description;
-        return this;
-    }
-
-    public Proposal withValue(double value) {
-        this.value = value;
-        return this;
-    }
-
-    public Proposal withId(String id) {
+    public void setId(String id) {
         this.id = id;
-        return this;
     }
 
-    public Proposal withAnnouncementId(String announcementId) {
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setAnnouncementId(String announcementId) {
         this.announcementId = announcementId;
-        return this;
     }
 
-    public Proposal withIsAccept(boolean isAccept) {
-        this.isAccept = isAccept;
-        return this;
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public void setAccept(boolean accept) {
+        isAccept = accept;
     }
 
     public boolean isAccept() {
@@ -81,5 +74,9 @@ public class Proposal {
 
     public double getValue() {
         return value;
+    }
+
+    public void setUserFrom(String userFrom) {
+        this.userFrom = userFrom;
     }
 }
