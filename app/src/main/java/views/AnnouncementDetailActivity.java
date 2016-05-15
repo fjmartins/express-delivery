@@ -16,7 +16,9 @@ import com.example.anderson.expressdelivery.R;
 import java.util.List;
 
 import controllers.AnnouncementController;
+import controllers.ProposalController;
 import models.Announcement;
+import models.Proposal;
 import services.IResult;
 
 public class AnnouncementDetailActivity extends GenericActivity {
@@ -54,6 +56,27 @@ public class AnnouncementDetailActivity extends GenericActivity {
         extras.putString("id", announcement.getId());
         extras.putParcelable("picture", announcement.getPicture());
         redirect(this, AnnouncementRegisterActivity.class, extras);
+    }
+
+    public void showProposal(View view){
+        ProposalController.getByAnnouncement(this.announcement, new IResult<Proposal>() {
+            @Override
+            public void onSuccess(List<Proposal> list) {
+                for (Proposal proposal: list){
+                    showToastMessage(getBaseContext(), proposal.getTitle());
+                }
+            }
+
+            @Override
+            public void onSuccess(Proposal obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
     }
 
     private void loadData() {

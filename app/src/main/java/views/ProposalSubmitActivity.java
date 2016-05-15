@@ -40,11 +40,19 @@ public class ProposalSubmitActivity extends GenericActivity {
             Proposal proposal = new Proposal(this.title.getText().toString(), this.description.getText().toString(),
                     Double.parseDouble(this.valor.getText().toString())).withAnnouncementId(announcementID);
 
+<<<<<<< HEAD
             proposal.setUserFrom(this.getUsername());
 
             ProposalController.send(proposal , new IResult<Proposal>() {
                 @Override
                 public void onSuccess(List<Proposal> list) {
+=======
+        String announcementID = extras.get("id").toString();
+        Proposal proposal = new Proposal(this.title.getText().toString(), this.description.getText().toString(),
+                Double.parseDouble(this.valor.getText().toString()));
+        proposal.setAnnouncementId(announcementID);
+        proposal.setUserFrom(this.getUsername());
+>>>>>>> 7b6ad52c7e48f6b603dc2872ba1204025602a173
 
                 }
 
