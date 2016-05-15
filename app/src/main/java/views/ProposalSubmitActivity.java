@@ -38,8 +38,8 @@ public class ProposalSubmitActivity extends GenericActivity {
 
         String announcementID = extras.get("id").toString();
         Proposal proposal = new Proposal(this.title.getText().toString(), this.description.getText().toString(),
-                Double.parseDouble(this.valor.getText().toString())).withAnnouncementId(announcementID);
-
+                Double.parseDouble(this.valor.getText().toString()));
+        proposal.setAnnouncementId(announcementID);
         proposal.setUserFrom(this.getUsername());
 
         ProposalController.send(proposal , new IResult<Proposal>() {
