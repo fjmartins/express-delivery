@@ -33,37 +33,74 @@ public class ProposalSubmitActivity extends GenericActivity {
     }
 
     public void send(View view) {
+        if (validate()) {
+            Bundle extras = getIntent().getExtras();
 
-        Bundle extras = getIntent().getExtras();
+            String announcementID = extras.get("id").toString();
+            Proposal proposal = new Proposal(this.title.getText().toString(), this.description.getText().toString(),
+                    Double.parseDouble(this.valor.getText().toString())).withAnnouncementId(announcementID);
 
-        String announcementID = extras.get("id").toString();
-        Proposal proposal = new Proposal(this.title.getText().toString(), this.description.getText().toString(),
-                Double.parseDouble(this.valor.getText().toString())).withAnnouncementId(announcementID);
+            proposal.setUserFrom(this.getUsername());
 
-        proposal.setUserFrom(this.getUsername());
+            ProposalController.send(proposal , new IResult<Proposal>() {
+                @Override
+                public void onSuccess(List<Proposal> list) {
 
-        ProposalController.send(proposal , new IResult<Proposal>() {
-            @Override
-            public void onSuccess(List<Proposal> list) {
+                }
 
-            }
+                @Override
+                public void onSuccess(Proposal obj) {
 
-            @Override
-            public void onSuccess(Proposal obj) {
+                }
 
-            }
+                @Override
+                public void onError(String msg) {
 
-            @Override
-            public void onError(String msg) {
-
-            }
-        });
-        redirect(this, MainActivity.class);
+                }
+            });
+            redirect(this, MainActivity.class);
+        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         this.isUserAuth(this);
+    }
+
+    private boolean validate() {
+        boolean result = true;
+
+        String title = this.title.getText().toString();
+        if (title.trim().isEmpty()) {
+            this.title.setError("Não pode ser vazio");
+            result = false;
+        } else if (title.length() < 2) {
+            this.title.setError("Pelo menos 5 caracteres");
+            result = false;
+        } else {
+            this.title.setError(null);
+        }
+
+        String description = this.description.getText().toString();
+        if (description.trim().isEmpty()) {
+            this.description.setError("Deve conter uma descrição");
+            result = false;
+        } else if (description.length() < 2) {
+            this.description.setError("Pelo menos 5 caracteres");
+            result = false;
+        } else {
+            this.description.setError(null);
+        }
+
+        String valor = this.valor.getText().toString();
+        if (valor.trim().isEmpty()) {
+            this.valor.setError("Deve conter um valor");
+            result = false;
+        } else {
+            this.valor.setError(null);
+        }
+
+        return result;
     }
 }
