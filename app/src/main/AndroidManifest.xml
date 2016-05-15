@@ -51,6 +51,11 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
+        <activity
+            android:name="views.UserProposalListActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+
         <!-- DANGER AREA -->
         <meta-data
             android:name="com.parse.APPLICATION_ID"

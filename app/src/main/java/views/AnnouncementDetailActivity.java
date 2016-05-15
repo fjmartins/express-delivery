@@ -62,24 +62,15 @@ public class AnnouncementDetailActivity extends GenericActivity {
     }
 
     public void showProposal(View view){
-        ProposalController.getByAnnouncement(this.announcement, new IResult<Proposal>() {
-            @Override
-            public void onSuccess(List<Proposal> list) {
-                for (Proposal proposal: list){
-                    showToastMessage(getBaseContext(), proposal.getTitle());
-                }
-            }
-
-            @Override
-            public void onSuccess(Proposal obj) {
-
-            }
-
-            @Override
-            public void onError(String msg) {
-
-            }
-        });
+        this.isUserAuth(this);
+        Bundle extras = new Bundle();
+        extras.putString("description", announcement.getDescription());
+        extras.putString("address", announcement.getAddress());
+        extras.putString("phone", announcement.getPhone());
+        extras.putString("tittle", announcement.getTitle());
+        extras.putString("id", announcement.getId());
+        extras.putParcelable("picture", announcement.getPicture());
+        redirect(this, UserProposalListActivity.class, extras);
     }
 
     private void loadData() {
@@ -154,4 +145,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
             });
         }
     }
+
+
+
 }

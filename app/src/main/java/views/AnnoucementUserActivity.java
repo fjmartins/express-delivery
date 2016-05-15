@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -23,8 +25,10 @@ import java.util.List;
 import controllers.AnnouncementController;
 import controllers.UserAuthController;
 import models.Announcement;
+import models.User;
 import services.IResult;
 import services.IResultGeneric;
+import services.IResultUser;
 import views.adapters.AnnouncementAdapter;
 import views.adapters.OnLoadMoreListener;
 import views.adapters.RecyclerItemClickListener;
@@ -32,7 +36,7 @@ import views.adapters.RecyclerItemClickListener;
 /**
  * Created by anderson on 10/05/16.
  */
-public class AnnoucementUserActivity extends GenericActivity {
+public class AnnoucementUserActivity extends GenericActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     private NavigationView navigationView;
     private RecyclerView mRecyclerView;
@@ -174,5 +178,51 @@ public class AnnoucementUserActivity extends GenericActivity {
             navigationView.getMenu().getItem(i).setVisible(value[i]);
         }
     }
+
+    @SuppressWarnings("StatementWithEmptyBody")
+    @Override
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+
+        int id = item.getItemId();
+
+        if (id == R.id.nav_manage_cadastro_anuncio) {
+            redirect(this, AnnouncementRegisterActivity.class);
+            finish();
+        } else if (id == R.id.nav_manage_cadastro_usuario) {
+            redirect(this, UserRegisterActivity.class);
+        } else if (id == R.id.nav_manage_logout) {
+            UserAuthController.getCurrentUser(new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    UserAuthController.logOut(obj, new IResultUser<User>() {
+                        @Override
+                        public void onSuccess(User obj) {
+                            redirect(AnnoucementUserActivity.this, UserLoginActivity.class);
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(AnnoucementUserActivity.this, msg);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(AnnoucementUserActivity.this, msg);
+                }
+            });
+        } else if (id == R.id.nav_login) {
+            redirect(this, UserLoginActivity.class);
+        } else if (id == R.id.nav_my_announcements) {
+            redirect(this, AnnoucementUserActivity.class);
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
 
 }
