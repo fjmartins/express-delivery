@@ -1,5 +1,6 @@
 package views;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -36,7 +37,7 @@ import views.adapters.RecyclerItemClickListener;
 /**
  * Created by anderson on 10/05/16.
  */
-public class AnnoucementUserActivity extends GenericActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class AnnoucementUserActivity extends GenericActivity {
 
     private NavigationView navigationView;
     private RecyclerView mRecyclerView;
@@ -57,6 +58,45 @@ public class AnnoucementUserActivity extends GenericActivity implements Navigati
         toggle.syncState();
 
         this.navigationView = (NavigationView) findViewById(R.id.nav_view);
+        this.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_manage_cadastro_anuncio) {
+                    redirect(AnnoucementUserActivity.this, AnnouncementRegisterActivity.class);
+                    finish();
+                } else if (id == R.id.nav_manage_logout) {
+                    UserAuthController.getCurrentUser(new IResultUser<User>() {
+                        @Override
+                        public void onSuccess(User obj) {
+                            UserAuthController.logOut(obj, new IResultUser<User>() {
+                                @Override
+                                public void onSuccess(User obj) {
+                                    redirect(AnnoucementUserActivity.this, UserLoginActivity.class);
+                                }
+
+                                @Override
+                                public void onError(String msg) {
+                                    showToastMessage(AnnoucementUserActivity.this, msg);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(AnnoucementUserActivity.this, msg);
+                        }
+                    });
+                }
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
+
         setVisibleMenuItem(this.navigationView);
 
 
@@ -178,51 +218,5 @@ public class AnnoucementUserActivity extends GenericActivity implements Navigati
             navigationView.getMenu().getItem(i).setVisible(value[i]);
         }
     }
-
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-
-        int id = item.getItemId();
-
-        if (id == R.id.nav_manage_cadastro_anuncio) {
-            redirect(this, AnnouncementRegisterActivity.class);
-            finish();
-        } else if (id == R.id.nav_manage_cadastro_usuario) {
-            redirect(this, UserRegisterActivity.class);
-        } else if (id == R.id.nav_manage_logout) {
-            UserAuthController.getCurrentUser(new IResultUser<User>() {
-                @Override
-                public void onSuccess(User obj) {
-                    UserAuthController.logOut(obj, new IResultUser<User>() {
-                        @Override
-                        public void onSuccess(User obj) {
-                            redirect(AnnoucementUserActivity.this, UserLoginActivity.class);
-                        }
-
-                        @Override
-                        public void onError(String msg) {
-                            showToastMessage(AnnoucementUserActivity.this, msg);
-                        }
-                    });
-                }
-
-                @Override
-                public void onError(String msg) {
-                    showToastMessage(AnnoucementUserActivity.this, msg);
-                }
-            });
-        } else if (id == R.id.nav_login) {
-            redirect(this, UserLoginActivity.class);
-        } else if (id == R.id.nav_my_announcements) {
-            redirect(this, AnnoucementUserActivity.class);
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
-
 
 }

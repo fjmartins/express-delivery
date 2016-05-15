@@ -5,11 +5,13 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -23,7 +25,9 @@ import controllers.ProposalController;
 import controllers.UserAuthController;
 import models.Announcement;
 import models.Proposal;
+import models.User;
 import services.IResult;
+import services.IResultUser;
 import views.adapters.AnnouncementAdapter;
 import views.adapters.ProposalAdapter;
 import views.adapters.RecyclerItemClickListener;
@@ -54,7 +58,48 @@ public class UserProposalListActivity extends GenericActivity {
         toggle.syncState();
 
         this.navigationView = (NavigationView) findViewById(R.id.nav_view);
+
         setVisibleMenuItem(this.navigationView);
+        this.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_manage_cadastro_anuncio) {
+                    redirect(UserProposalListActivity.this, AnnouncementRegisterActivity.class);
+                    finish();
+                } else if (id == R.id.nav_manage_logout) {
+                    UserAuthController.getCurrentUser(new IResultUser<User>() {
+                        @Override
+                        public void onSuccess(User obj) {
+                            UserAuthController.logOut(obj, new IResultUser<User>() {
+                                @Override
+                                public void onSuccess(User obj) {
+                                    redirect(UserProposalListActivity.this, UserLoginActivity.class);
+                                }
+
+                                @Override
+                                public void onError(String msg) {
+                                    showToastMessage(UserProposalListActivity.this, msg);
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(UserProposalListActivity.this, msg);
+                        }
+                    });
+                }else if (id == R.id.nav_my_announcements) {
+                    redirect(UserProposalListActivity.this, AnnoucementUserActivity.class);
+                }
+
+                DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+                drawer.closeDrawer(GravityCompat.START);
+                return true;
+            }
+        });
+
         this.isUserAuth(this);
 
         updateProposal();
@@ -122,7 +167,7 @@ public class UserProposalListActivity extends GenericActivity {
         if (this.getUsername().equals("")) {
             this.setVisible(navigationView, false, true, false, false, true);
         } else {
-            this.setVisible(navigationView, true, false, false, true, false);
+            this.setVisible(navigationView, true, false, true, true, false);
         }
     }
 
