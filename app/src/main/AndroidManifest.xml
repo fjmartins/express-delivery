@@ -46,7 +46,7 @@
         </activity>
 
         <activity
-            android:name="views.AnnoucementUserActivity"
+            android:name="views.UserAnnouncementActivity"
             android:label="@string/title_activity_meus_anuncios"
             android:theme="@style/AppTheme.NoActionBar">
         </activity>

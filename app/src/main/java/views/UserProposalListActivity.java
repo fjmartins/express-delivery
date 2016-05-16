@@ -1,7 +1,5 @@
 package views;
 
-import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -13,14 +11,11 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
 import java.util.List;
 
-import controllers.AnnouncementController;
 import controllers.ProposalController;
 import controllers.UserAuthController;
 import models.Announcement;
@@ -28,9 +23,7 @@ import models.Proposal;
 import models.User;
 import services.IResult;
 import services.IResultUser;
-import views.adapters.AnnouncementAdapter;
 import views.adapters.ProposalAdapter;
-import views.adapters.RecyclerItemClickListener;
 
 
 /**
@@ -91,7 +84,7 @@ public class UserProposalListActivity extends GenericActivity {
                         }
                     });
                 }else if (id == R.id.nav_my_announcements) {
-                    redirect(UserProposalListActivity.this, AnnoucementUserActivity.class);
+                    redirect(UserProposalListActivity.this, UserAnnouncementActivity.class);
                 }
 
                 DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

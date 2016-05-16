@@ -156,7 +156,7 @@ public class AnnouncementDetailActivity extends GenericActivity {
 
                 @Override
                 public void onSuccess(Announcement obj) {
-                    finish();
+                    redirect(AnnouncementDetailActivity.this, UserAnnouncementActivity.class);
                 }
 
                 @Override
