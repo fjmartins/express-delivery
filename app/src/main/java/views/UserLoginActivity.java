@@ -1,6 +1,8 @@
 package views;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -9,6 +11,8 @@ import android.widget.EditText;
 
 import com.example.anderson.expressdelivery.R;
 
+import java.util.List;
+
 import controllers.UserAuthController;
 import controllers.UserController;
 import models.User;
@@ -16,8 +20,9 @@ import services.IResultUser;
 
 public class UserLoginActivity extends GenericActivity {
 
-    private EditText username;
-    private EditText password;
+    protected EditText username;
+    protected EditText password;
+    protected ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,20 +40,9 @@ public class UserLoginActivity extends GenericActivity {
 
     public void logIn(View view) {
         if (validate()) {
-            User user = new User(username.getText().toString(), password.getText().toString());
-            UserAuthController.logIn(user, new IResultUser<User>() {
-                @Override
-                public void onSuccess(User obj) {
-                    redirect(UserLoginActivity.this, MainActivity.class);
-                    finish();
-                }
-
-                @Override
-                public void onError(String msg) {
-                    showToastMessage(UserLoginActivity.this, msg);
-                }
-            });
+            new LoginTask().execute();
         }
+
     }
 
     public void visitar(View view) {
@@ -88,5 +82,46 @@ public class UserLoginActivity extends GenericActivity {
     @Override
     protected void onStop() {
         super.onStop();
+    }
+
+    protected class LoginTask extends AsyncTask<Void, Void, Void> {
+
+        String name = username.getText().toString().trim();
+        String pass = password.getText().toString().trim();
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(UserLoginActivity.this);
+            progressDialog.setTitle("Entrando");
+            progressDialog.setMessage("Aguarde ...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            User user = new User(name, pass);
+            UserAuthController.logIn(user, new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    redirect(UserLoginActivity.this, MainActivity.class);
+                    finish();
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(UserLoginActivity.this, msg);
+                    progressDialog.hide();
+                }
+            });
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+
+        }
     }
 }
