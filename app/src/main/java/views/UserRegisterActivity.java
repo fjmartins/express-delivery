@@ -26,6 +26,8 @@ public class UserRegisterActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_register_activity);
 
+        overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
+
         this.name = (EditText)findViewById(R.id.txt_register_user_activity_name);
         this.email = (EditText)findViewById(R.id.txt_register_user_activity_email);
         this.password = (EditText)findViewById(R.id.txt_register_user_activity_password);

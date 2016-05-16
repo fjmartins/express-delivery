@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layoutDetAnunc"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,44 +10,63 @@
 
     <include layout="@layout/announcement_detail_activity_content"></include>
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabEditDetAnunc"
+    <com.getbase.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fbProposalSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
-        android:onClick="update"
-        android:src="@android:drawable/ic_menu_edit" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fabProposalSubmit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_margin="@dimen/fab_margin"
+        android:layout_margin="16dp"
         android:onClick="submitProposal"
-        android:src="@android:drawable/ic_menu_send" />
+        android:src="@android:drawable/ic_menu_send"
+        fab:fab_colorNormal="#72b2ce"
+        fab:fab_colorPressed="#ffffff"/>
 
-    <Button
-        android:id="@+id/btn_delete_announcment"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:onClick="remove"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="15dp"
+    <com.getbase.floatingactionbutton.FloatingActionsMenu
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/multiple_actions"
+        android:layout_margin="16dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:layout_gravity="end|bottom"
-        android:background="@mipmap/ic_excluir" />
+        fab:fab_addButtonColorNormal="#72b2ce"
+        fab:fab_addButtonColorPressed="#f1f1f1"
+        fab:fab_addButtonPlusIconColor="#ffffff">
 
-    <Button
-        android:id="@+id/btn_show_proposal"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:onClick="showProposal"
-        android:layout_marginTop="10dp"
-        android:layout_marginRight="80dp"
-        android:layout_marginBottom="15dp"
-        android:layout_gravity="bottom"
-        android:background="@android:drawable/ic_search_category_default" />
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fbListProposal"
+            android:onClick="showProposal"
+            fab:fab_icon="@android:drawable/ic_menu_search"
+            fab:fab_colorNormal="#72b2ce"
+            fab:fab_colorPressed="#ffffff"
+            fab:fab_size="mini"
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fbEditDetAnunc"
+            android:onClick="update"
+            fab:fab_icon="@android:drawable/ic_menu_edit"
+            fab:fab_colorNormal="#72b2ce"
+            fab:fab_colorPressed="#ffffff"
+            fab:fab_size="mini"
+            />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/fbdelete_announcment"
+            android:onClick="remove"
+            fab:fab_icon="@android:drawable/ic_menu_delete"
+            fab:fab_colorNormal="#72b2ce"
+            fab:fab_colorPressed="#ffffff"
+            fab:fab_size="mini"
+            />
+
+    </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
 </android.support.design.widget.CoordinatorLayout>

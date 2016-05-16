@@ -30,4 +30,5 @@ dependencies {
     compile 'com.parse.bolts:bolts-android:1.+'
     compile 'com.parse:parse-android:1.+'
     androidTestCompile 'junit:junit:4.12'
+    compile 'com.getbase:floatingactionbutton:1.8.0'
 }

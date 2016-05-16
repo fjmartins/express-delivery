@@ -38,6 +38,8 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcement_register_activity);
 
+        overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
+
         this.isUserAuth(this);
 
         this.title = (EditText) findViewById(R.id.txtCadAnuncioTitulo);

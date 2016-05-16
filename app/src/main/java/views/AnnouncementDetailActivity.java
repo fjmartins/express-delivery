@@ -2,7 +2,7 @@ package views;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+//import android.support.design.widget.FloatingActionButton;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,8 +10,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.getbase.floatingactionbutton.FloatingActionButton;
 
 import com.example.anderson.expressdelivery.R;
+import com.getbase.floatingactionbutton.FloatingActionsMenu;
 
 import java.util.List;
 
@@ -31,20 +33,35 @@ public class AnnouncementDetailActivity extends GenericActivity {
     private Announcement announcement;
     private Button btnDelete;
 
+    private FloatingActionsMenu btnmultiple_actions;
+    private FloatingActionButton btnfbListProposal;
+    private FloatingActionButton btnfbEditDetAnunc;
+    private FloatingActionButton btnfbdelete_announcment;
+    private FloatingActionButton btnfbProposalSubmit;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.announcement_detail_activity);
+
+        overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
+
 
         this.title = (TextView) findViewById(R.id.txt_announcement_detail_activity_title);
         this.description = (TextView) findViewById(R.id.txt_announcement_detail_activity_description);
         this.phone = (TextView) findViewById(R.id.txt_announcement_detail_activity_phone);
         this.address = (TextView) findViewById(R.id.txt_announcement_detail_activity_address);
         this.picture = (ImageView) findViewById(R.id.img_announcement_detail_activity_picture);
-        this.btnDetail = (FloatingActionButton) findViewById(R.id.fabEditDetAnunc);
-        this.btnDelete = (Button) findViewById(R.id.btn_delete_announcment);
-        this.btnSubmitProposal = (FloatingActionButton) findViewById(R.id.fabProposalSubmit);
-        this.btnShowProposal = (Button) findViewById(R.id.btn_show_proposal);
+        //this.btnDetail = (FloatingActionButton) findViewById(R.id.fabEditDetAnunc);
+        //this.btnDelete = (Button) findViewById(R.id.btn_delete_announcment);
+        //this.btnSubmitProposal = (FloatingActionButton) findViewById(R.id.fabProposalSubmit);
+        //this.btnShowProposal = (Button) findViewById(R.id.btn_show_proposal);
+
+        this.btnmultiple_actions = (FloatingActionsMenu) findViewById(R.id.multiple_actions);
+        this.btnfbListProposal = (FloatingActionButton) findViewById(R.id.fbListProposal);
+        this.btnfbEditDetAnunc = (FloatingActionButton) findViewById(R.id.fbEditDetAnunc);
+        this.btnfbdelete_announcment = (FloatingActionButton) findViewById(R.id.fbdelete_announcment);
+        this.btnfbProposalSubmit = (FloatingActionButton) findViewById(R.id.fbProposalSubmit);
 
         loadData();
     }
@@ -95,11 +112,17 @@ public class AnnouncementDetailActivity extends GenericActivity {
             this.picture.setImageBitmap(announcement.getPicture());
 
             if(!this.getUsername().equals(announcement.getUser())){
-                this.btnDetail.setVisibility(View.INVISIBLE);
-                this.btnDelete.setVisibility(View.INVISIBLE);
-                this.btnShowProposal.setVisibility(View.INVISIBLE);
+                //this.btnDetail.setVisibility(View.INVISIBLE);
+                //this.btnDelete.setVisibility(View.INVISIBLE);
+                //this.btnShowProposal.setVisibility(View.INVISIBLE);
+                this.btnfbEditDetAnunc.setVisibility(View.INVISIBLE);
+                this.btnfbdelete_announcment.setVisibility(View.INVISIBLE);
+                this.btnfbListProposal.setVisibility(View.INVISIBLE);
+                this.btnmultiple_actions.setVisibility(View.INVISIBLE);
+
             }else{
-                this.btnSubmitProposal.setVisibility(View.INVISIBLE);
+                //this.btnSubmitProposal.setVisibility(View.INVISIBLE);
+                this.btnfbProposalSubmit.setVisibility(View.INVISIBLE);
             }
 
         }

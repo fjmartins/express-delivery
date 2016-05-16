@@ -24,6 +24,8 @@ public class ProposalSubmitActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.proposal_submit_activity);
 
+        overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
+
         this.title = (EditText) findViewById(R.id.txtEnvioPropostaTitulo);
         this.description = (EditText) findViewById(R.id.txtEnvioPropostaDesc);
         this.valor = (EditText) findViewById(R.id.txtEnvioPropostaValor);
