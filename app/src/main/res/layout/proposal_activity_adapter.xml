@@ -16,14 +16,22 @@
         android:layout_marginBottom="5dp">
 
         <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proposta enviada por:"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="5sp"
+            android:textColor="#8B0000"/>
+
+        <TextView
             android:id="@+id/txtTitulo"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:textSize="18sp"
+            android:textSize="15sp"
             android:textStyle="bold"
-            android:layout_marginTop="10sp"
-            android:layout_marginLeft="35sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginLeft="150sp"
             android:gravity="center_vertical"/>
 
         <TextView
@@ -31,9 +39,44 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_name"
-            android:layout_marginLeft="35sp"
-            android:layout_marginTop="35sp"
+            android:layout_marginLeft="10sp"
+            android:layout_marginTop="30sp"
             android:gravity="center_vertical"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Valor R$:"
+            android:layout_marginLeft="5sp"
+            android:layout_marginTop="70sp"/>
+
+        <TextView
+            android:id="@+id/txtValor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="50.00"
+            android:layout_marginTop="70sp"
+            android:layout_marginLeft="65sp"/>
+
+        <ImageButton
+            android:id="@+id/btnConfirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60sp"
+            android:layout_marginLeft="220sp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/check"/>
+
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60sp"
+            android:layout_marginLeft="280sp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/remove"/>
+
 
 
     </android.support.v7.widget.CardView>
