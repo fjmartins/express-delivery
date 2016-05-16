@@ -2,6 +2,7 @@ package views;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
@@ -128,6 +129,10 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                         });
                     } else if (btnCad.getText().toString().equalsIgnoreCase("Cadastrar")) {
 
+                        if (announcement.getPicture() == null) {
+                            announcement.setPicture(BitmapFactory.decodeResource(getResources(),
+                                    R.drawable.ic_menu_camera));
+                        }
                         AnnouncementController.insert(announcement, new IResult<Announcement>() {
                             @Override
                             public void onSuccess(List<Announcement> list) {
