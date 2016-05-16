@@ -109,28 +109,35 @@ public class UserProposalListActivity extends GenericActivity {
         mAdapter = new ProposalAdapter(this.mList, getBaseContext(), this.mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
-        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
-                new RecyclerItemClickListener.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(View view, int position) {
-                        Context contexto = getApplicationContext();
-                        String texto = "CURTO";
-                        int duracao = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(contexto, texto, duracao);
-                        toast.show();
-                    }
-
-                    @Override
-                    public void onItemLongClick(View view, int position) {
-                        Context contexto = getApplicationContext();
-                        String texto = "LONGO";
-                        int duracao = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(contexto, texto, duracao);
-                        toast.show();
-                    }
-                }));
+//        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
+//                new RecyclerItemClickListener.OnItemClickListener() {
+//                    @Override
+//                    public void onItemClick(View view, int position) {
+//                        Context contexto = getApplicationContext();
+//                        String texto = "CURTO";
+//                        int duracao = Toast.LENGTH_SHORT;
+//                        Toast toast = Toast.makeText(contexto, texto, duracao);
+//                        toast.show();
+//                    }
+//
+//                    @Override
+//                    public void onItemLongClick(View view, int position) {
+//                        Context contexto = getApplicationContext();
+//                        String texto = "LONGO";
+//                        int duracao = Toast.LENGTH_SHORT;
+//                        Toast toast = Toast.makeText(contexto, texto, duracao);
+//                        toast.show();
+//                    }
+//                }));
     }
 
+    public void refuse(View view){
+        showToastMessage(this, "RECUSADO");
+    }
+
+    public void accept(View view){
+        showToastMessage(this, "ACEITO");
+    }
 
     public void updateProposal() {
 

@@ -11,13 +11,14 @@ import com.example.anderson.expressdelivery.R;
  */
 public class ProposalViewHolder extends RecyclerView.ViewHolder{
 
-    protected TextView viewTitulo;
-    protected TextView viewDescricao;
+    protected TextView viewTitle, viewDescription, viewUserFrom, viewValue;
 
     public ProposalViewHolder(View itemView) {
         super(itemView);
 
-        viewTitulo = (TextView) itemView.findViewById(R.id.txtTitulo);
-        viewDescricao = (TextView) itemView.findViewById(R.id.txtDescricao);
+        viewTitle = (TextView) itemView.findViewById(R.id.text_title_proposal);
+        viewDescription = (TextView) itemView.findViewById(R.id.text_description_proposal);
+        viewUserFrom = (TextView) itemView.findViewById(R.id.txt_user_from_proposal);
+        viewValue = (TextView) itemView.findViewById(R.id.txt_value_proposal);
     }
 }

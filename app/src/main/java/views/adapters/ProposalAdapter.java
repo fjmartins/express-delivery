@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import com.example.anderson.expressdelivery.R;
 
 import java.util.List;
+import java.util.StringTokenizer;
 
 import models.Proposal;
 
@@ -80,8 +81,11 @@ public class ProposalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             Proposal proposal = mList.get(position);
             ProposalViewHolder proposalViewHolder = (ProposalViewHolder) holder;
-            proposalViewHolder.viewTitulo.setText(proposal.getTitle());
-            proposalViewHolder.viewDescricao.setText(proposal.getDescription());
+            proposalViewHolder.viewTitle.setText(proposal.getTitle());
+            proposalViewHolder.viewDescription.setText(proposal.getDescription());
+            proposalViewHolder.viewValue.setText(String.valueOf(proposal.getValue()));
+            proposalViewHolder.viewUserFrom.setText(proposal.getUserFrom());
+
 
         } else if (holder instanceof LoadingViewHolder) {
             LoadingViewHolder loadingViewHolder = (LoadingViewHolder) holder;
