@@ -90,12 +90,17 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                 public void onSuccess(User obj) {
                     Announcement announcement = new Announcement(obj.getUsername(),
                             title, description, address, phone, picture);
+
                     Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);
                     if (btnCad.getText().toString().equalsIgnoreCase("Atualizar")) {
 
                         final Bundle extrasEntrada = getIntent().getExtras();
 
                         announcement.setId(extrasEntrada.get("id").toString());
+
+                        if (announcement.getPicture() == null) {
+                            announcement.setPicture((Bitmap) extrasEntrada.getParcelable("picture"));
+                        }
 
                         AnnouncementController.update(announcement, new IResult<Announcement>() {
                             @Override
