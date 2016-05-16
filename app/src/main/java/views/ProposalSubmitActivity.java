@@ -61,6 +61,7 @@ public class ProposalSubmitActivity extends GenericActivity {
                 }
             });
             redirect(this, MainActivity.class);
+            finish();
         }
     }
 
@@ -77,8 +78,8 @@ public class ProposalSubmitActivity extends GenericActivity {
         if (title.trim().isEmpty()) {
             this.title.setError("Não pode ser vazio");
             result = false;
-        } else if (title.length() < 2) {
-            this.title.setError("Pelo menos 5 caracteres");
+        } else if (title.length() <= 5 || title.length() > 20) {
+            this.title.setError("Deve conter entre 5 e 20 caracteres");
             result = false;
         } else {
             this.title.setError(null);
@@ -88,8 +89,8 @@ public class ProposalSubmitActivity extends GenericActivity {
         if (description.trim().isEmpty()) {
             this.description.setError("Deve conter uma descrição");
             result = false;
-        } else if (description.length() < 2) {
-            this.description.setError("Pelo menos 5 caracteres");
+        } else if (description.length() <= 5 || description.length()  > 100) {
+            this.description.setError("Deve conter entre 5 e 100 caracteres");
             result = false;
         } else {
             this.description.setError(null);
@@ -102,7 +103,6 @@ public class ProposalSubmitActivity extends GenericActivity {
         } else {
             this.valor.setError(null);
         }
-
         return result;
     }
 }
