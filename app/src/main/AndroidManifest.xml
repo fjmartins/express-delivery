@@ -53,7 +53,8 @@
 
         <activity
             android:name="views.UserProposalListActivity"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:label="@string/title_activity_user_proporsal">
         </activity>
 
         <!-- DANGER AREA -->
