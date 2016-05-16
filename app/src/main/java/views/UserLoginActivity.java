@@ -27,13 +27,13 @@ public class UserLoginActivity extends GenericActivity {
         username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
         password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
 
-        if(UserAuthController.getCurrentUser() != null) {
+        if (UserAuthController.getCurrentUser() != null) {
             this.goToMainIfUserAuth();
             finish();
         }
     }
 
-    public void logIn(View view){
+    public void logIn(View view) {
         if (validate()) {
             User user = new User(username.getText().toString(), password.getText().toString());
             UserAuthController.logIn(user, new IResultUser<User>() {
@@ -51,13 +51,13 @@ public class UserLoginActivity extends GenericActivity {
         }
     }
 
-    public void visitar(View view){
+    public void visitar(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
     }
 
-    public void cadastrar(View view){
+    public void cadastrar(View view) {
         Intent intent = new Intent(this, UserRegisterActivity.class);
         startActivity(intent);
         finish();
@@ -67,16 +67,16 @@ public class UserLoginActivity extends GenericActivity {
         boolean result = true;
 
         String username = this.username.getText().toString();
-        if (username.isEmpty()){
-            this.username.setError("Nome de usuário inválido");
+        if (username.length() < 5 || username.length() > 20) {
+            this.username.setError("Nome de usuário deve ser entre 5 e 20 caracteres");
             result = false;
         } else {
             this.username.setError(null);
         }
 
         String password = this.password.getText().toString();
-        if (password.trim().isEmpty()){
-            this.password.setError("Senha inválida");
+        if (password.length() < 5 || password.length() > 20) {
+            this.password.setError("Senha de usuário deve ser entre 5 e 20 caracteres");
             result = false;
         } else {
             this.password.setError(null);
