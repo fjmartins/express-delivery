@@ -56,6 +56,7 @@ public class AnnouncementDetailsActivity extends GenericActivity {
 
 
     private void loadData() {
+
         this.announcement = AnnouncementUtils.getExtras(getIntent().getBundleExtra("bundle"));
 
         this.title.setText(announcement.getTitle());

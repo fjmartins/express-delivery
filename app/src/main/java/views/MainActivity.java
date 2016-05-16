@@ -28,6 +28,7 @@ import models.User;
 import services.IResult;
 import services.IResultGeneric;
 import services.IResultUser;
+import utils.AnnouncementUtils;
 import views.adapters.AnnouncementAdapter;
 import views.adapters.OnLoadMoreListener;
 import views.adapters.RecyclerItemClickListener;
@@ -88,17 +89,9 @@ public class MainActivity extends GenericActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        Context contexto = getApplicationContext();
-                        Intent intent = new Intent(contexto, AnnouncementDetailsActivity.class);
-                        Announcement announcement = mList.get(position);
-                        intent.putExtra("description", announcement.getDescription());
-                        intent.putExtra("address", announcement.getAddress());
-                        intent.putExtra("picture", announcement.getPicture());
-                        intent.putExtra("phone", announcement.getPhone());
-                        intent.putExtra("tittle", announcement.getTitle());
-                        intent.putExtra("id", announcement.getId());
-                        intent.putExtra("username", announcement.getUser());
-                        startActivity(intent);
+                        Intent i = new Intent(MainActivity.this, AnnouncementDetailsActivity.class);
+                        i.putExtra("bundle", AnnouncementUtils.sendExtras(mList.get(position)));
+                        startActivity(i);
                     }
 
                     @Override
