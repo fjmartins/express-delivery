@@ -1,5 +1,6 @@
 package views;
 
+import android.app.Activity;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -55,7 +56,7 @@ public class AnnouncementDetailsActivity extends GenericActivity {
 
 
     private void loadData() {
-        this.announcement = AnnouncementUtils.getExtras(getIntent().getExtras());
+        this.announcement = AnnouncementUtils.getExtras(getIntent().getBundleExtra("bundle"));
 
         this.title.setText(announcement.getTitle());
         this.description.setText(announcement.getDescription());
@@ -113,7 +114,8 @@ public class AnnouncementDetailsActivity extends GenericActivity {
 
                 @Override
                 public void onSuccess(Announcement obj) {
-                    redirect(AnnouncementDetailsActivity.this, UserAnnouncementActivity.class);
+                    setResult(Activity.RESULT_OK);
+                    finish();
                 }
 
                 @Override

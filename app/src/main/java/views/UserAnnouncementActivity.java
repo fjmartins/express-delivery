@@ -1,6 +1,8 @@
 package views;
 
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
@@ -72,9 +74,10 @@ public class UserAnnouncementActivity extends MainActivity {
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
-                        redirect(UserAnnouncementActivity.this, AnnouncementDetailsActivity.class,
-                                AnnouncementUtils.sendExtras(mList.get(position)));
-                        finish();
+                        Intent i = new Intent(UserAnnouncementActivity.this, AnnouncementDetailsActivity.class);
+                        i.putExtra("bundle", AnnouncementUtils.sendExtras(mList.get(position)));
+                        startActivityForResult(i, 1);
+
                     }
 
                     @Override
@@ -91,10 +94,14 @@ public class UserAnnouncementActivity extends MainActivity {
         this.isUserAuth(this);
     }
 
+
     @Override
-    protected void onRestart() {
-        super.onRestart();
-        recreate();
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                recreate();
+            }
+        }
     }
 
     public void updateAnnouncementList() {
