@@ -89,7 +89,7 @@ public class MainActivity extends GenericActivity {
                     @Override
                     public void onItemClick(View view, int position) {
                         Context contexto = getApplicationContext();
-                        Intent intent = new Intent(contexto, AnnouncementDetailActivity.class);
+                        Intent intent = new Intent(contexto, AnnouncementDetailsActivity.class);
                         Announcement announcement = mList.get(position);
                         intent.putExtra("description", announcement.getDescription());
                         intent.putExtra("address", announcement.getAddress());

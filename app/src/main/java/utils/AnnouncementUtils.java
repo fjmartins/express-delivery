@@ -1,5 +1,6 @@
 package utils;
 
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import models.Announcement;
@@ -9,9 +10,7 @@ import models.Announcement;
  */
 public class AnnouncementUtils {
 
-
     public static Bundle sendExtras(Announcement announcement) {
-
         Bundle extrasOut = new Bundle();
 
         extrasOut.putString("id", announcement.getId());
@@ -25,5 +24,14 @@ public class AnnouncementUtils {
         return extrasOut;
     }
 
+    public static Announcement getExtras(Bundle extras) {
+        Announcement announcement = new Announcement(
+                extras.get("username").toString(), extras.get("tittle").toString(),
+                extras.get("description").toString(), extras.get("address").toString(),
+                extras.get("phone").toString(), (Bitmap) extras.getParcelable("picture"));
 
+        announcement.setId(extras.get("id").toString());
+
+        return announcement;
+    }
 }
