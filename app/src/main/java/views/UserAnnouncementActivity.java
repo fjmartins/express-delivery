@@ -91,6 +91,12 @@ public class UserAnnouncementActivity extends MainActivity {
         this.isUserAuth(this);
     }
 
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recreate();
+    }
+
     public void updateAnnouncementList() {
         AnnouncementController.getMy(UserAuthController.getCurrentUser(), new IResult<Announcement>() {
             @Override
