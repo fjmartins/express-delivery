@@ -17,9 +17,9 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:onClick="submitProposal"
-        android:src="@android:drawable/ic_menu_send"
-        fab:fab_colorNormal="#72b2ce"
-        fab:fab_colorPressed="#ffffff"/>
+        fab:fab_icon="@drawable/ic_menu_send"
+        fab:fab_colorNormal="#037614"
+        fab:fab_colorPressed="#12b31e"/>
 
     <com.getbase.floatingactionbutton.FloatingActionsMenu
         android:layout_width="wrap_content"
@@ -30,8 +30,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_gravity="end|bottom"
-        fab:fab_addButtonColorNormal="#72b2ce"
-        fab:fab_addButtonColorPressed="#f1f1f1"
+        fab:fab_addButtonColorNormal="#037614"
+        fab:fab_addButtonColorPressed="#12b31e"
         fab:fab_addButtonPlusIconColor="#ffffff">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -40,8 +40,8 @@
             android:id="@+id/fbListProposal"
             android:onClick="showProposal"
             fab:fab_icon="@android:drawable/ic_menu_search"
-            fab:fab_colorNormal="#72b2ce"
-            fab:fab_colorPressed="#ffffff"
+            fab:fab_colorNormal="#037614"
+            fab:fab_colorPressed="#12b31e"
             fab:fab_size="mini"
             />
 
@@ -51,7 +51,7 @@
             android:id="@+id/fbEditDetAnunc"
             android:onClick="updateAnnouncement"
             fab:fab_icon="@android:drawable/ic_menu_edit"
-            fab:fab_colorNormal="#72b2ce"
+            fab:fab_colorNormal="#037614"
             fab:fab_colorPressed="#ffffff"
             fab:fab_size="mini"
             />
@@ -62,8 +62,8 @@
             android:id="@+id/fbdelete_announcment"
             android:onClick="removeAnnouncement"
             fab:fab_icon="@android:drawable/ic_menu_delete"
-            fab:fab_colorNormal="#72b2ce"
-            fab:fab_colorPressed="#ffffff"
+            fab:fab_colorNormal="#037614"
+            fab:fab_colorPressed="#12b31e"
             fab:fab_size="mini"
             />
 

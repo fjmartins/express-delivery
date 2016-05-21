@@ -6,8 +6,8 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:context="views.ProposalSubmitActivity"
-    android:paddingLeft="24dp"
-    android:paddingRight="24dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
     android:background="@color/backgroundWhite">
 
     <ScrollView
@@ -68,7 +68,7 @@
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
                 android:onClick="send"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/colorPrimary"
                 android:textColor="@color/primaryText"
                 android:text="@string/enviar_proposta"/>
 
