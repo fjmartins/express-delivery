@@ -13,7 +13,6 @@ import android.widget.ImageView;
 import com.example.anderson.expressdelivery.R;
 
 import java.util.List;
-
 import controllers.AnnouncementController;
 import controllers.UserAuthController;
 import models.Announcement;
@@ -32,7 +31,6 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     private ImageView picture;
     private Announcement announcement;
     private Bitmap pictureMake;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

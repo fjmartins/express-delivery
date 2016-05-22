@@ -57,6 +57,10 @@
             android:label="@string/title_activity_user_proporsal">
         </activity>
 
+        <activity
+            android:name="views.UserRegisterAddressActivity">
+        </activity>
+
         <!-- DANGER AREA -->
         <meta-data
             android:name="com.parse.APPLICATION_ID"

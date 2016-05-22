@@ -16,6 +16,12 @@
     <string name="entrar">Entrar</string>
     <string name="visitar">Visitar</string>
     <string name="email">E-mail</string>
+    <string name="street">Logradouro</string>
+    <string name="number">Nº</string>
+    <string name="complement">Complemento</string>
+    <string name="district">Bairro</string>
+    <string name="city">Cidade</string>
+    <string name="zipcode">CEP</string>
     <string name="password_confirm">Confimar Senha</string>
     <string name="cadastro_usuario">Cadastro de Usuário</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuários</string>

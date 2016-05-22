@@ -1,5 +1,6 @@
 package views;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -91,7 +92,7 @@ public class UserRegisterActivity extends GenericActivity {
             this.password.setError("Senha inválida");
             result = false;
         } else if (password.length() < 5 || password.length() > 20) {
-            this.password.setError("Password deve conter entrer 5 e 20 caraceres");
+            this.password.setError("Password deve conter entrer 5 e 20 caracteres");
             result = false;
         }else {
             this.password.setError(null);
@@ -104,6 +105,7 @@ public class UserRegisterActivity extends GenericActivity {
         } else {
             this.passwordConfirm.setError(null);
         }
+
         return result;
     }
 }
