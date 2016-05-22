@@ -86,6 +86,17 @@
                 android:textColor="@color/primaryText"
                 android:text="@string/cadastrar"/>
 
+            <android.support.v7.widget.AppCompatButton
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="24dp"
+                android:padding="12dp"
+                android:onClick="goToAddress"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/primaryText"
+                android:text="Cadastrar Endereço"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

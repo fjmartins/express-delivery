@@ -19,6 +19,36 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent">
 
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp">
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/txt_register_user_activity_zipcode"
+                        android:hint="@string/zipcode"
+                        android:inputType="text"/>
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/btn_register_user_activity_search_address"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginLeft="310dp"
+                    android:padding="12dp"
+                    android:onClick="searchAddress"
+                    android:background="@drawable/ic_menu_share" />
+
+            </RelativeLayout>
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,19 +85,6 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txt_register_user_activity_complement"
                     android:hint="@string/complement"
-                    android:inputType="text"/>
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txt_register_user_activity_zipcode"
-                    android:hint="@string/zipcode"
                     android:inputType="text"/>
             </android.support.design.widget.TextInputLayout>
 

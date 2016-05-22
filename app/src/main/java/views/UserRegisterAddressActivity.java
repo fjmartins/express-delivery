@@ -1,12 +1,21 @@
 package views;
 
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.Patterns;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.anderson.expressdelivery.R;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import utils.HTTPUtils;
 
 /**
  * Created by anderson on 21/05/16.
@@ -15,6 +24,7 @@ public class UserRegisterAddressActivity extends GenericActivity {
 
     private EditText street, number, complement, zipcode, district, city;
     private Button btnRegister;
+    protected ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,4 +93,55 @@ public class UserRegisterAddressActivity extends GenericActivity {
         return result;
     }
 
+    public void searchAddress(View v) {
+        if (!this.zipcode.getText().toString().isEmpty()) {
+            new AddressTask(this.zipcode.getText().toString()).execute();
+        } else {
+            showToastMessage(this, "Insira um CEP para consulta");
+        }
+    }
+
+    private class AddressTask extends AsyncTask<Void, Void, Void> {
+
+        private String cep;
+
+        public AddressTask(String cep) {
+            this.cep = cep;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            progressDialog = new ProgressDialog(UserRegisterAddressActivity.this);
+            progressDialog.setTitle("Buscando Endereço");
+            progressDialog.setMessage("Aguarde ...");
+            progressDialog.setIndeterminate(false);
+            progressDialog.show();
+        }
+
+        JSONObject address;
+
+        @Override
+        protected Void doInBackground(Void... params) {
+            address = HTTPUtils.getAddress(this.cep);
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+
+            if (address.has("logradouro")) {
+                try {
+                    street.setText(address.getString("logradouro"));
+                    complement.setText(address.getString("complemento"));
+                    district.setText(address.getString("bairro"));
+                    city.setText(address.getString("localidade"));
+
+                    progressDialog.hide();
+                } catch (JSONException e) {
+                    Log.i("JSON_ERROR", e.getMessage());
+                }
+            }
+        }
+    }
 }
