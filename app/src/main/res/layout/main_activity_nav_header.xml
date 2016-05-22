@@ -9,7 +9,7 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
     android:gravity="bottom"
-    android:background="@android:color/holo_green_dark">
+    android:background="@drawable/side_nav_bar">
 
     <ImageView
         android:id="@+id/imageView"

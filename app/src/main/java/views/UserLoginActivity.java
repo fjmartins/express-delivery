@@ -1,15 +1,29 @@
 package views;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.text.style.ClickableSpan;
 import android.util.Patterns;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.anderson.expressdelivery.R;
+
+import com.facebook.FacebookSdk;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.facebook.login.widget.LoginButton;
+
+import android.util.Log;
 
 import java.util.List;
 
@@ -23,10 +37,15 @@ public class UserLoginActivity extends GenericActivity {
     protected EditText username;
     protected EditText password;
     protected ProgressDialog progressDialog;
+    private LoginButton buttonLoginFacebook;
+    private LoginManager loginManager;
+    private CallbackManager callbackManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.user_login_activity);
 
         username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
@@ -57,6 +76,39 @@ public class UserLoginActivity extends GenericActivity {
         finish();
     }
 
+    public void logInFace(View view) {
+
+        buttonLoginFacebook = (LoginButton) findViewById(R.id.fbLogin);
+        buttonLoginFacebook.setReadPermissions("email");
+        loginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+        //buttonLoginFacebook.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                //getIntent().putExtra(/*getUsername()*/, loginResult.getAccessToken());
+                //setResult(Activity.RESULT_OK);
+                //finish();
+
+                Intent intent = new Intent(UserLoginActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onCancel() {
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+            }
+        });
+    }
+/*
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
+        Log.e("data",data.toString());
+    }
+*/
     private boolean validate() {
         boolean result = true;
 
