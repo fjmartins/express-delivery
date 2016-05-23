@@ -106,7 +106,6 @@ public class UserLoginActivity extends GenericActivity {
                 @Override
                 public void onError(String msg) {
                     showToastMessage(UserLoginActivity.this, msg);
-                    progressDialog.hide();
                 }
             });
 
@@ -115,7 +114,7 @@ public class UserLoginActivity extends GenericActivity {
 
         @Override
         protected void onPostExecute(Void result) {
-
+            progressDialog.hide();
         }
     }
 }

@@ -21,6 +21,7 @@
     <string name="complement">Complemento</string>
     <string name="district">Bairro</string>
     <string name="city">Cidade</string>
+    <string name="uf">UF</string>
     <string name="zipcode">CEP</string>
     <string name="add_address">Deseja cadastrar seu endereço para facilitar as entregas?</string>
     <string name="password_confirm">Confimar Senha</string>

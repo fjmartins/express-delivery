@@ -27,7 +27,7 @@ import utils.HTTPUtils;
  */
 public class UserRegisterAddressActivity extends GenericActivity {
 
-    private EditText street, number, complement, zipcode, district, city;
+    private EditText street, number, complement, zipcode, district, city, state;
     private Button btnRegister;
     protected ProgressDialog progressDialog;
 
@@ -42,6 +42,7 @@ public class UserRegisterAddressActivity extends GenericActivity {
         this.zipcode = (EditText) findViewById(R.id.txt_register_user_activity_zipcode);
         this.district = (EditText) findViewById(R.id.txt_register_user_activity_district);
         this.city = (EditText) findViewById(R.id.txt_register_user_activity_city);
+        this.state = (EditText) findViewById(R.id.txt_register_user_activity_uf);
         this.btnRegister = (Button) findViewById(R.id.btn_register_user_activity_register);
     }
 
@@ -174,6 +175,7 @@ public class UserRegisterAddressActivity extends GenericActivity {
                         complement.setText(address.getString("complemento"));
                         district.setText(address.getString("bairro"));
                         city.setText(address.getString("localidade"));
+                        state.setText(address.getString("uf"));
                     } catch (JSONException e) {
                         Log.i("JSON_ERROR", e.getMessage());
                     }
