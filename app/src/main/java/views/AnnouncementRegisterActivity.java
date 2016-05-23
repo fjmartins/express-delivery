@@ -19,6 +19,7 @@ import models.Announcement;
 import models.User;
 import services.IResult;
 import services.IResultUser;
+import utils.Mask;
 
 /**
  * Created by Allan-PC on 17/04/2016.
@@ -44,6 +45,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         this.title = (EditText) findViewById(R.id.txtCadAnuncioTitulo);
         this.description = (EditText) findViewById(R.id.txtCadAnuncioDesc);
         this.phone = (EditText) findViewById(R.id.txtCadAnuncioTelefone);
+        phone.addTextChangedListener(Mask.insert(Mask.CELULAR_MASK, phone));
         this.address = (EditText) findViewById(R.id.txtCadAnuncioEndereco);
         this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
 
@@ -203,6 +205,13 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             this.address.setText(extras.getString("address"));
             this.picture.setImageBitmap((Bitmap) extras.getParcelable("picture"));
         }
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
     }
 }
 

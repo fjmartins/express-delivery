@@ -30,6 +30,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtEnvioPropostaTitulo"
                     android:hint="@string/title"
+                    android:maxLength="50"
                     android:layout_weight="0.22" />
             </android.support.design.widget.TextInputLayout>
 
@@ -43,6 +44,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtEnvioPropostaDesc"
                     android:hint="@string/description"
+                    android:maxLength="300"
                     android:layout_weight="0.31" />
             </android.support.design.widget.TextInputLayout>
 
@@ -54,10 +56,11 @@
                 <EditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal"
                     android:id="@+id/txtEnvioPropostaValor"
                     android:hint="@string/valor"
-                    android:layout_weight="0.18" />
+                    android:maxLength="10"
+                    android:layout_weight="0.18"
+                    android:inputType="numberDecimal" />
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton

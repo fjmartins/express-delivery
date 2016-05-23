@@ -105,4 +105,11 @@ public class ProposalSubmitActivity extends GenericActivity {
         }
         return result;
     }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
+    }
 }

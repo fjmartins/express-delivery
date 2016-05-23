@@ -11,6 +11,7 @@ import com.example.anderson.expressdelivery.R;
 import controllers.UserAuthController;
 import models.User;
 import services.IResultUser;
+import utils.Validate;
 
 public class UserLoginActivity extends GenericActivity {
 
@@ -23,6 +24,8 @@ public class UserLoginActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_login_activity);
 
+        overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
+
         username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
         password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
 
@@ -33,7 +36,7 @@ public class UserLoginActivity extends GenericActivity {
     }
 
     public void logIn(View view) {
-        if (validate()) {
+        if (Validate.validarCampoUsuario(username) || Validate.validarCampoSenha(password)) {
             new LoginTask().execute();
         }
 
@@ -51,6 +54,7 @@ public class UserLoginActivity extends GenericActivity {
         finish();
     }
 
+    /*
     private boolean validate() {
         boolean result = true;
 
@@ -72,7 +76,7 @@ public class UserLoginActivity extends GenericActivity {
 
         return result;
     }
-
+*/
     @Override
     protected void onStop() {
         super.onStop();
@@ -116,5 +120,12 @@ public class UserLoginActivity extends GenericActivity {
         protected void onPostExecute(Void result) {
             progressDialog.hide();
         }
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
     }
 }

@@ -122,4 +122,11 @@ public class UserAnnouncementActivity extends MainActivity {
             }
         });
     }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
+    }
 }

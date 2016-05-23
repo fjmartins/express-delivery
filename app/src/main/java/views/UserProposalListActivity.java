@@ -41,6 +41,7 @@ public class UserProposalListActivity extends GenericActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -176,5 +177,12 @@ public class UserProposalListActivity extends GenericActivity {
         for (int i = 0; i < value.length; i++) {
             navigationView.getMenu().getItem(i).setVisible(value[i]);
         }
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
     }
 }

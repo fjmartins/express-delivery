@@ -237,4 +237,11 @@ public class MainActivity extends GenericActivity {
             navigationView.getMenu().getItem(i).setVisible(value[i]);
         }
     }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
+    }
 }

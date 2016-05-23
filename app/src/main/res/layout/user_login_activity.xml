@@ -34,6 +34,7 @@
                 <EditText android:id="@+id/edt_loginactivity_email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:maxLength="20"
                     android:hint="@string/txt_login_email" />
             </android.support.design.widget.TextInputLayout>
 

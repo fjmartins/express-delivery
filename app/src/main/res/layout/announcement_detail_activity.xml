@@ -39,10 +39,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/fbListProposal"
             android:onClick="showProposal"
-            fab:fab_icon="@android:drawable/ic_menu_search"
+            fab:fab_icon="@android:drawable/ic_menu_slideshow"
             fab:fab_colorNormal="#037614"
             fab:fab_colorPressed="#12b31e"
             fab:fab_size="mini"
+            fab:fab_title="@string/minhas_propostas"
             />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -54,6 +55,7 @@
             fab:fab_colorNormal="#037614"
             fab:fab_colorPressed="#ffffff"
             fab:fab_size="mini"
+            fab:fab_title="@string/editar"
             />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
@@ -65,6 +67,7 @@
             fab:fab_colorNormal="#037614"
             fab:fab_colorPressed="#12b31e"
             fab:fab_size="mini"
+            fab:fab_title="@string/deletar"
             />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>

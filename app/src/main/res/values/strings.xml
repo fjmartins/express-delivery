@@ -27,6 +27,9 @@
     <string name="password_confirm">Confimar Senha</string>
     <string name="cadastro_usuario">Cadastro de Usuário</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuários</string>
+    <string name="editar">Editar</string>
+    <string name="minhas_propostas">Minhas Propostas</string>
+    <string name="deletar">Deletar</string>
 
     <string name="yes">Sim</string>
     <string name="no">Não</string>

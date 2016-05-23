@@ -21,6 +21,7 @@ import models.Address;
 import models.User;
 import services.IResultUser;
 import utils.HTTPUtils;
+import utils.Mask;
 
 /**
  * Created by anderson on 21/05/16.
@@ -36,10 +37,13 @@ public class UserRegisterAddressActivity extends GenericActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_register_address_activity);
 
+        overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
+
         this.street = (EditText) findViewById(R.id.txt_register_user_activity_street);
         this.number = (EditText) findViewById(R.id.txt_register_user_activity_number);
         this.complement = (EditText) findViewById(R.id.txt_register_user_activity_complement);
         this.zipcode = (EditText) findViewById(R.id.txt_register_user_activity_zipcode);
+        zipcode.addTextChangedListener(Mask.insert(Mask.CEP_MASK, zipcode));
         this.district = (EditText) findViewById(R.id.txt_register_user_activity_district);
         this.city = (EditText) findViewById(R.id.txt_register_user_activity_city);
         this.state = (EditText) findViewById(R.id.txt_register_user_activity_uf);
@@ -186,5 +190,12 @@ public class UserRegisterAddressActivity extends GenericActivity {
 
             progressDialog.hide();
         }
+    }
+
+    @Override
+    public void finish(){
+        super.finish();
+
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
     }
 }
