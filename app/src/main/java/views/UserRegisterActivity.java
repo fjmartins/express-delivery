@@ -129,8 +129,4 @@ public class UserRegisterActivity extends GenericActivity {
 
         return result;
     }
-
-    public void goToAddress(View v) {
-
-    }
 }
