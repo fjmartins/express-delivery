@@ -10,9 +10,6 @@ public class Proposal {
     private String description;
     private String announcementId;
     private double value;
-
-
-
     private String userFrom;
     private boolean isAccept;
 
