@@ -4,8 +4,6 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.Patterns;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,6 +13,13 @@ import com.example.anderson.expressdelivery.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Arrays;
+
+import controllers.UserAuthController;
+import controllers.UserController;
+import models.Address;
+import models.User;
+import services.IResultUser;
 import utils.HTTPUtils;
 
 /**
@@ -42,9 +47,41 @@ public class UserRegisterAddressActivity extends GenericActivity {
 
     public void registerUserAddress(View view) {
         if (validate()) {
+            Bundle extras = getIntent().getExtras();
+            User user = (User)extras.getSerializable("user");
 
+            Address address = new Address();
+            address.setCity(this.city.getText().toString());
+            address.setZipCode(this.zipcode.getText().toString());
+            address.setNumber(this.number.getText().toString());
+            address.setComplement(this.complement.getText().toString());
+            address.setDistrict(this.district.getText().toString());
+
+            user.setAddresses(Arrays.asList(address));
+
+            UserController.signUp(user, new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    UserAuthController.logIn(obj, new IResultUser<User>() {
+                        @Override
+                        public void onSuccess(User obj) {
+                            redirect(UserRegisterAddressActivity.this, MainActivity.class);
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(UserRegisterAddressActivity.this, msg);
+                        }
+                    });
+                }
+
+                @Override
+                public void onError(String msg) {
+                    showToastMessage(UserRegisterAddressActivity.this, msg);
+                }
+            });
         }
-
     }
 
     private boolean validate() {

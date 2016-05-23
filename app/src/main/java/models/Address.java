@@ -59,4 +59,15 @@ public class Address {
     public void setComplement(String complement) {
         this.complement = complement;
     }
+
+    public String toString() {
+        return "{"
+                +" zipcode: "+this.zipCode
+                +", city: "+this.city
+                +", number: "+this.number
+                +", complement: "+this.complement
+                +", state: "+this.state
+                +", district: "+this.district+
+                " }";
+    }
 }

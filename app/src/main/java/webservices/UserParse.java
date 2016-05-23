@@ -4,6 +4,11 @@ import com.parse.ParseException;
 import com.parse.ParseUser;
 import com.parse.SignUpCallback;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import models.Address;
 import services.IResult;
 import dao.IUserDao;
 import models.User;
@@ -20,6 +25,15 @@ public class UserParse implements IUserDao {
         parseUser.setEmail(user.getEmail());
         parseUser.setUsername(user.getUsername());
         parseUser.setPassword(user.getPassword());
+
+        if (user.getAddresses() != null) {
+            List<String> addresses = new ArrayList<String>();
+            for (Address a : user.getAddresses()) {
+                addresses.add(a.toString());
+            }
+
+            parseUser.put("Addresses", addresses);
+        }
 
         parseUser.signUpInBackground(new SignUpCallback() {
             @Override

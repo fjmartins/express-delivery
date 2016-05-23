@@ -22,9 +22,14 @@
     <string name="district">Bairro</string>
     <string name="city">Cidade</string>
     <string name="zipcode">CEP</string>
+    <string name="add_address">Deseja cadastrar seu endereço para facilitar as entregas?</string>
     <string name="password_confirm">Confimar Senha</string>
     <string name="cadastro_usuario">Cadastro de Usuário</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuários</string>
+
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+    <string name="after">Depois</string>
 
     <string name="cadastrar">Cadastrar</string>
     <string name="configuracao">Configurações</string>

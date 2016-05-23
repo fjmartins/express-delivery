@@ -1,5 +1,8 @@
 package views;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -38,30 +41,48 @@ public class UserRegisterActivity extends GenericActivity {
 
     public void registerUser(View view) {
         if (validate()) {
-            User user = new User(this.name.getText().toString(), this.email.getText().toString(),
+            final User user = new User(this.name.getText().toString(), this.email.getText().toString(),
                     this.password.getText().toString());
-            UserController.signUp(user, new IResultUser<User>() {
-                @Override
-                public void onSuccess(User obj) {
-                    UserAuthController.logIn(obj, new IResultUser<User>() {
-                        @Override
-                        public void onSuccess(User obj) {
-                            redirect(UserRegisterActivity.this, MainActivity.class);
-                            finish();
-                        }
 
-                        @Override
-                        public void onError(String msg) {
-                            showToastMessage(UserRegisterActivity.this, msg);
-                        }
-                    });
-                }
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
-                @Override
-                public void onError(String msg) {
-                    showToastMessage(UserRegisterActivity.this, msg);
-                }
-            });
+            dialog.setMessage(R.string.add_address)
+                  .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                      @Override
+                      public void onClick(DialogInterface dialog, int which) {
+                          Bundle extras = new Bundle();
+                          extras.putSerializable("user", user);
+                          redirect(UserRegisterActivity.this, UserRegisterAddressActivity.class, extras);
+                      }
+                  })
+                  .setNegativeButton(R.string.after, new DialogInterface.OnClickListener() {
+                      @Override
+                      public void onClick(DialogInterface dialog, int which) {
+                          UserController.signUp(user, new IResultUser<User>() {
+                              @Override
+                              public void onSuccess(User obj) {
+                                  UserAuthController.logIn(obj, new IResultUser<User>() {
+                                      @Override
+                                      public void onSuccess(User obj) {
+                                          redirect(UserRegisterActivity.this, MainActivity.class);
+                                          finish();
+                                      }
+
+                                      @Override
+                                      public void onError(String msg) {
+                                          showToastMessage(UserRegisterActivity.this, msg);
+                                      }
+                                  });
+                              }
+
+                              @Override
+                              public void onError(String msg) {
+                                  showToastMessage(UserRegisterActivity.this, msg);
+                              }
+                          });
+                      }
+                  })
+                  .show();
         }
     }
 
@@ -110,6 +131,6 @@ public class UserRegisterActivity extends GenericActivity {
     }
 
     public void goToAddress(View v) {
-        redirect(this, UserRegisterAddressActivity.class);
+
     }
 }
