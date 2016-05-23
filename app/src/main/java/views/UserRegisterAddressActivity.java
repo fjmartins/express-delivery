@@ -130,18 +130,22 @@ public class UserRegisterAddressActivity extends GenericActivity {
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
 
-            if (address.has("logradouro")) {
-                try {
-                    street.setText(address.getString("logradouro"));
-                    complement.setText(address.getString("complemento"));
-                    district.setText(address.getString("bairro"));
-                    city.setText(address.getString("localidade"));
-
-                    progressDialog.hide();
-                } catch (JSONException e) {
-                    Log.i("JSON_ERROR", e.getMessage());
+            if (address != null) {
+                if (address.has("logradouro")) {
+                    try {
+                        street.setText(address.getString("logradouro"));
+                        complement.setText(address.getString("complemento"));
+                        district.setText(address.getString("bairro"));
+                        city.setText(address.getString("localidade"));
+                    } catch (JSONException e) {
+                        Log.i("JSON_ERROR", e.getMessage());
+                    }
                 }
+            } else {
+                showToastMessage(UserRegisterAddressActivity.this, "CEP inválido");
             }
+
+            progressDialog.hide();
         }
     }
 }
