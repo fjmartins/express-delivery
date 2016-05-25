@@ -11,6 +11,7 @@ import java.util.List;
 import controllers.ProposalController;
 import models.Proposal;
 import services.IResult;
+import utils.Validate;
 
 /**
  * Created by Allan-PC on 08/05/2016.
@@ -35,7 +36,7 @@ public class ProposalSubmitActivity extends GenericActivity {
     }
 
     public void send(View view) {
-        if (validate()) {
+        if (Validate.validarCampoTitle(title) && Validate.validarCampoDescription(description) && Validate.validarCampoValor(valor)) {
             Bundle extras = getIntent().getExtras();
 
             String announcementID = extras.get("id").toString();
@@ -69,41 +70,6 @@ public class ProposalSubmitActivity extends GenericActivity {
     protected void onResume() {
         super.onResume();
         this.isUserAuth(this);
-    }
-
-    private boolean validate() {
-        boolean result = true;
-
-        String title = this.title.getText().toString();
-        if (title.trim().isEmpty()) {
-            this.title.setError("Não pode ser vazio");
-            result = false;
-        } else if (title.length() <= 5 || title.length() > 20) {
-            this.title.setError("Deve conter entre 5 e 20 caracteres");
-            result = false;
-        } else {
-            this.title.setError(null);
-        }
-
-        String description = this.description.getText().toString();
-        if (description.trim().isEmpty()) {
-            this.description.setError("Deve conter uma descrição");
-            result = false;
-        } else if (description.length() <= 5 || description.length()  > 100) {
-            this.description.setError("Deve conter entre 5 e 100 caracteres");
-            result = false;
-        } else {
-            this.description.setError(null);
-        }
-
-        String valor = this.valor.getText().toString();
-        if (valor.trim().isEmpty()) {
-            this.valor.setError("Deve conter um valor");
-            result = false;
-        } else {
-            this.valor.setError(null);
-        }
-        return result;
     }
 
     @Override

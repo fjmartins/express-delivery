@@ -19,6 +19,7 @@ import controllers.UserController;
 import services.IResult;
 import models.User;
 import services.IResultUser;
+import utils.Validate;
 
 public class UserRegisterActivity extends GenericActivity {
 
@@ -40,7 +41,7 @@ public class UserRegisterActivity extends GenericActivity {
     }
 
     public void registerUser(View view) {
-        if (validate()) {
+        if(Validate.validarCampoUsuario(name) && Validate.validarCampoEmail(email) && Validate.validarCampoSenha(password) && Validate.validarCampoConfirm(password, passwordConfirm)){
             final User user = new User(this.name.getText().toString(), this.email.getText().toString(),
                     this.password.getText().toString());
 
@@ -86,47 +87,10 @@ public class UserRegisterActivity extends GenericActivity {
         }
     }
 
-    private boolean validate() {
-        boolean result = true;
+    @Override
+    public void finish(){
+        super.finish();
 
-        String name = this.name.getText().toString();
-        if (name.length() < 5 || name.length() <= 5) {
-            this.name.setError("Nome de usuário deve ser entre 5 e 20");
-            result = false;
-        } else {
-            this.name.setError(null);
-        }
-
-        String email = this.email.getText().toString();
-        if (email.isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            this.email.setError("Email inválido");
-            result = false;
-        } else if (email.length() < 5 || email.length() > 45) {
-            this.email.setError("Email deve conter entrer 5 e 45 caraceres");
-            result = false;
-        } else {
-            this.email.setError(null);
-        }
-
-        String password = this.password.getText().toString();
-        if (password.trim().isEmpty()) {
-            this.password.setError("Senha inválida");
-            result = false;
-        } else if (password.length() < 5 || password.length() > 20) {
-            this.password.setError("Password deve conter entrer 5 e 20 caracteres");
-            result = false;
-        }else {
-            this.password.setError(null);
-        }
-
-        String passwordConfirm = this.passwordConfirm.getText().toString();
-        if (!password.trim().equals(passwordConfirm.trim())) {
-            this.passwordConfirm.setError("Senhas não conferem");
-            result = false;
-        } else {
-            this.passwordConfirm.setError(null);
-        }
-
-        return result;
+        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
     }
 }

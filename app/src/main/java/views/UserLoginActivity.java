@@ -36,10 +36,9 @@ public class UserLoginActivity extends GenericActivity {
     }
 
     public void logIn(View view) {
-        if (Validate.validarCampoUsuario(username) || Validate.validarCampoSenha(password)) {
+        if (Validate.validarCampoUsuario(username) && Validate.validarCampoSenha(password)) {
             new LoginTask().execute();
         }
-
     }
 
     public void visitar(View view) {
@@ -54,29 +53,6 @@ public class UserLoginActivity extends GenericActivity {
         finish();
     }
 
-    /*
-    private boolean validate() {
-        boolean result = true;
-
-        String username = this.username.getText().toString();
-        if (username.length() < 5 || username.length() > 20) {
-            this.username.setError("Nome de usuário deve ser entre 5 e 20 caracteres");
-            result = false;
-        } else {
-            this.username.setError(null);
-        }
-
-        String password = this.password.getText().toString();
-        if (password.length() < 5 || password.length() > 20) {
-            this.password.setError("Senha de usuário deve ser entre 5 e 20 caracteres");
-            result = false;
-        } else {
-            this.password.setError(null);
-        }
-
-        return result;
-    }
-*/
     @Override
     protected void onStop() {
         super.onStop();

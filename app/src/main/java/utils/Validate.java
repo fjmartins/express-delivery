@@ -1,5 +1,6 @@
 package utils;
 
+import android.util.Patterns;
 import android.widget.EditText;
 import android.view.View;
 
@@ -11,8 +12,8 @@ public class Validate {
     public static boolean validarCampoUsuario(EditText campoUsuario) {
         boolean result = true;
 
-        if (campoUsuario.getText().toString().length() < 5 || campoUsuario.getText().toString().length() > 20) {
-            campoUsuario.setError("Nome de usuário deve ser maior que 5 e menor que 20 caracteres");
+        if (campoUsuario.getText().toString().length() < 5) {
+            campoUsuario.setError("Nome de usuário deve ter de 5 à 20 caracteres");
             result = false;
         } else {
             campoUsuario.setError(null);
@@ -20,36 +21,109 @@ public class Validate {
         return result;
     }
 
-    public static boolean validarCampoSenha(EditText campoSenha) {
+    public static boolean validarCampoEmail(EditText campoEmail) {
         boolean result = true;
 
-        if (campoSenha.getText().toString().length() < 7 || campoSenha.getText().toString().length() > 20) {
-            campoSenha.setError("Senha de usuário deve ser de 8 à 20 caracteres");
+        if (campoEmail.getText().toString().isEmpty() || !Patterns.EMAIL_ADDRESS.matcher(campoEmail.getText().toString()).matches()) {
+            campoEmail.setError("Email inválido");
             result = false;
-        } if(!campoSenha.getText().toString().contains("@") ||
-                !campoSenha.getText().toString().contains("#") ||
-                !campoSenha.getText().toString().contains("$")||
-                !campoSenha.getText().toString().contains("%")||
-                !campoSenha.getText().toString().contains("&")||
-                !campoSenha.getText().toString().contains("*")){
-            campoSenha.setError("Senha de usuário deve conter algum desses caracteres especiais[@,#,$,&,*,%]");
+        } else if (campoEmail.length() < 5 || campoEmail.length() > 45) {
+            campoEmail.setError("Email deve conter entrer 5 e 45 caraceres");
             result = false;
-        } if(!campoSenha.getText().toString().contains("0")||
-                !campoSenha.getText().toString().contains("1")||
-                !campoSenha.getText().toString().contains("2")||
-                !campoSenha.getText().toString().contains("3")||
-                !campoSenha.getText().toString().contains("4")||
-                !campoSenha.getText().toString().contains("5")||
-                !campoSenha.getText().toString().contains("6")||
-                !campoSenha.getText().toString().contains("7")||
-                !campoSenha.getText().toString().contains("8")||
-                !campoSenha.getText().toString().contains("9")){
-            campoSenha.setError("Senha de usuário deve conter algum número");
-            result = false;
+        } else {
+            campoEmail.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoSenha(EditText campoSenha) {
+        boolean senhaOK = false;
+
+        String[] lowerCase = { "q", "w", "e", "r", "t", "y", "u", "i", "o", "p", "a", "s", "d", "f", "g",
+                "h", "j", "k", "l", "ç", "z", "x", "c", "v", "b", "n", "m" };
+        String[] upperCase = { "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P", "A", "S", "D", "F", "G",
+                "H", "J", "K", "L", "Ç", "Z", "X", "C", "V", "B", "N", "M" };
+        String[] numbers = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+        String[] caractespecial = { "!", "@", "_", "$", "%", "&", "*", ".", "/", "#", "?" };
+
+        // verifica se há pelo menos 1 caracter de cada tipo
+        if (campoSenha.getText().toString().length() > 7) {
+            for (int i = 0; i < lowerCase.length; i++) {
+                for (int j = 0; j < upperCase.length; j++) {
+                    for (int l = 0; l < numbers.length; l++) {
+                        for (int k = 0; k < caractespecial.length; k++) {
+                            if (campoSenha.getText().toString().contains(lowerCase[i])
+                                    && campoSenha.getText().toString().contains(upperCase[j])
+                                    && campoSenha.getText().toString().contains(numbers[l])
+                                    && campoSenha.getText().toString().contains(caractespecial[k])) {
+                                senhaOK = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if(senhaOK == false) {
+            campoSenha.setError("Senha de usuário deve ser de 8 à 20 caracteres e deverá conter: " +
+                    "letra Minuscula, letra Maiuscula, número, e caracter especial[!, @, _, $, %, &, *, ., /, #, ?]");
         }
 
-        else {
-            campoSenha.setError(null);
+        return senhaOK;
+    }
+
+    public static boolean validarCampoConfirm(EditText campoSenha, EditText campoConfirm) {
+
+        boolean result = true;
+
+        if (!campoSenha.getText().toString().trim().equals(campoConfirm.getText().toString().trim())) {
+            campoConfirm.setError("Senhas não conferem");
+            result = false;
+        } else {
+            campoConfirm.setError(null);
+        }
+
+        return result;
+
+    }
+
+    public static boolean validarCampoTitle(EditText campoTitle) {
+        boolean result = true;
+
+        if (campoTitle.getText().toString().trim().isEmpty()) {
+            campoTitle.setError("Não pode ser vazio");
+            result = false;
+        } else if (campoTitle.getText().toString().length() <= 5 || campoTitle.getText().toString().length() > 20) {
+            campoTitle.setError("Deve conter entre 5 e 20 caracteres");
+            result = false;
+        } else {
+            campoTitle.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoDescription(EditText campoDescription) {
+        boolean result = true;
+
+        if (campoDescription.getText().toString().trim().isEmpty()) {
+            campoDescription.setError("Deve conter uma descrição");
+            result = false;
+        } else if (campoDescription.getText().toString().length() <= 5 || campoDescription.getText().toString().length() > 100) {
+            campoDescription.setError("Deve conter entre 5 e 100 caracteres");
+            result = false;
+        } else {
+            campoDescription.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoValor(EditText campoValor) {
+        boolean result = true;
+
+        if (campoValor.getText().toString().trim().isEmpty()) {
+            campoValor.setError("Deve conter um valor");
+            result = false;
+        } else {
+            campoValor.setError(null);
         }
         return result;
     }
@@ -62,5 +136,4 @@ public class Validate {
         }
         return result;
     }
-
 }
