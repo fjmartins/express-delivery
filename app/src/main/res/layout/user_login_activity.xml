@@ -85,6 +85,15 @@
                 android:gravity="center"
                 android:textSize="16sp" />
 
+            <TextView android:id="@+id/link_reset_password_activity"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:onClick="forgotPassword"
+                android:text="@string/forgot_password"
+                android:gravity="center"
+                android:textSize="16sp" />
+
         </LinearLayout>
 
     </ScrollView>

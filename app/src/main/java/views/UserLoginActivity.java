@@ -42,14 +42,17 @@ public class UserLoginActivity extends GenericActivity {
     }
 
     public void visitar(View view) {
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
+        redirect(this, MainActivity.class);
         finish();
     }
 
     public void cadastrar(View view) {
-        Intent intent = new Intent(this, UserRegisterActivity.class);
-        startActivity(intent);
+        redirect(this, UserRegisterActivity.class);
+        finish();
+    }
+
+    public void forgotPassword(View v) {
+        redirect(this, ResetPasswordActivity.class);
         finish();
     }
 

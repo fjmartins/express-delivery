@@ -78,6 +78,7 @@ public class UserRegisterAddressActivity extends GenericActivity {
                         @Override
                         public void onError(String msg) {
                             showToastMessage(UserRegisterAddressActivity.this, msg);
+                            UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
                         }
                     });
                 }
@@ -85,6 +86,7 @@ public class UserRegisterAddressActivity extends GenericActivity {
                 @Override
                 public void onError(String msg) {
                     showToastMessage(UserRegisterAddressActivity.this, msg);
+                    UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
                 }
             });
         }

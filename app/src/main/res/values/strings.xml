@@ -4,7 +4,8 @@
     <!--Login Activity Strings-->
     <string name="aviso_login_email_invalido">Este email está num formato inválido.</string>
     <string name="aviso_login_email_nao_preenchido">O campo de email não está preenchido.</string>
-    <string name="aviso_login_senha_nao_preenchida">O campo de senha não está preenchida.</string>
+    <string name="aviso_login_senha_nao_preenchida">O campo de senha não está preenchido.</string>
+    <string name="forgot_password">Esqueceu sua senha?</string>
     <string name="txt_login_email">Usuário</string>
     <string name="txt_login_password">Senha</string>
     <string name="btn_login_entrar">Entrar</string>
@@ -35,6 +36,7 @@
     <string name="yes">Sim</string>
     <string name="no">Não</string>
     <string name="after">Depois</string>
+    <string name="send_mail">Enviar</string>
 
     <string name="cadastrar">Cadastrar</string>
     <string name="configuracao">Configurações</string>

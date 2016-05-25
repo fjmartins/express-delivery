@@ -1,6 +1,11 @@
 package controllers;
 
+import com.parse.ParseException;
+import com.parse.ParseUser;
+import com.parse.RequestPasswordResetCallback;
+
 import models.User;
+import services.IResult;
 import services.IResultUser;
 import services.IUserAuth;
 import webservices.UserAuthParse;
@@ -58,4 +63,12 @@ public class UserAuthController {
         return userAuth.getCurrentUser();
     }
 
+    public static boolean resetPassword(String email) {
+        try {
+            ParseUser.requestPasswordReset(email);
+            return true;
+        } catch(ParseException e) {
+            return false;
+        }
+    }
 }
