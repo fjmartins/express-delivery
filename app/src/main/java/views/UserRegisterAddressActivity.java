@@ -51,6 +51,7 @@ public class UserRegisterAddressActivity extends GenericActivity {
     }
 
     public void registerUserAddress(View view) {
+        this.btnRegister.setEnabled(false);
         if (validate()) {
             Bundle extras = getIntent().getExtras();
             User user = (User)extras.getSerializable("user");

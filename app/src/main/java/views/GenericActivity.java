@@ -65,4 +65,8 @@ public class GenericActivity extends AppCompatActivity {
         return (user == null) ? "" : user.getUsername();
     }
 
+    public User getUser(){
+        return UserAuthController.getCurrentUser();
+    }
+
 }

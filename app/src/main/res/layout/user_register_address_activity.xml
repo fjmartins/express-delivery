@@ -39,11 +39,11 @@
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/btn_register_user_activity_search_address"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="24dp"
-                    android:layout_marginLeft="310dp"
+                    android:layout_width="55dp"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="26dp"
+                    android:layout_marginLeft="300dp"
                     android:padding="12dp"
                     android:onClick="searchAddress"
                     android:background="@android:drawable/ic_menu_search" />
