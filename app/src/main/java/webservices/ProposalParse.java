@@ -28,6 +28,7 @@ public class ProposalParse implements IProposalDao {
         parseObject.put("Value", proposal.getValue());
         parseObject.put("IsAccept", proposal.isAccept());
         parseObject.put("AnnouncementId", proposal.getAnnouncementId());
+        parseObject.put("UserFromEmail", proposal.getUserFromEmail());
 
         parseObject.saveInBackground(new SaveCallback() {
             @Override
@@ -80,12 +81,14 @@ public class ProposalParse implements IProposalDao {
             String value = parseObject.get("Value").toString();
             String announcementId = parseObject.get("AnnouncementId").toString();
             String id = parseObject.getObjectId();
+            String userFromEmail =  parseObject.get("UserFromEmail").toString();
 
             proposal = new Proposal(title, description, Double.parseDouble(value));
             proposal.setUserFrom(userFrom);
             proposal.setAnnouncementId(announcementId);
             proposal.setAccept(false);
             proposal.setId(id);
+            proposal.setUserFromEmail(userFromEmail);
 
             ProposalList.add(proposal);
         }

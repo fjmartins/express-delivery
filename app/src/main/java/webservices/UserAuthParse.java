@@ -54,6 +54,7 @@ public class UserAuthParse implements IUserAuth {
         } else {
             User user = new User();
             user.setUsername(currentUser.getUsername());
+            user.setEmail(currentUser.getEmail());
             result.onSuccess(user);
         }
     }
@@ -64,6 +65,7 @@ public class UserAuthParse implements IUserAuth {
         if(currentUser != null) {
             User user = new User();
             user.setUsername(currentUser.getUsername());
+            user.setEmail(currentUser.getEmail());
             return user;
         }
         return null;

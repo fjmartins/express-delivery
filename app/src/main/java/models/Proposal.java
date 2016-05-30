@@ -12,6 +12,15 @@ public class Proposal {
     private double value;
     private String userFrom;
     private boolean isAccept;
+    private String userFromEmail;
+
+    public String getUserFromEmail() {
+        return userFromEmail;
+    }
+
+    public void setUserFromEmail(String userFromEmail) {
+        this.userFromEmail = userFromEmail;
+    }
 
     public Proposal() { }
 
