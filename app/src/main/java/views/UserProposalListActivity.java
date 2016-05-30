@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -110,67 +111,52 @@ public class UserProposalListActivity extends GenericActivity {
         mAdapter = new ProposalAdapter(this.mList, getBaseContext(), this.mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
-//        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
-//                new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, final int position) {
-//
-//                        AlertDialog.Builder dialog = new AlertDialog.Builder(UserProposalListActivity.this);
-//
-//                        dialog.setMessage(R.string.acc_anuncio)
-//                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//                                        Proposal proposal = mList.get(position);
-//                                        proposal.setAccept(true);
-//                                        ProposalController.analyzer(proposal, new IResult() {
-//                                            @Override
-//                                            public void onSuccess(List list) {
-//
-//                                            }
-//
-//                                            @Override
-//                                            public void onSuccess(Object obj) {
-//
-//                                            }
-//
-//                                            @Override
-//                                            public void onError(String msg) {
-//
-//                                            }
-//                                        });
-//                                        Intent emailIntent = new Intent(android.content.Intent.ACTION_SEND);
-//                                        startActivity(emailIntent);
-//                                    }
-//                                })
-//
-//                                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
-//                                    @Override
-//                                    public void onClick(DialogInterface dialog, int which) {
-//
-//                                    }
-//                                })
-//                                .show();
-//                    }
-//
-//                    @Override
-//                    public void onItemLongClick(View view, int position) {
-////                        Context contexto = getApplicationContext();
-////                        String texto = "LONGO";
-////                        int duracao = Toast.LENGTH_SHORT;
-////                        Toast toast = Toast.makeText(contexto, texto, duracao);
-////                        toast.show();
-//                    }
-//                }));
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, final int position) {
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(UserProposalListActivity.this);
+
+                        dialog.setMessage(R.string.acc_anuncio)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        Proposal proposal = mList.get(position);
+
+                                        Intent emailIntent = new Intent(Intent.ACTION_SEND);
+                                        emailIntent.setData(Uri.parse("mailto:"));
+                                        emailIntent.setType("text/plain");
+                                        emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{proposal.getUserFromEmail()});
+                                        emailIntent.putExtra(Intent.EXTRA_SUBJECT, proposal.getTitle() +
+                                                "[Express Delivery]");
+                                        emailIntent.putExtra(Intent.EXTRA_TEXT, "Olá " + proposal.getUserFrom() +
+                                                ", gostaria de entrar em contato com você.");
+
+                                        startActivity(Intent.createChooser(emailIntent, "Send mail..."));
+                                    }
+                                })
+
+                                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .show();
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
+//                        Context contexto = getApplicationContext();
+//                        String texto = "LONGO";
+//                        int duracao = Toast.LENGTH_SHORT;
+//                        Toast toast = Toast.makeText(contexto, texto, duracao);
+//                        toast.show();
+                    }
+                }));
     }
 
-    public void refuse(View view) {
-        showToastMessage(this, "RECUSADO");
-    }
-
-    public void accept(View view) {
-        showToastMessage(this, "ACEITO");
-    }
 
     public void updateProposal() {
 
