@@ -45,6 +45,8 @@
     <string name="abrir_anuncio">Abrir</string>
     <string name="salvar_anuncio">Salvar</string>
 
+    <string name="campo_obrigatorio">Campo Obrigatório</string>
+
     <string name="mensagem_cadastrar">Não tem conta? Crie uma agora.</string>
 
     <string name="navigation_drawer_open">Open navigation drawer</string>

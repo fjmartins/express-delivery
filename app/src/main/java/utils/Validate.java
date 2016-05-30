@@ -90,7 +90,7 @@ public class Validate {
         boolean result = true;
 
         if (campoTitle.getText().toString().trim().isEmpty()) {
-            campoTitle.setError("Não pode ser vazio");
+            campoTitle.setError("@string/campo_obrigatorio");
             result = false;
         } else if (campoTitle.getText().toString().length() <= 5 || campoTitle.getText().toString().length() > 20) {
             campoTitle.setError("Deve conter entre 5 e 20 caracteres");
@@ -108,7 +108,7 @@ public class Validate {
             campoDescription.setError("Deve conter uma descrição");
             result = false;
         } else if (campoDescription.getText().toString().length() <= 5 || campoDescription.getText().toString().length() > 100) {
-            campoDescription.setError("Deve conter entre 5 e 100 caracteres");
+            campoDescription.setError("Deve conter entre 10 e 100 caracteres");
             result = false;
         } else {
             campoDescription.setError(null);
@@ -124,6 +124,90 @@ public class Validate {
             result = false;
         } else {
             campoValor.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoPhone(EditText campoPhone) {
+        boolean result = true;
+
+        if (campoPhone.getText().toString().trim().isEmpty()) {
+            campoPhone.setError("@string/campo_obrigatorio");
+            result = false;
+        } else {
+            campoPhone.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoAddress(EditText campoAddress) {
+        boolean result = true;
+
+        if (campoAddress.getText().toString().trim().isEmpty()) {
+            campoAddress.setError("@string/campo_obrigatorio");
+            result = false;
+        } else {
+            campoAddress.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoStreet(EditText campoStreet) {
+        boolean result = true;
+
+        if (campoStreet.getText().toString().length() < 5) {
+            campoStreet.setError("Rua deve conter mais de 5 caracteres");
+            result = false;
+        } else {
+            campoStreet.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoNumber(EditText campoNumber) {
+        boolean result = true;
+
+        if (campoNumber.getText().toString().trim().isEmpty()) {
+            campoNumber.setError("Número é obrigatório");
+            result = false;
+        } else {
+            campoNumber.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoZipcod(EditText campoZipcode) {
+        boolean result = true;
+
+        if (campoZipcode.getText().toString().trim().isEmpty()) {
+            campoZipcode.setError("CEP é obrigatório");
+            result = false;
+        } else {
+            campoZipcode.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoDistrict(EditText campoDistrict) {
+        boolean result = true;
+
+        if (campoDistrict.getText().toString().trim().isEmpty()) {
+            campoDistrict.setError("Bairro é obrigatório");
+            result = false;
+        } else {
+            campoDistrict.setError(null);
+        }
+        return result;
+    }
+
+    public static boolean validarCampoCity(EditText campoCity) {
+        boolean result = true;
+
+        if (campoCity.getText().toString().trim().isEmpty()) {
+            campoCity.setError("Cidade é obrigatório");
+            result = false;
+        } else {
+            campoCity.setError(null);
         }
         return result;
     }

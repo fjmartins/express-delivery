@@ -22,6 +22,7 @@ import models.User;
 import services.IResultUser;
 import utils.HTTPUtils;
 import utils.Mask;
+import utils.Validate;
 
 /**
  * Created by anderson on 21/05/16.
@@ -52,7 +53,11 @@ public class UserRegisterAddressActivity extends GenericActivity {
 
     public void registerUserAddress(View view) {
         this.btnRegister.setEnabled(false);
-        if (validate()) {
+        if (Validate.validarCampoStreet(street) &&
+                Validate.validarCampoNumber(number) &&
+                Validate.validarCampoCity(city) &&
+                Validate.validarCampoZipcod(zipcode) &&
+                Validate.validarCampoDistrict(district)) {
             Bundle extras = getIntent().getExtras();
             User user = (User)extras.getSerializable("user");
 
@@ -90,52 +95,6 @@ public class UserRegisterAddressActivity extends GenericActivity {
                 }
             });
         }
-    }
-
-    private boolean validate() {
-        boolean result = true;
-
-        String street = this.street.getText().toString();
-        if (street.length() <= 5) {
-            this.street.setError("Rua deve conter mais de 5 caracteres");
-            result = false;
-        } else {
-            this.street.setError(null);
-        }
-
-        String number = this.number.getText().toString();
-        if (number == null || number.isEmpty()) {
-            this.number.setError("Número é obrigatório");
-            result = false;
-        } else {
-            this.number.setError(null);
-        }
-
-        String zipcode = this.zipcode.getText().toString();
-        if (zipcode == null || zipcode.isEmpty()) {
-            this.zipcode.setError("CEP é obrigatório");
-            result = false;
-        } else {
-            this.zipcode.setError(null);
-        }
-
-        String district = this.district.getText().toString();
-        if (district == null || district.isEmpty()) {
-            this.district.setError("Bairro é obrigatório");
-            result = false;
-        } else {
-            this.district.setError(null);
-        }
-
-        String city = this.city.getText().toString();
-        if (city == null || city.isEmpty()) {
-            this.city.setError("Cidade é obrigatório");
-            result = false;
-        } else {
-            this.city.setError(null);
-        }
-
-        return result;
     }
 
     public void searchAddress(View v) {
@@ -195,10 +154,4 @@ public class UserRegisterAddressActivity extends GenericActivity {
         }
     }
 
-    @Override
-    public void finish(){
-        super.finish();
-
-        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
-    }
 }

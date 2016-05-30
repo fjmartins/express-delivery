@@ -20,6 +20,7 @@ import models.User;
 import services.IResult;
 import services.IResultUser;
 import utils.Mask;
+import utils.Validate;
 
 /**
  * Created by Allan-PC on 17/04/2016.
@@ -79,7 +80,10 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     }
 
     public void save(View v) {
-        if (validate()) {
+        if (foto() && Validate.validarCampoTitle(title) &&
+                Validate.validarCampoPhone(phone) &&
+                Validate.validarCampoDescription(description) &&
+                Validate.validarCampoAddress(address)) {
             final String title = this.title.getText().toString();
             final String phone = this.phone.getText().toString();
             final String description = this.description.getText().toString();
@@ -169,23 +173,12 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         }
     }
 
-    private boolean validate() {
+    private boolean foto() {
         boolean result = true;
 
-        String title = this.title.getText().toString();
-        if (title.trim().isEmpty()) {
-            this.title.setError("Campo obrigatório");
+        if (pictureMake == null){
+            showToastMessage(AnnouncementRegisterActivity.this, "Insira uma foto");
             result = false;
-        } else {
-            this.title.setError(null);
-        }
-
-        String phone = this.phone.getText().toString();
-        if (phone.trim().isEmpty()) {
-            this.phone.setError("Campo obrigatório");
-            result = false;
-        } else {
-            this.phone.setError(null);
         }
 
         return result;
@@ -204,14 +197,9 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             this.phone.setText(extras.getString("phone"));
             this.address.setText(extras.getString("address"));
             this.picture.setImageBitmap((Bitmap) extras.getParcelable("picture"));
+            this.pictureMake = extras.getParcelable("picture");
         }
     }
 
-    @Override
-    public void finish(){
-        super.finish();
-
-        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
-    }
 }
 

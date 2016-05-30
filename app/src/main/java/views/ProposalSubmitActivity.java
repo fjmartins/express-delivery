@@ -44,7 +44,7 @@ public class ProposalSubmitActivity extends GenericActivity {
 
     public void sendProposal(View view) {
         Log.d(TAG, "Send Proposal");
-        if (!validate()) {
+        if (!Validate.validarCampoDescription(editTextDescription) && !Validate.validarCampoValor(editTextValue)) {
             sendProposalFailed("Os dados são inválidos");
             return;
         }
@@ -93,30 +93,6 @@ public class ProposalSubmitActivity extends GenericActivity {
         Toast.makeText(getBaseContext(), erro, Toast.LENGTH_LONG).show();
         btnSendProposal.setEnabled(true);
 
-    }
-
-    public boolean validate() {
-        boolean valid = true;
-
-        String description = editTextDescription.getText().toString();
-        String value = editTextValue.getText().toString();
-
-
-        if (description.isEmpty() || description.length() < 10) {
-            editTextDescription.setError("Descrição minima de 10 caracteres.");
-            valid = false;
-        } else {
-            editTextDescription.setError(null);
-        }
-
-        if (value.isEmpty()) {
-            editTextValue.setError("Algum valor deve ser inserido.");
-            valid = false;
-        } else {
-            editTextValue.setError(null);
-        }
-
-        return valid;
     }
 
     @Override
