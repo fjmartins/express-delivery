@@ -1,24 +1,31 @@
 package views;
 
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
 import java.util.List;
 
 import controllers.ProposalController;
+import models.Announcement;
 import models.Proposal;
 import services.IResult;
+import utils.AnnouncementUtils;
 import utils.Validate;
 
-/**
- * Created by Allan-PC on 08/05/2016.
- */
 public class ProposalSubmitActivity extends GenericActivity {
 
-    private EditText title, description, valor;
+    private static final String TAG = "ProposalSubmitActivity";
+    private EditText editTextDescription, editTextValue;
+    private Button btnSendProposal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,55 +34,94 @@ public class ProposalSubmitActivity extends GenericActivity {
 
         overridePendingTransition(R.anim.register_activity_enter, R.anim.main_activity_exit);
 
-        this.title = (EditText) findViewById(R.id.txtEnvioPropostaTitulo);
-        this.description = (EditText) findViewById(R.id.txtEnvioPropostaDesc);
-        this.valor = (EditText) findViewById(R.id.txtEnvioPropostaValor);
+        this.editTextDescription = (EditText) findViewById(R.id.txtEnvioPropostaDesc);
+        this.editTextValue = (EditText) findViewById(R.id.txtEnvioPropostaValor);
+        this.btnSendProposal = (Button) findViewById(R.id.btnSendProposal);
 
         this.isUserAuth(this);
 
     }
 
-    public void send(View view) {
-        if (Validate.validarCampoTitle(title) && Validate.validarCampoDescription(description) && Validate.validarCampoValor(valor)) {
-            Bundle extras = getIntent().getExtras();
-
-            String announcementID = extras.get("id").toString();
-            Proposal proposal = new Proposal(this.title.getText().toString(), this.description.getText().toString(),
-                    Double.parseDouble(this.valor.getText().toString()));
-            proposal.setAnnouncementId(announcementID);
-            proposal.setUserFrom(this.getUsername());
-
-            ProposalController.send(proposal, new IResult<Proposal>() {
-                @Override
-                public void onSuccess(List<Proposal> list) {
-
-                }
-
-                @Override
-                public void onSuccess(Proposal obj) {
-
-                }
-
-                @Override
-                public void onError(String msg) {
-
-                }
-            });
-            redirect(this, MainActivity.class);
-            finish();
+    public void sendProposal(View view) {
+        Log.d(TAG, "Send Proposal");
+        if (!validate()) {
+            sendProposalFailed("Os dados são inválidos");
+            return;
         }
+
+        String description = editTextDescription.getText().toString();
+        String value = editTextValue.getText().toString();
+
+        Bundle extras = getIntent().getExtras();
+
+        Announcement announcement = AnnouncementUtils.getExtras(extras);
+
+        Proposal proposal = new Proposal(announcement.getTitle(), description,
+                Double.parseDouble(value));
+        proposal.setAnnouncementId(announcement.getId());
+        proposal.setUserFrom(getUsername());
+
+        ProposalController.send(proposal, new IResult<Proposal>() {
+            @Override
+            public void onSuccess(List<Proposal> list) {
+
+            }
+
+            @Override
+            public void onSuccess(Proposal obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+
+        sendProposalSuccess();
+    }
+
+
+    public void sendProposalSuccess() {
+        btnSendProposal.setEnabled(true);
+        setResult(RESULT_OK, null);
+        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        finish();
+    }
+
+    public void sendProposalFailed(String erro) {
+        Toast.makeText(getBaseContext(), erro, Toast.LENGTH_LONG).show();
+        btnSendProposal.setEnabled(true);
+
+    }
+
+    public boolean validate() {
+        boolean valid = true;
+
+        String description = editTextDescription.getText().toString();
+        String value = editTextValue.getText().toString();
+
+
+        if (description.isEmpty() || description.length() < 10) {
+            editTextDescription.setError("Descrição minima de 10 caracteres.");
+            valid = false;
+        } else {
+            editTextDescription.setError(null);
+        }
+
+        if (value.isEmpty()) {
+            editTextValue.setError("Algum valor deve ser inserido.");
+            valid = false;
+        } else {
+            editTextValue.setError(null);
+        }
+
+        return valid;
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        this.isUserAuth(this);
-    }
-
-    @Override
-    public void finish(){
-        super.finish();
-
-        overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
+    protected void onRestart() {
+        super.onRestart();
+        finish();
     }
 }

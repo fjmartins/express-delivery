@@ -20,19 +20,6 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <android.support.design.widget.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="8dp">
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/txtEnvioPropostaTitulo"
-                    android:hint="@string/title"
-                    android:maxLength="50"
-                    android:layout_weight="0.22" />
-            </android.support.design.widget.TextInputLayout>
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -44,7 +31,9 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/txtEnvioPropostaDesc"
                     android:hint="@string/description"
-                    android:maxLength="300"
+                    android:maxLength="120"
+                    android:lines="4"
+                    android:inputType="textMultiLine"
                     android:layout_weight="0.31" />
             </android.support.design.widget.TextInputLayout>
 
@@ -64,13 +53,13 @@
             </android.support.design.widget.TextInputLayout>
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btnEnvioProposta"
+                android:id="@+id/btnSendProposal"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
-                android:onClick="send"
+                android:onClick="sendProposal"
                 android:background="@color/colorPrimary"
                 android:textColor="@color/primaryText"
                 android:text="@string/enviar_proposta"/>
