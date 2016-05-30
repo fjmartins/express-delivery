@@ -1,5 +1,6 @@
 package webservices;
 
+import com.parse.GetCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
@@ -42,7 +43,13 @@ public class ProposalParse implements IProposalDao {
 
     @Override
     public void analyze(Proposal proposal, IResult result) {
-
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Proposal");
+        query.getInBackground(proposal.getId(), new GetCallback<ParseObject>() {
+            @Override
+            public void done(ParseObject object, ParseException e) {
+                object.put("IsAccept", true);
+            }
+        });
     }
 
     @Override

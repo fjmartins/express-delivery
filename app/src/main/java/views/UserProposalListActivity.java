@@ -112,7 +112,7 @@ public class UserProposalListActivity extends GenericActivity {
         mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
                 new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
-                    public void onItemClick(View view, int position) {
+                    public void onItemClick(View view, final int position) {
 
                         AlertDialog.Builder dialog = new AlertDialog.Builder(UserProposalListActivity.this);
 
@@ -120,9 +120,27 @@ public class UserProposalListActivity extends GenericActivity {
                                 .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {
+                                        Proposal proposal = mList.get(position);
+                                        proposal.setAccept(true);
+                                        ProposalController.analyzer(proposal, new IResult() {
+                                            @Override
+                                            public void onSuccess(List list) {
 
+                                            }
+
+                                            @Override
+                                            public void onSuccess(Object obj) {
+
+                                            }
+
+                                            @Override
+                                            public void onError(String msg) {
+
+                                            }
+                                        });
                                     }
                                 })
+
                                 .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialog, int which) {

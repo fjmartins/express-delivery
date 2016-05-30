@@ -54,4 +54,24 @@ public class ProposalController {
         });
     }
 
+    public static void analyzer(Proposal proposal, final IResult result){
+        proposalDao.analyze(proposal, new IResult() {
+            @Override
+            public void onSuccess(List list) {
+
+            }
+
+            @Override
+            public void onSuccess(Object obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+
+    }
+
 }
