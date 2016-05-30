@@ -32,18 +32,20 @@
         android:layout_gravity="end|bottom"
         fab:fab_addButtonColorNormal="#037614"
         fab:fab_addButtonColorPressed="#12b31e"
-        fab:fab_addButtonPlusIconColor="#ffffff">
+        fab:fab_addButtonPlusIconColor="#ffffff"
+        fab:fab_labelStyle="@style/menu_labls_style">
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/fbListProposal"
             android:onClick="showProposal"
-            fab:fab_icon="@android:drawable/ic_menu_slideshow"
+            fab:fab_icon="@android:drawable/ic_menu_set_as"
             fab:fab_colorNormal="#037614"
             fab:fab_colorPressed="#12b31e"
             fab:fab_size="mini"
             fab:fab_title="@string/minhas_propostas"
+
             />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
