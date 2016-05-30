@@ -79,16 +79,17 @@ public class ProposalParse implements IProposalDao {
             String description = parseObject.get("Description").toString();
             String value = parseObject.get("Value").toString();
             String announcementId = parseObject.get("AnnouncementId").toString();
+            String id = parseObject.getObjectId();
 
             proposal = new Proposal(title, description, Double.parseDouble(value));
             proposal.setUserFrom(userFrom);
             proposal.setAnnouncementId(announcementId);
             proposal.setAccept(false);
+            proposal.setId(id);
 
             ProposalList.add(proposal);
         }
 
         result.onSuccess(ProposalList);
-
     }
 }
