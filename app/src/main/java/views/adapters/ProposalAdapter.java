@@ -81,7 +81,6 @@ public class ProposalAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             Proposal proposal = mList.get(position);
             ProposalViewHolder proposalViewHolder = (ProposalViewHolder) holder;
-            proposalViewHolder.viewTitle.setText(proposal.getTitle());
             proposalViewHolder.viewDescription.setText(proposal.getDescription());
             proposalViewHolder.viewValue.setText(String.valueOf(proposal.getValue()));
             proposalViewHolder.viewUserFrom.setText(proposal.getUserFrom());

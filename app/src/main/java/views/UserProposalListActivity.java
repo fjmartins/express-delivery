@@ -1,5 +1,8 @@
 package views;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 
@@ -18,12 +22,14 @@ import java.util.List;
 
 import controllers.ProposalController;
 import controllers.UserAuthController;
+import controllers.UserController;
 import models.Announcement;
 import models.Proposal;
 import models.User;
 import services.IResult;
 import services.IResultUser;
 import views.adapters.ProposalAdapter;
+import views.adapters.RecyclerItemClickListener;
 
 
 /**
@@ -84,7 +90,7 @@ public class UserProposalListActivity extends GenericActivity {
                             showToastMessage(UserProposalListActivity.this, msg);
                         }
                     });
-                }else if (id == R.id.nav_my_announcements) {
+                } else if (id == R.id.nav_my_announcements) {
                     redirect(UserProposalListActivity.this, UserAnnouncementActivity.class);
                 }
 
@@ -103,33 +109,45 @@ public class UserProposalListActivity extends GenericActivity {
         mAdapter = new ProposalAdapter(this.mList, getBaseContext(), this.mRecyclerView);
         mRecyclerView.setAdapter(mAdapter);
 
-//        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
-//                new RecyclerItemClickListener.OnItemClickListener() {
-//                    @Override
-//                    public void onItemClick(View view, int position) {
-//                        Context contexto = getApplicationContext();
-//                        String texto = "CURTO";
-//                        int duracao = Toast.LENGTH_SHORT;
-//                        Toast toast = Toast.makeText(contexto, texto, duracao);
-//                        toast.show();
-//                    }
-//
-//                    @Override
-//                    public void onItemLongClick(View view, int position) {
+        mRecyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, mRecyclerView,
+                new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(UserProposalListActivity.this);
+
+                        dialog.setMessage(R.string.acc_anuncio)
+                                .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                    }
+                                })
+                                .show();
+                    }
+
+                    @Override
+                    public void onItemLongClick(View view, int position) {
 //                        Context contexto = getApplicationContext();
 //                        String texto = "LONGO";
 //                        int duracao = Toast.LENGTH_SHORT;
 //                        Toast toast = Toast.makeText(contexto, texto, duracao);
 //                        toast.show();
-//                    }
-//                }));
+                    }
+                }));
     }
 
-    public void refuse(View view){
+    public void refuse(View view) {
         showToastMessage(this, "RECUSADO");
     }
 
-    public void accept(View view){
+    public void accept(View view) {
         showToastMessage(this, "ACEITO");
     }
 
@@ -180,7 +198,7 @@ public class UserProposalListActivity extends GenericActivity {
     }
 
     @Override
-    public void finish(){
+    public void finish() {
         super.finish();
 
         overridePendingTransition(R.anim.main_activity_enter, R.anim.register_activity_exit);
