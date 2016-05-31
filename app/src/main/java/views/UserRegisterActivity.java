@@ -51,9 +51,22 @@ public class UserRegisterActivity extends GenericActivity {
                   .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
                       @Override
                       public void onClick(DialogInterface dialog, int which) {
-                          Bundle extras = new Bundle();
+                          final Bundle extras = new Bundle();
                           extras.putSerializable("user", user);
-                          redirect(UserRegisterActivity.this, UserRegisterAddressActivity.class, extras);
+
+                          UserController.signUp(user, new IResultUser<User>() {
+                              @Override
+                              public void onSuccess(User obj) {
+                                  redirect(UserRegisterActivity.this, UserRegisterAddressActivity.class, extras);
+                                  finish();
+                              }
+
+                              @Override
+                              public void onError(String msg) {
+
+                              }
+                          });
+
                       }
                   })
                   .setNegativeButton(R.string.after, new DialogInterface.OnClickListener() {

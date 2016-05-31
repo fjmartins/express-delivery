@@ -17,6 +17,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -72,55 +73,27 @@ public class UserRegisterAddressActivity extends GenericActivity {
             address.setComplement(this.complement.getText().toString());
             address.setDistrict(this.district.getText().toString());
             address.setStreet(this.street.getText().toString());
+            address.setState(this.state.getText().toString());
 
-            boolean isCurrentUser = true;
+
             User user = getCurrentUser();
+            List<Address> addresses = new ArrayList<Address>();
+            addresses.add(address);
+            user.setAddresses(addresses);
 
-            if (user == null) {
-                user = (User) extras.getSerializable("user");
-                isCurrentUser = false;
-            }
+            UserController.update(user, new IResultUser<User>() {
+                @Override
+                public void onSuccess(User obj) {
+                    redirect(UserRegisterAddressActivity.this, MainActivity.class);
+                    finish();
+                }
 
-            if (!isCurrentUser) {
-                UserController.signUp(user, new IResultUser<User>() {
-                    @Override
-                    public void onSuccess(User obj) {
-                        UserAuthController.logIn(obj, new IResultUser<User>() {
-                            @Override
-                            public void onSuccess(User obj) {
-                                redirect(UserRegisterAddressActivity.this, MainActivity.class);
-                                finish();
-                            }
+                @Override
+                public void onError(String msg) {
 
-                            @Override
-                            public void onError(String msg) {
-                                showToastMessage(UserRegisterAddressActivity.this, msg);
-                                UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
-                            }
-                        });
-                    }
+                }
+            });
 
-                    @Override
-                    public void onError(String msg) {
-                        showToastMessage(UserRegisterAddressActivity.this, msg);
-                        UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
-                    }
-                });
-            } else {
-                UserController.update(user, new IResultUser<User>() {
-                    @Override
-                    public void onSuccess(User obj) {
-                        redirect(UserRegisterAddressActivity.this, MainActivity.class);
-                        finish();
-                    }
-
-                    @Override
-                    public void onError(String msg) {
-                        showToastMessage(UserRegisterAddressActivity.this, msg);
-                        UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
-                    }
-                });
-            }
         }
     }
 

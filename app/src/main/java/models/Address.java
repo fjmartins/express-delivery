@@ -1,8 +1,12 @@
 package models;
 
+import com.parse.ParseClassName;
+import com.parse.ParseObject;
+
 /**
  * Created by kleber on 22/05/16. // morte aqui papai
  */
+
 public class Address {
 
     private String zipCode;
