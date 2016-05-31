@@ -76,6 +76,18 @@
                 android:textColor="@color/primaryText"
                 android:text="@string/btn_login_visitar"/>
 
+            <android.support.v7.widget.AppCompatButton
+                android:id="@+id/btn_loginactivity_facebook"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="16dp"
+                android:padding="12dp"
+                android:onClick="logInFacebook"
+                android:background="@color/colorPrimary"
+                android:textColor="@color/primaryText"
+                android:text="@string/btn_login_facebook"/>
+
             <TextView android:id="@+id/link_loginactivity_signup"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"

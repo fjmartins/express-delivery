@@ -55,7 +55,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 
         this.addresses = (Spinner)findViewById(R.id.spn_announcement_register);
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
-                this.getCurrentUser().getAddresses());
+                new String[]{"teste"});
         addresses.setAdapter(adapter);
 
         loadData();

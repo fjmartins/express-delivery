@@ -26,9 +26,6 @@ public class UserParse implements IUserDao {
         parseUser.setEmail(user.getEmail());
         parseUser.setUsername(user.getUsername());
         parseUser.setPassword(user.getPassword());
-
-
-
         parseUser.signUpInBackground(new SignUpCallback() {
             @Override
             public void done(ParseException e) {

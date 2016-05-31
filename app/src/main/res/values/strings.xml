@@ -10,6 +10,7 @@
     <string name="txt_login_password">Senha</string>
     <string name="btn_login_entrar">Entrar</string>
     <string name="btn_login_visitar">Visitar</string>
+    <string name="btn_login_facebook">Entrar com Facebook</string>
     <!--Login Activity Strings-->
 
     <string name="user">Usuário</string>
@@ -85,6 +86,6 @@
     <string name="parse_id">fdP0V6P2q11e6XjAQ6YMlK1ltc7v2uEUCCiL0S54</string>
     <string name="parse_client_key">p7XkIb23IXrMqQJWQCFZrMXShi3yfTwJp2Pj1QK6</string>
 
-    <string name="facebook_app_id">1207144035983388</string>
+    <string name="facebook_app_id">246500365722991</string>
 
 </resources>

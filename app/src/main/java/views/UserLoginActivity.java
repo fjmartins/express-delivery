@@ -4,11 +4,28 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
+import com.facebook.AccessToken;
+import com.facebook.GraphRequest;
+import com.facebook.GraphResponse;
+import com.facebook.HttpMethod;
+import com.parse.LogInCallback;
+import com.parse.ParseException;
+import com.parse.ParseFacebookUtils;
+import com.parse.ParseUser;
+
+import org.json.JSONException;
+
+import java.util.Arrays;
+import java.util.List;
+
 import controllers.UserAuthController;
+import controllers.UserController;
 import models.User;
 import services.IResultUser;
 import utils.Validate;
@@ -101,4 +118,67 @@ public class UserLoginActivity extends GenericActivity {
         }
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        ParseFacebookUtils.onActivityResult(requestCode, resultCode, data);
+    }
+
+    private void getUserDetailsFromFB() {
+        new GraphRequest(
+                AccessToken.getCurrentAccessToken(),
+                "/me",
+                null,
+                HttpMethod.GET,
+                new GraphRequest.Callback() {
+                    public void onCompleted(GraphResponse response) {
+                        try {
+                            User user = new User();
+                            user.setUsername(response.getJSONObject().getString("name"));
+                            user.setEmail(response.getJSONObject().getString("email"));
+
+                            UserController.signUp(user, new IResultUser<User>() {
+                                @Override
+                                public void onSuccess(User obj) {
+                                    redirect(UserLoginActivity.this, MainActivity.class);
+                                    finish();
+                                }
+
+                                @Override
+                                public void onError(String msg) {
+                                    showToastMessage(UserLoginActivity.this, msg);
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+        ).executeAsync();
+    }
+
+    public void logInFacebook(View v) {
+        List<String> permissions = Arrays.asList("email", "public_profile");
+
+        ParseFacebookUtils.logInWithReadPermissionsInBackground(
+            UserLoginActivity.this,
+            permissions,
+            new LogInCallback() {
+                @Override
+                public void done(ParseUser user, ParseException e) {
+                    if (user == null) {
+                        if(e != null) {
+                            Log.i("ERRO_FB", e.getMessage());
+                            showToastMessage(UserLoginActivity.this, "Erro na conexão com o Facebook");
+                        } else {
+                            showToastMessage(UserLoginActivity.this, "Usuário sem acesso");
+                        }
+                    } else if (user.isNew()) {
+                        getUserDetailsFromFB();
+                    } else {
+                        redirect(UserLoginActivity.this, MainActivity.class);
+                    }
+                }
+            });
+    }
 }
