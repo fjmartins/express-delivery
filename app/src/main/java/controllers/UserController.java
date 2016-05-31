@@ -28,4 +28,19 @@ public class UserController {
         });
     }
 
+    public static void update(final User user, final IResultUser<User> result) {
+        IUserDao userDao = new UserParse();
+        userDao.update(user, new IResultUser<User>() {
+            @Override
+            public void onSuccess(User obj) {
+                result.onSuccess(obj);
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+    }
+
 }

@@ -18,6 +18,11 @@
             android:title="@string/meus_anuncios" />
 
         <item
+            android:id="@+id/nav_register_address"
+            android:icon="@drawable/ic_menu_send"
+            android:title="@string/register_address" />
+
+        <item
             android:id="@+id/nav_manage_logout"
             android:icon="@drawable/ic_menu_send"
             android:title="@string/exit" />

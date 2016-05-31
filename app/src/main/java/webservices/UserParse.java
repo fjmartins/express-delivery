@@ -2,6 +2,7 @@ package webservices;
 
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SaveCallback;
 import com.parse.SignUpCallback;
 
 import java.util.ArrayList;
@@ -27,11 +28,7 @@ public class UserParse implements IUserDao {
         parseUser.setPassword(user.getPassword());
 
         if (user.getAddresses() != null) {
-            List<String> addresses = new ArrayList<String>();
-            for (Address a : user.getAddresses()) {
-                addresses.add(a.toString());
-            }
-
+            List<String> addresses = user.getAddresses();
             parseUser.put("Addresses", addresses);
         }
 
@@ -48,8 +45,22 @@ public class UserParse implements IUserDao {
     }
 
     @Override
-    public void update(User user, IResultUser<User> result) {
-
+    public void update(final User user, final IResultUser<User> result) {
+        ParseUser userParse = ParseUser.getCurrentUser();
+        if (user.getAddresses() != null) {
+            List<String> addresses = user.getAddresses();
+            userParse.put("Addresses", addresses);
+        }
+        userParse.saveInBackground(new SaveCallback() {
+            @Override
+            public void done(ParseException e) {
+                if (e == null) {
+                    result.onSuccess(user);
+                } else {
+                    result.onError(e.getMessage());
+                }
+            }
+        });
     }
 
     @Override

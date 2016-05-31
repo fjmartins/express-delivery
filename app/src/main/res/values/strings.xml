@@ -26,7 +26,8 @@
     <string name="zipcode">CEP</string>
     <string name="acc_anuncio">Deseja responder a proposta?</string>
     <string name="add_address">Deseja cadastrar seu endereço para facilitar as entregas?</string>
-    <string name="register_address">Deseja utilizar seu endereço de cadastro?</string>
+    <string name="register_address">Cadastrar Endereço</string>
+    <string name="is_register_address">Deseja utilizar seu endereço de cadastro?</string>
     <string name="password_confirm">Confimar Senha</string>
     <string name="cadastro_usuario">Cadastro de Usuário</string>
     <string name="title_activity_cadastro_usuario">Cadastro de Usuários</string>

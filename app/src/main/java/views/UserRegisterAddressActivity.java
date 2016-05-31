@@ -1,6 +1,7 @@
 package views;
 
 import android.app.ProgressDialog;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -9,11 +10,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.anderson.expressdelivery.R;
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Arrays;
+import java.util.List;
 
 import controllers.UserAuthController;
 import controllers.UserController;
@@ -59,7 +64,6 @@ public class UserRegisterAddressActivity extends GenericActivity {
                 Validate.validarCampoZipcod(zipcode) &&
                 Validate.validarCampoDistrict(district)) {
             Bundle extras = getIntent().getExtras();
-            User user = (User)extras.getSerializable("user");
 
             Address address = new Address();
             address.setCity(this.city.getText().toString());
@@ -68,32 +72,64 @@ public class UserRegisterAddressActivity extends GenericActivity {
             address.setComplement(this.complement.getText().toString());
             address.setDistrict(this.district.getText().toString());
 
-            user.setAddresses(Arrays.asList(address));
+            boolean isCurrentUser = true;
+            User user = getCurrentUser();
 
-            UserController.signUp(user, new IResultUser<User>() {
-                @Override
-                public void onSuccess(User obj) {
-                    UserAuthController.logIn(obj, new IResultUser<User>() {
-                        @Override
-                        public void onSuccess(User obj) {
-                            redirect(UserRegisterAddressActivity.this, MainActivity.class);
-                            finish();
-                        }
+            if (user == null) {
+                user = (User) extras.getSerializable("user");
+                isCurrentUser = false;
+            }
 
-                        @Override
-                        public void onError(String msg) {
-                            showToastMessage(UserRegisterAddressActivity.this, msg);
-                            UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
-                        }
-                    });
-                }
+            List<String> addresses = user.getAddresses();
 
-                @Override
-                public void onError(String msg) {
-                    showToastMessage(UserRegisterAddressActivity.this, msg);
-                    UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
-                }
-            });
+            if (addresses != null) {
+                addresses.add(address.toString());
+            } else {
+                addresses = Arrays.asList(address.toString());
+            }
+
+            user.setAddresses(addresses);
+
+            if (!isCurrentUser) {
+                UserController.signUp(user, new IResultUser<User>() {
+                    @Override
+                    public void onSuccess(User obj) {
+                        UserAuthController.logIn(obj, new IResultUser<User>() {
+                            @Override
+                            public void onSuccess(User obj) {
+                                redirect(UserRegisterAddressActivity.this, MainActivity.class);
+                                finish();
+                            }
+
+                            @Override
+                            public void onError(String msg) {
+                                showToastMessage(UserRegisterAddressActivity.this, msg);
+                                UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        showToastMessage(UserRegisterAddressActivity.this, msg);
+                        UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
+                    }
+                });
+            } else {
+                UserController.update(user, new IResultUser<User>() {
+                    @Override
+                    public void onSuccess(User obj) {
+                        redirect(UserRegisterAddressActivity.this, MainActivity.class);
+                        finish();
+                    }
+
+                    @Override
+                    public void onError(String msg) {
+                        showToastMessage(UserRegisterAddressActivity.this, msg);
+                        UserRegisterAddressActivity.this.btnRegister.setEnabled(true);
+                    }
+                });
+            }
         }
     }
 

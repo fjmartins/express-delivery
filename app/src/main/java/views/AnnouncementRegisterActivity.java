@@ -6,9 +6,11 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import com.example.anderson.expressdelivery.R;
 
@@ -33,6 +35,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     private ImageView picture;
     private Announcement announcement;
     private Bitmap pictureMake;
+    private Spinner addresses;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +50,13 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         this.description = (EditText) findViewById(R.id.txtCadAnuncioDesc);
         this.phone = (EditText) findViewById(R.id.txtCadAnuncioTelefone);
         phone.addTextChangedListener(Mask.insert(Mask.CELULAR_MASK, phone));
-        this.address = (EditText) findViewById(R.id.txtCadAnuncioEndereco);
+//        this.address = (EditText) findViewById(R.id.txtCadAnuncioEndereco);
         this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
+
+        this.addresses = (Spinner)findViewById(R.id.spn_announcement_register);
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+                this.getCurrentUser().getAddresses());
+        addresses.setAdapter(adapter);
 
         loadData();
     }
@@ -87,7 +95,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             final String title = this.title.getText().toString();
             final String phone = this.phone.getText().toString();
             final String description = this.description.getText().toString();
-            final String address = this.address.getText().toString();
+            final String address = "this.address.getText().toString()";
             final Bitmap picture = this.pictureMake;
 
             UserAuthController.getCurrentUser(new IResultUser<User>() {

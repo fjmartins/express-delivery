@@ -218,6 +218,8 @@ public class MainActivity extends GenericActivity {
             redirect(context, UserLoginActivity.class);
         } else if (id == R.id.nav_my_announcements) {
             redirect(context, UserAnnouncementActivity.class);
+        } else if (id == R.id.nav_register_address) {
+            redirect(context, UserRegisterAddressActivity.class);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -225,10 +227,10 @@ public class MainActivity extends GenericActivity {
     }
 
     public void setVisibleMenuItem(NavigationView navigationView) {
-        if (this.getUsername().equals("")) {
-            this.setVisible(navigationView, false, true, false, false, true);
+        if (this.getCurrentUser() == null) {
+            this.setVisible(navigationView, false, true, false, false, false, true);
         } else {
-            this.setVisible(navigationView, true, false, true, true, false);
+            this.setVisible(navigationView, true, false, true, true, true, false);
         }
     }
 

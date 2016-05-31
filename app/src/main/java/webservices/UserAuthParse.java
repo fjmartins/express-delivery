@@ -5,6 +5,10 @@ import com.parse.LogOutCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import models.Address;
 import services.IResult;
 import models.User;
 import services.IResultUser;
@@ -55,6 +59,7 @@ public class UserAuthParse implements IUserAuth {
             User user = new User();
             user.setUsername(currentUser.getUsername());
             user.setEmail(currentUser.getEmail());
+            user.setAddresses((List<String>)currentUser.get("Addresses"));
             result.onSuccess(user);
         }
     }
