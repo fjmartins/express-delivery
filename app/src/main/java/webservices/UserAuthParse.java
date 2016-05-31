@@ -59,7 +59,6 @@ public class UserAuthParse implements IUserAuth {
             User user = new User();
             user.setUsername(currentUser.getUsername());
             user.setEmail(currentUser.getEmail());
-            user.setAddresses((List<String>)currentUser.get("Addresses"));
             result.onSuccess(user);
         }
     }

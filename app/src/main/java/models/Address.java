@@ -1,7 +1,7 @@
 package models;
 
 /**
- * Created by kleber on 22/05/16.
+ * Created by kleber on 22/05/16. // morte aqui papai
  */
 public class Address {
 
@@ -12,15 +12,6 @@ public class Address {
     private String number;
     private String complement;
     private String street;
-    private String user;
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
-    }
 
     public String getStreet() {
         return street;
@@ -76,14 +67,5 @@ public class Address {
 
     public void setComplement(String complement) {
         this.complement = complement;
-    }
-
-    public String toString() {
-        return  "zipcode: "+this.zipCode
-                +"\ncity: "+this.city
-                +"\nnumber: "+this.number
-                +"\ncomplement: "+this.complement
-                +"\nstate: "+this.state
-                +"\ndistrict: "+this.district;
     }
 }
