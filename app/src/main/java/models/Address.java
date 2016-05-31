@@ -11,6 +11,24 @@ public class Address {
     private String state;
     private String number;
     private String complement;
+    private String street;
+    private String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
     public String getZipCode() {
         return zipCode;
@@ -61,13 +79,11 @@ public class Address {
     }
 
     public String toString() {
-        return "{"
-                +" zipcode: "+this.zipCode
-                +", city: "+this.city
-                +", number: "+this.number
-                +", complement: "+this.complement
-                +", state: "+this.state
-                +", district: "+this.district+
-                " }";
+        return  "zipcode: "+this.zipCode
+                +"\ncity: "+this.city
+                +"\nnumber: "+this.number
+                +"\ncomplement: "+this.complement
+                +"\nstate: "+this.state
+                +"\ndistrict: "+this.district;
     }
 }

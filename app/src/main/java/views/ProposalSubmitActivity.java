@@ -60,7 +60,7 @@ public class ProposalSubmitActivity extends GenericActivity {
                 Double.parseDouble(value));
         proposal.setAnnouncementId(announcement.getId());
         proposal.setUserFrom(getUsername());
-        proposal.setUserFromEmail(getUser().getEmail());
+        proposal.setUserFromEmail(getCurrentUser().getEmail());
 
         ProposalController.send(proposal, new IResult<Proposal>() {
             @Override

@@ -71,6 +71,7 @@ public class UserRegisterAddressActivity extends GenericActivity {
             address.setNumber(this.number.getText().toString());
             address.setComplement(this.complement.getText().toString());
             address.setDistrict(this.district.getText().toString());
+            address.setStreet(this.street.getText().toString());
 
             boolean isCurrentUser = true;
             User user = getCurrentUser();
@@ -79,16 +80,6 @@ public class UserRegisterAddressActivity extends GenericActivity {
                 user = (User) extras.getSerializable("user");
                 isCurrentUser = false;
             }
-
-            List<String> addresses = user.getAddresses();
-
-            if (addresses != null) {
-                addresses.add(address.toString());
-            } else {
-                addresses = Arrays.asList(address.toString());
-            }
-
-            user.setAddresses(addresses);
 
             if (!isCurrentUser) {
                 UserController.signUp(user, new IResultUser<User>() {

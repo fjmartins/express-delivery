@@ -11,7 +11,6 @@ public class User implements Serializable{
     private String username;
     private String email;
     private String password;
-    private List<String> addresses;
 
     public User(String username, String email, String password) {
         this.setUsername(username);
@@ -25,14 +24,6 @@ public class User implements Serializable{
     }
 
     public User() { }
-
-    public List<String> getAddresses() {
-        return addresses;
-    }
-
-    public void setAddresses(List<String> addresses) {
-        this.addresses = addresses;
-    }
 
     public String getUsername() {
         return username;
