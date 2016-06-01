@@ -64,7 +64,6 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             @Override
             public void onSuccess(List<Address> list) {
                 loadData(list);
-
             }
 
             @Override
@@ -109,12 +108,13 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     public void save(View v) {
         if (foto() && Validate.validarCampoTitle(title) &&
                 Validate.validarCampoPhone(phone) &&
-                Validate.validarCampoDescription(description) &&
-                Validate.validarCampoAddress(address)) {
+                Validate.validarCampoDescription(description)) {
+
+            Address addressView = (Address) this.addresses.getSelectedItem();
             final String title = this.title.getText().toString();
             final String phone = this.phone.getText().toString();
             final String description = this.description.getText().toString();
-            final String address = "this.address.getText().toString()";
+            final String address = addressView.toString();
             final Bitmap picture = this.pictureMake;
 
             UserAuthController.getCurrentUser(new IResultUser<User>() {
