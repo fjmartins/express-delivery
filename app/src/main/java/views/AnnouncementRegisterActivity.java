@@ -213,11 +213,10 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         if (extras != null) {
             Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);
             btnCad.setText("Atualizar");
-
             this.title.setText(extras.getString("tittle"));
             this.description.setText(extras.getString("description"));
             this.phone.setText(extras.getString("phone"));
-            this.address.setText(extras.getString("address"));
+
             this.picture.setImageBitmap((Bitmap) extras.getParcelable("picture"));
             this.pictureMake = extras.getParcelable("picture");
         }

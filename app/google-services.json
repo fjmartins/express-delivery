@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "656140044111",
+    "firebase_url": "https://express-delivery-47618.firebaseio.com",
+    "project_id": "express-delivery-47618",
+    "storage_bucket": "express-delivery-47618.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:656140044111:android:995b0cab4de80143",
+        "android_client_info": {
+          "package_name": "com.example.anderson.myapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "656140044111-5lu92jvl8oovrpe2548bk3f730l8t1d9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAGpi45bgw5MKtZD7d53rvFVVotttmT9uM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
