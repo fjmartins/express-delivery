@@ -17,6 +17,8 @@ import com.example.anderson.expressdelivery.R;
 import java.util.List;
 import controllers.AnnouncementController;
 import controllers.UserAuthController;
+import controllers.UserController;
+import models.Address;
 import models.Announcement;
 import models.User;
 import services.IResult;
@@ -54,8 +56,21 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
 
         this.addresses = (Spinner)findViewById(R.id.spn_announcement_register);
+
+         Address address = UserController.findAddress(new IResultUser<Address>() {
+            @Override
+            public void onSuccess(Address obj) {
+
+            }
+
+            @Override
+            public void onError(String msg) {
+
+            }
+        });
+
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
-                new String[]{"teste"});
+                new String[]{ address.toString() });
         addresses.setAdapter(adapter);
 
         loadData();

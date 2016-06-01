@@ -2,6 +2,7 @@ package webservices;
 
 import com.parse.ParseException;
 import com.parse.ParseObject;
+import com.parse.ParseQuery;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
 
@@ -23,6 +24,7 @@ public class UserAddressParse implements IAddressDao {
         addressParse.put("city", address.getCity());
         addressParse.put("state", address.getState());
         addressParse.put("number", address.getNumber());
+        addressParse.put("Street", address.getStreet());
         addressParse.put("complement", address.getComplement());
         userParse.put("Address", addressParse);
         userParse.saveInBackground(new SaveCallback() {
@@ -38,7 +40,26 @@ public class UserAddressParse implements IAddressDao {
     }
 
     @Override
-    public void find(Address address, IResult<Address> result) {
+    public Address find(IResult<Address> result) {
+        ParseUser userParse = ParseUser.getCurrentUser();
+        ParseObject parseObject = (ParseObject) userParse.get("Address");
+        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Address");
+        try {
+            parseObject = query.get(parseObject.getObjectId());
+        } catch (ParseException e) {
+            result.onError(e.getMessage());
+        }
 
+        Address addressObject = new Address();
+        addressObject.setCity(parseObject.get("city").toString());
+        addressObject.setZipCode(parseObject.get("zipCode").toString());
+        addressObject.setNumber(parseObject.get("number").toString());
+        addressObject.setComplement(parseObject.get("complement").toString());
+        addressObject.setDistrict(parseObject.get("district").toString());
+        addressObject.setStreet(parseObject.get("city").toString());
+        addressObject.setState(parseObject.get("state").toString());
+
+        result.onSuccess(addressObject);
+        return addressObject;
     }
 }

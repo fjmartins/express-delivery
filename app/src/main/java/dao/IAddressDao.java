@@ -8,5 +8,5 @@ import services.IResult;
  */
 public interface IAddressDao {
     void add(Address address, IResult<Address> result);
-    void find(Address address, IResult<Address> result);
+    Address find(IResult<Address> result);
 }

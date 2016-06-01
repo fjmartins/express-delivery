@@ -72,4 +72,17 @@ public class Address {
     public void setComplement(String complement) {
         this.complement = complement;
     }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "zipCode='" + zipCode + '\'' +
+                ", district='" + district + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", number='" + number + '\'' +
+                ", complement='" + complement + '\'' +
+                ", street='" + street + '\'' +
+                '}';
+    }
 }

@@ -64,6 +64,26 @@ public class UserController {
                 result.onError(msg);
             }
         });
+    }
+
+    public static Address findAddress(final IResultUser<Address> result) {
+        IAddressDao userDao = new UserAddressParse();
+       return userDao.find(new IResult<Address>() {
+            @Override
+            public void onSuccess(List<Address> list) {
+
+            }
+
+            @Override
+            public void onSuccess(Address obj) {
+                result.onSuccess(obj);
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
 
     }
 
