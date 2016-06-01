@@ -45,11 +45,6 @@ public class UserLoginActivity extends GenericActivity {
 
         username = (EditText) this.findViewById(R.id.edt_loginactivity_email);
         password = (EditText) this.findViewById(R.id.edt_loginactivity_password);
-
-        if (UserAuthController.getCurrentUser() != null) {
-            this.goToMainIfUserAuth();
-            finish();
-        }
     }
 
     public void logIn(View view) {
