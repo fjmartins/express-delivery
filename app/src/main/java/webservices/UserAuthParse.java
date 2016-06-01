@@ -1,5 +1,7 @@
 package webservices;
 
+import android.util.Log;
+
 import com.parse.LogInCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
@@ -60,6 +62,7 @@ public class UserAuthParse implements IUserAuth {
             User user = new User();
             user.setUsername(currentUser.getUsername());
             user.setEmail(currentUser.getEmail());
+            user.setIsNew(currentUser.isNew());
             result.onSuccess(user);
         }
     }

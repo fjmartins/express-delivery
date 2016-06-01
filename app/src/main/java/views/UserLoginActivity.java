@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.example.anderson.expressdelivery.R;
 import com.facebook.AccessToken;
@@ -20,6 +19,7 @@ import com.parse.ParseFacebookUtils;
 import com.parse.ParseUser;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Arrays;
 import java.util.List;
@@ -176,7 +176,27 @@ public class UserLoginActivity extends GenericActivity {
                     } else if (user.isNew()) {
                         getUserDetailsFromFB();
                     } else {
-                        redirect(UserLoginActivity.this, MainActivity.class);
+                        GraphRequest request = GraphRequest.newMeRequest(
+                                AccessToken.getCurrentAccessToken(),
+                                new GraphRequest.GraphJSONObjectCallback() {
+                                    @Override
+                                    public void onCompleted(JSONObject object, GraphResponse response) {
+                                        try {
+                                            ParseUser user = ParseUser.getCurrentUser();
+                                            user.setEmail(object.getString("email"));
+                                            user.setUsername(object.getString("name"));
+                                            user.saveEventually();
+                                        } catch(JSONException e) {
+                                            e.printStackTrace();
+                                        }
+                                        redirect(UserLoginActivity.this, MainActivity.class);
+                                    }
+                                });
+
+                        Bundle parameters = new Bundle();
+                        parameters.putString("fields", "id,name,email");
+                        request.setParameters(parameters);
+                        request.executeAsync();
                     }
                 }
             });
