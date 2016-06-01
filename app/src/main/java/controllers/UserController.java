@@ -46,7 +46,7 @@ public class UserController {
         });
     }
 
-    public static void registerAddress(final Address address, final IResultUser<Address> result) {
+    public static void registerAddress(final Address address, final IResult<Address> result) {
         IAddressDao userDao = new UserAddressParse();
         userDao.register(address, new IResult<Address>() {
             @Override
@@ -65,18 +65,18 @@ public class UserController {
             }
         });
     }
-    
-    public static List<Address> findAddress(final IResultUser<Address> result) {
+
+    public static void findAddress(final IResult<Address> result) {
         IAddressDao userDao = new UserAddressParse();
-       return userDao.find(new IResult<Address>() {
+        userDao.find(new IResult<Address>() {
             @Override
             public void onSuccess(List<Address> list) {
-
+                result.onSuccess(list);
             }
 
             @Override
             public void onSuccess(Address obj) {
-                result.onSuccess(obj);
+
             }
 
             @Override
@@ -84,6 +84,5 @@ public class UserController {
                 result.onError(msg);
             }
         });
-
     }
 }

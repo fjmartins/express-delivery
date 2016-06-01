@@ -1,6 +1,5 @@
 package dao;
 
-import java.util.List;
 
 import models.Address;
 import services.IResult;
@@ -10,7 +9,7 @@ import services.IResult;
  */
 public interface IAddressDao {
 
-    List<Address> find(IResult<Address> result);
+    void find(IResult<Address> result);
 
     void register(Address address, IResult<Address> result);
 }

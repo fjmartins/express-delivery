@@ -21,27 +21,33 @@ import services.IResult;
 public class UserAddressParse implements IAddressDao {
 
     @Override
-    public List<Address> find(IResult<Address> result) {
+    public void find(final IResult<Address> result) {
         ParseUser userParse = ParseUser.getCurrentUser();
         ParseRelation<ParseObject> relation = userParse.getRelation("Address");
         ParseQuery<ParseObject> query = relation.getQuery();
 
-        List<ParseObject> list = (List<ParseObject>) query.findInBackground();
-        List<Address> listAddresses = new ArrayList<Address>();
-
-        for (ParseObject parseObject : list) {
-            Address addressObject = new Address();
-            addressObject.setCity(parseObject.get("city").toString());
-            addressObject.setZipCode(parseObject.get("zipCode").toString());
-            addressObject.setNumber(parseObject.get("number").toString());
-            addressObject.setComplement(parseObject.get("complement").toString());
-            addressObject.setDistrict(parseObject.get("district").toString());
-            addressObject.setStreet(parseObject.get("city").toString());
-            addressObject.setState(parseObject.get("state").toString());
-            listAddresses.add(addressObject);
-        }
-
-        return listAddresses;
+        query.findInBackground(new FindCallback<ParseObject>() {
+            @Override
+            public void done(List<ParseObject> objects, ParseException e) {
+                if (e == null) {
+                    List<Address> addressList = new ArrayList<>();
+                    for (ParseObject parseObject : objects) {
+                        Address addressObject = new Address();
+                        addressObject.setCity(parseObject.get("city").toString());
+                        addressObject.setZipCode(parseObject.get("zipCode").toString());
+                        addressObject.setNumber(parseObject.get("number").toString());
+                        addressObject.setComplement(parseObject.get("complement").toString());
+                        addressObject.setDistrict(parseObject.get("district").toString());
+                        addressObject.setStreet(parseObject.get("city").toString());
+                        addressObject.setState(parseObject.get("state").toString());
+                        addressList.add(addressObject);
+                    }
+                    result.onSuccess(addressList);
+                } else {
+                    result.onError(e.getMessage());
+                }
+            }
+        });
     }
 
     @Override

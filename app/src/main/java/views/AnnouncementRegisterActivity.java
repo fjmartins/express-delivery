@@ -5,6 +5,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -14,6 +15,7 @@ import android.widget.Spinner;
 
 import com.example.anderson.expressdelivery.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import controllers.AnnouncementController;
@@ -55,10 +57,16 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         phone.addTextChangedListener(Mask.insert(Mask.CELULAR_MASK, phone));
 //        this.address = (EditText) findViewById(R.id.txtCadAnuncioEndereco);
         this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
-
         this.addresses = (Spinner) findViewById(R.id.spn_announcement_register);
 
-        List<Address> addressList = UserController.findAddress(new IResultUser<Address>() {
+        final List<Address> addressList = new ArrayList<>();
+        UserController.findAddress(new IResult<Address>() {
+            @Override
+            public void onSuccess(List<Address> list) {
+                loadData(list);
+
+            }
+
             @Override
             public void onSuccess(Address obj) {
 
@@ -70,12 +78,6 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             }
         });
 
-
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
-                new String[]{addressList.toString()});
-        addresses.setAdapter(adapter);
-
-        loadData();
     }
 
     @Override
@@ -210,8 +212,12 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     }
 
 
-    private void loadData() {
+    private void loadData(List<Address> addressList) {
         Bundle extras = getIntent().getExtras();
+
+        ArrayAdapter<Address> adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
+                addressList);
+        addresses.setAdapter(adapter);
 
         if (extras != null) {
             Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);

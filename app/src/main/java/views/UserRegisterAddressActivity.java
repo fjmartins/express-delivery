@@ -25,6 +25,7 @@ import controllers.UserAuthController;
 import controllers.UserController;
 import models.Address;
 import models.User;
+import services.IResult;
 import services.IResultUser;
 import utils.HTTPUtils;
 import utils.Mask;
@@ -75,7 +76,12 @@ public class UserRegisterAddressActivity extends GenericActivity {
             address.setStreet(this.street.getText().toString());
             address.setState(this.state.getText().toString());
 
-            UserController.registerAddress(address, new IResultUser<Address>() {
+            UserController.registerAddress(address, new IResult<Address>() {
+                @Override
+                public void onSuccess(List<Address> list) {
+
+                }
+
                 @Override
                 public void onSuccess(Address obj) {
                     redirect(UserRegisterAddressActivity.this, MainActivity.class);
