@@ -76,21 +76,16 @@ public class UserRegisterAddressActivity extends GenericActivity {
             address.setState(this.state.getText().toString());
 
 
-            User user = getCurrentUser();
-            List<Address> addresses = new ArrayList<Address>();
-            addresses.add(address);
-            user.setAddresses(addresses);
-
-            UserController.update(user, new IResultUser<User>() {
+            UserController.registerAddress(address, new IResultUser<Address>() {
                 @Override
-                public void onSuccess(User obj) {
+                public void onSuccess(Address obj) {
                     redirect(UserRegisterAddressActivity.this, MainActivity.class);
                     finish();
                 }
 
                 @Override
                 public void onError(String msg) {
-
+                    showToastMessage(UserRegisterAddressActivity.this, msg);
                 }
             });
 

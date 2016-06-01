@@ -41,62 +41,60 @@ public class UserRegisterActivity extends GenericActivity {
     }
 
     public void registerUser(View view) {
-        if(Validate.validarCampoUsuario(name) && Validate.validarCampoEmail(email) && Validate.validarCampoSenha(password) && Validate.validarCampoConfirm(password, passwordConfirm)){
+        if (Validate.validarCampoUsuario(name) && Validate.validarCampoEmail(email) && Validate.validarCampoSenha(password) && Validate.validarCampoConfirm(password, passwordConfirm)) {
             final User user = new User(this.name.getText().toString(), this.email.getText().toString(),
                     this.password.getText().toString());
 
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
 
             dialog.setMessage(R.string.add_address)
-                  .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(DialogInterface dialog, int which) {
-                          final Bundle extras = new Bundle();
-                          extras.putSerializable("user", user);
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
 
-                          UserController.signUp(user, new IResultUser<User>() {
-                              @Override
-                              public void onSuccess(User obj) {
-                                  redirect(UserRegisterActivity.this, UserRegisterAddressActivity.class, extras);
-                                  finish();
-                              }
+                            UserController.signUp(user, new IResultUser<User>() {
+                                @Override
+                                public void onSuccess(User obj) {
+                                    redirect(UserRegisterActivity.this, UserRegisterAddressActivity.class);
+                                    finish();
+                                }
 
-                              @Override
-                              public void onError(String msg) {
+                                @Override
+                                public void onError(String msg) {
 
-                              }
-                          });
+                                }
+                            });
 
-                      }
-                  })
-                  .setNegativeButton(R.string.after, new DialogInterface.OnClickListener() {
-                      @Override
-                      public void onClick(DialogInterface dialog, int which) {
-                          UserController.signUp(user, new IResultUser<User>() {
-                              @Override
-                              public void onSuccess(User obj) {
-                                  UserAuthController.logIn(obj, new IResultUser<User>() {
-                                      @Override
-                                      public void onSuccess(User obj) {
-                                          redirect(UserRegisterActivity.this, MainActivity.class);
-                                          finish();
-                                      }
+                        }
+                    })
+                    .setNegativeButton(R.string.after, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            UserController.signUp(user, new IResultUser<User>() {
+                                @Override
+                                public void onSuccess(User obj) {
+                                    UserAuthController.logIn(obj, new IResultUser<User>() {
+                                        @Override
+                                        public void onSuccess(User obj) {
+                                            redirect(UserRegisterActivity.this, MainActivity.class);
+                                            finish();
+                                        }
 
-                                      @Override
-                                      public void onError(String msg) {
-                                          showToastMessage(UserRegisterActivity.this, msg);
-                                      }
-                                  });
-                              }
+                                        @Override
+                                        public void onError(String msg) {
+                                            showToastMessage(UserRegisterActivity.this, msg);
+                                        }
+                                    });
+                                }
 
-                              @Override
-                              public void onError(String msg) {
-                                  showToastMessage(UserRegisterActivity.this, msg);
-                              }
-                          });
-                      }
-                  })
-                  .show();
+                                @Override
+                                public void onError(String msg) {
+                                    showToastMessage(UserRegisterActivity.this, msg);
+                                }
+                            });
+                        }
+                    })
+                    .show();
         }
     }
 

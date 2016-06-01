@@ -2,10 +2,13 @@ package controllers;
 
 import java.util.List;
 
+import dao.IAddressDao;
+import models.Address;
 import services.IResult;
 import dao.IUserDao;
 import models.User;
 import services.IResultUser;
+import webservices.UserAddressParse;
 import webservices.UserParse;
 
 /**
@@ -41,6 +44,27 @@ public class UserController {
                 result.onError(msg);
             }
         });
+    }
+
+    public static void registerAddress(final Address address, final IResultUser<Address> result) {
+        IAddressDao userDao = new UserAddressParse();
+        userDao.add(address, new IResult<Address>() {
+            @Override
+            public void onSuccess(List<Address> list) {
+
+            }
+
+            @Override
+            public void onSuccess(Address obj) {
+                result.onSuccess(obj);
+            }
+
+            @Override
+            public void onError(String msg) {
+                result.onError(msg);
+            }
+        });
+
     }
 
 }
