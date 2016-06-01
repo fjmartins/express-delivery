@@ -75,7 +75,6 @@ public class UserRegisterAddressActivity extends GenericActivity {
             address.setStreet(this.street.getText().toString());
             address.setState(this.state.getText().toString());
 
-
             UserController.registerAddress(address, new IResultUser<Address>() {
                 @Override
                 public void onSuccess(Address obj) {
@@ -88,7 +87,6 @@ public class UserRegisterAddressActivity extends GenericActivity {
                     showToastMessage(UserRegisterAddressActivity.this, msg);
                 }
             });
-
         }
     }
 

@@ -3,6 +3,8 @@ package webservices;
 import com.parse.LogInCallback;
 import com.parse.LogOutCallback;
 import com.parse.ParseException;
+import com.parse.ParseObject;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 
 import java.util.ArrayList;
@@ -27,8 +29,7 @@ public class UserAuthParse implements IUserAuth {
             public void done(ParseUser parseUserInner, ParseException e) {
                 if (e != null) {
                     result.onError(e.getMessage());
-                }
-                else if (parseUserInner != null) {
+                } else if (parseUserInner != null) {
                     result.onSuccess(user);
                 }
             }
@@ -66,7 +67,8 @@ public class UserAuthParse implements IUserAuth {
     @Override
     public User getCurrentUser() {
         ParseUser currentUser = ParseUser.getCurrentUser();
-        if(currentUser != null) {
+
+        if (currentUser != null) {
             User user = new User();
             user.setUsername(currentUser.getUsername());
             user.setEmail(currentUser.getEmail());

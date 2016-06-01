@@ -1,10 +1,15 @@
 package webservices;
 
+import com.parse.FindCallback;
 import com.parse.ParseException;
 import com.parse.ParseObject;
 import com.parse.ParseQuery;
+import com.parse.ParseRelation;
 import com.parse.ParseUser;
 import com.parse.SaveCallback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import dao.IAddressDao;
 import models.Address;
@@ -16,8 +21,34 @@ import services.IResult;
 public class UserAddressParse implements IAddressDao {
 
     @Override
-    public void add(final Address address, final IResult<Address> result) {
+    public List<Address> find(IResult<Address> result) {
         ParseUser userParse = ParseUser.getCurrentUser();
+        ParseRelation<ParseObject> relation = userParse.getRelation("Address");
+        ParseQuery<ParseObject> query = relation.getQuery();
+
+        List<ParseObject> list = (List<ParseObject>) query.findInBackground();
+        List<Address> listAddresses = new ArrayList<Address>();
+
+        for (ParseObject parseObject : list) {
+            Address addressObject = new Address();
+            addressObject.setCity(parseObject.get("city").toString());
+            addressObject.setZipCode(parseObject.get("zipCode").toString());
+            addressObject.setNumber(parseObject.get("number").toString());
+            addressObject.setComplement(parseObject.get("complement").toString());
+            addressObject.setDistrict(parseObject.get("district").toString());
+            addressObject.setStreet(parseObject.get("city").toString());
+            addressObject.setState(parseObject.get("state").toString());
+            listAddresses.add(addressObject);
+        }
+
+        return listAddresses;
+    }
+
+    @Override
+    public void register(final Address address, final IResult<Address> result) {
+        ParseUser userParse = ParseUser.getCurrentUser();
+        ParseRelation<ParseObject> relation = userParse.getRelation("Address");
+
         ParseObject addressParse = new ParseObject("Address");
         addressParse.put("zipCode", address.getZipCode());
         addressParse.put("district", address.getDistrict());
@@ -26,7 +57,13 @@ public class UserAddressParse implements IAddressDao {
         addressParse.put("number", address.getNumber());
         addressParse.put("Street", address.getStreet());
         addressParse.put("complement", address.getComplement());
-        userParse.put("Address", addressParse);
+        try {
+            addressParse.save();
+        } catch (ParseException e) {
+            result.onError(e.getMessage());
+        }
+        relation.add(addressParse);
+
         userParse.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -37,29 +74,5 @@ public class UserAddressParse implements IAddressDao {
                 }
             }
         });
-    }
-
-    @Override
-    public Address find(IResult<Address> result) {
-        ParseUser userParse = ParseUser.getCurrentUser();
-        ParseObject parseObject = (ParseObject) userParse.get("Address");
-        ParseQuery<ParseObject> query = new ParseQuery<ParseObject>("Address");
-        try {
-            parseObject = query.get(parseObject.getObjectId());
-        } catch (ParseException e) {
-            result.onError(e.getMessage());
-        }
-
-        Address addressObject = new Address();
-        addressObject.setCity(parseObject.get("city").toString());
-        addressObject.setZipCode(parseObject.get("zipCode").toString());
-        addressObject.setNumber(parseObject.get("number").toString());
-        addressObject.setComplement(parseObject.get("complement").toString());
-        addressObject.setDistrict(parseObject.get("district").toString());
-        addressObject.setStreet(parseObject.get("city").toString());
-        addressObject.setState(parseObject.get("state").toString());
-
-        result.onSuccess(addressObject);
-        return addressObject;
     }
 }

@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import com.example.anderson.expressdelivery.R;
 
 import java.util.List;
+
 import controllers.AnnouncementController;
 import controllers.UserAuthController;
 import controllers.UserController;
@@ -55,9 +56,9 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 //        this.address = (EditText) findViewById(R.id.txtCadAnuncioEndereco);
         this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
 
-        this.addresses = (Spinner)findViewById(R.id.spn_announcement_register);
+        this.addresses = (Spinner) findViewById(R.id.spn_announcement_register);
 
-         Address address = UserController.findAddress(new IResultUser<Address>() {
+        List<Address> addressList = UserController.findAddress(new IResultUser<Address>() {
             @Override
             public void onSuccess(Address obj) {
 
@@ -69,8 +70,9 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             }
         });
 
+
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_spinner_item,
-                new String[]{ address.toString() });
+                new String[]{addressList.toString()});
         addresses.setAdapter(adapter);
 
         loadData();
@@ -199,7 +201,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
     private boolean foto() {
         boolean result = true;
 
-        if (pictureMake == null){
+        if (pictureMake == null) {
             showToastMessage(AnnouncementRegisterActivity.this, "Insira uma foto");
             result = false;
         }
