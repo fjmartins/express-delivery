@@ -92,8 +92,8 @@ public class Validate {
         if (campoTitle.getText().toString().trim().isEmpty()) {
             campoTitle.setError("@string/campo_obrigatorio");
             result = false;
-        } else if (campoTitle.getText().toString().length() <= 5 || campoTitle.getText().toString().length() > 20) {
-            campoTitle.setError("Deve conter entre 5 e 20 caracteres");
+        } else if (campoTitle.getText().toString().length() <= 5 || campoTitle.getText().toString().length() > 50) {
+            campoTitle.setError("Deve conter entre 5 e 50 caracteres");
             result = false;
         } else {
             campoTitle.setError(null);

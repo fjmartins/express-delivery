@@ -2,6 +2,7 @@ package webservices;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.util.Log;
 
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
@@ -36,7 +37,7 @@ public class AnnouncementParse implements IAnnouncementDao {
         announcement.getPicture().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] image = stream.toByteArray();
 
-        final ParseFile imageFile = new ParseFile(announcement.getUser() + System.currentTimeMillis() +
+        final ParseFile imageFile = new ParseFile(System.currentTimeMillis() +
                 ".png", image);
         imageFile.saveInBackground(new SaveCallback() {
             @Override
@@ -74,7 +75,7 @@ public class AnnouncementParse implements IAnnouncementDao {
         announcement.getPicture().compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] image = stream.toByteArray();
 
-        final ParseFile imageFile = new ParseFile(announcement.getUser() + System.currentTimeMillis() +
+        final ParseFile imageFile = new ParseFile(System.currentTimeMillis() +
                 ".png", image);
         imageFile.saveInBackground(new SaveCallback() {
             @Override
