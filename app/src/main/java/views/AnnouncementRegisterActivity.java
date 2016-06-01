@@ -38,7 +38,6 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 
     private EditText title, description, phone, address;
     private ImageView picture;
-    private Announcement announcement;
     private Bitmap pictureMake;
     private Spinner addresses;
 
@@ -54,12 +53,9 @@ public class AnnouncementRegisterActivity extends GenericActivity {
         this.title = (EditText) findViewById(R.id.txtCadAnuncioTitulo);
         this.description = (EditText) findViewById(R.id.txtCadAnuncioDesc);
         this.phone = (EditText) findViewById(R.id.txtCadAnuncioTelefone);
-        phone.addTextChangedListener(Mask.insert(Mask.CELULAR_MASK, phone));
-//        this.address = (EditText) findViewById(R.id.txtCadAnuncioEndereco);
         this.picture = (ImageView) findViewById(R.id.img_announcement_activity);
         this.addresses = (Spinner) findViewById(R.id.spn_announcement_register);
 
-        final List<Address> addressList = new ArrayList<>();
         UserController.findAddress(new IResult<Address>() {
             @Override
             public void onSuccess(List<Address> list) {
@@ -99,14 +95,14 @@ public class AnnouncementRegisterActivity extends GenericActivity {
                     Bitmap btm = b.getParcelable("data");
                     btm = Bitmap.createScaledBitmap(btm, 200, 200, true);
                     this.pictureMake = btm;
-                    AnnouncementRegisterActivity.this.picture.setImageBitmap(btm);
+                    this.picture.setImageBitmap(btm);
                 }
             }
         }
     }
 
     public void save(View v) {
-        if (foto() && Validate.validarCampoTitle(title) &&
+        if (hasPicture() && Validate.validarCampoTitle(title) &&
                 Validate.validarCampoPhone(phone) &&
                 Validate.validarCampoDescription(description)) {
 
@@ -117,93 +113,88 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             final String address = addressView.toString();
             final Bitmap picture = this.pictureMake;
 
-            UserAuthController.getCurrentUser(new IResultUser<User>() {
-                @Override
-                public void onSuccess(User obj) {
-                    Announcement announcement = new Announcement(obj.getUsername(),
-                            title, description, address, phone, picture);
+            User obj = this.getCurrentUser();
 
-                    Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);
-                    if (btnCad.getText().toString().equalsIgnoreCase("Atualizar")) {
+            if (obj != null) {
+                Announcement announcement = new Announcement(obj.getUsername(),
+                        title, description, address, phone, picture);
 
-                        final Bundle extrasEntrada = getIntent().getExtras();
+                Button btnCad = (Button) findViewById(R.id.btnCadAnuncioCadastrar);
 
-                        announcement.setId(extrasEntrada.get("id").toString());
+                if (btnCad.getText().toString().equalsIgnoreCase("Atualizar")) {
 
-                        if (announcement.getPicture() == null) {
-                            announcement.setPicture((Bitmap) extrasEntrada.getParcelable("picture"));
-                        }
+                    final Bundle extrasEntrada = getIntent().getExtras();
 
-                        AnnouncementController.update(announcement, new IResult<Announcement>() {
-                            @Override
-                            public void onSuccess(List<Announcement> list) {
+                    announcement.setId(extrasEntrada.get("id").toString());
 
-                            }
-
-                            @Override
-                            public void onSuccess(Announcement obj) {
-                                Bundle extrasSaida = new Bundle();
-                                extrasSaida.putString("description", obj.getDescription());
-                                extrasSaida.putString("address", obj.getAddress());
-                                extrasSaida.putString("phone", obj.getPhone());
-                                extrasSaida.putString("tittle", obj.getTitle());
-                                extrasSaida.putParcelable("picture", obj.getPicture());
-                                redirect(AnnouncementRegisterActivity.this, MainActivity.class, extrasSaida);
-                                finish();
-
-                            }
-
-                            @Override
-                            public void onError(String msg) {
-
-                            }
-                        });
-                    } else if (btnCad.getText().toString().equalsIgnoreCase("Cadastrar")) {
-
-                        if (announcement.getPicture() == null) {
-                            announcement.setPicture(BitmapFactory.decodeResource(getResources(),
-                                    R.drawable.ic_menu_camera));
-                        }
-                        AnnouncementController.insert(announcement, new IResult<Announcement>() {
-                            @Override
-                            public void onSuccess(List<Announcement> list) {
-
-                            }
-
-                            @Override
-                            public void onSuccess(Announcement obj) {
-                                Bundle extrasSaida = new Bundle();
-                                extrasSaida.putString("description", obj.getDescription());
-                                extrasSaida.putString("address", obj.getAddress());
-                                extrasSaida.putString("phone", obj.getPhone());
-                                extrasSaida.putString("tittle", obj.getTitle());
-                                extrasSaida.putParcelable("picture", obj.getPicture());
-                                redirect(AnnouncementRegisterActivity.this, MainActivity.class, extrasSaida);
-                                finish();
-                            }
-
-                            @Override
-                            public void onError(String msg) {
-                                showToastMessage(AnnouncementRegisterActivity.this, msg);
-                            }
-                        });
+                    if (announcement.getPicture() == null) {
+                        announcement.setPicture((Bitmap) extrasEntrada.getParcelable("picture"));
                     }
 
+                    AnnouncementController.update(announcement, new IResult<Announcement>() {
+                        @Override
+                        public void onSuccess(List<Announcement> list) {
 
-                }
+                        }
 
-                @Override
-                public void onError(String msg) {
-                    showToastMessage(AnnouncementRegisterActivity.this, "Você não está logado");
+                        @Override
+                        public void onSuccess(Announcement obj) {
+                            Bundle extrasSaida = new Bundle();
+                            extrasSaida.putString("description", obj.getDescription());
+                            extrasSaida.putString("address", obj.getAddress());
+                            extrasSaida.putString("phone", obj.getPhone());
+                            extrasSaida.putString("tittle", obj.getTitle());
+                            extrasSaida.putParcelable("picture", obj.getPicture());
+                            redirect(AnnouncementRegisterActivity.this, MainActivity.class, extrasSaida);
+                            finish();
+
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+
+                        }
+                    });
+                } else if (btnCad.getText().toString().equalsIgnoreCase("Cadastrar")) {
+
+                    if (announcement.getPicture() == null) {
+                        announcement.setPicture(BitmapFactory.decodeResource(getResources(),
+                                R.drawable.ic_menu_camera));
+                    }
+                    AnnouncementController.insert(announcement, new IResult<Announcement>() {
+                        @Override
+                        public void onSuccess(List<Announcement> list) {
+
+                        }
+
+                        @Override
+                        public void onSuccess(Announcement obj) {
+                            Bundle extrasSaida = new Bundle();
+                            extrasSaida.putString("description", obj.getDescription());
+                            extrasSaida.putString("address", obj.getAddress());
+                            extrasSaida.putString("phone", obj.getPhone());
+                            extrasSaida.putString("tittle", obj.getTitle());
+                            extrasSaida.putParcelable("picture", obj.getPicture());
+                            redirect(AnnouncementRegisterActivity.this, MainActivity.class, extrasSaida);
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(String msg) {
+                            showToastMessage(AnnouncementRegisterActivity.this, msg);
+                        }
+                    });
                 }
-            });
+            } else {
+                showToastMessage(AnnouncementRegisterActivity.this, "Você não está logado");
+            }
         }
     }
 
-    private boolean foto() {
+    private boolean hasPicture() {
         boolean result = true;
 
-        if (pictureMake == null) {
+        if (this.pictureMake == null) {
             showToastMessage(AnnouncementRegisterActivity.this, "Insira uma foto");
             result = false;
         }
