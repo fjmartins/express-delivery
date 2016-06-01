@@ -37,6 +37,10 @@ public class GenericActivity extends AppCompatActivity {
         Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
     }
 
+    public void showToastMessage(Context context, String msg, int duration) {
+        Toast.makeText(context, msg, duration).show();
+    }
+
     public void isUserAuth(final Context context) {
         UserAuthController.getCurrentUser(new IResultUser<User>() {
             @Override

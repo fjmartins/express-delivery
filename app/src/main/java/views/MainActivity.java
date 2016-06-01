@@ -98,11 +98,7 @@ public class MainActivity extends GenericActivity {
 
                     @Override
                     public void onItemLongClick(View view, int position) {
-                        Context contexto = getApplicationContext();
-                        String texto = "LONGO";
-                        int duracao = Toast.LENGTH_SHORT;
-                        Toast toast = Toast.makeText(contexto, texto, duracao);
-                        toast.show();
+//                        showToastMessage(getApplicationContext(), "Texto", Toast.LENGTH_LONG);
                     }
                 }));
 
