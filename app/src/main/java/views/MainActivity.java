@@ -2,7 +2,9 @@ package views;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -145,6 +147,7 @@ public class MainActivity extends GenericActivity {
             }
         });
 
+        this.checkAddress();
     }
 
     public void updateAnnouncment(int size, int skip) {
@@ -240,4 +243,26 @@ public class MainActivity extends GenericActivity {
         }
     }
 
+    private void checkAddress() {
+        final Bundle extras = getIntent().getExtras();
+
+        if (extras != null && extras.containsKey("isNew") && extras.getBoolean("isNew")) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+            dialog.setMessage(R.string.add_address)
+                    .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick (DialogInterface dialog,int which){
+                            redirect(MainActivity.this, UserRegisterAddressActivity.class, extras);
+                            finish();
+                        }
+                    }).
+                    setNegativeButton(R.string.after, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick (DialogInterface dialog,int which){
+
+                        }
+                    }).show();
+        }
+    }
 }

@@ -12,6 +12,7 @@ public class User implements Serializable{
     private String email;
     private String password;
     private List<Address> addresses;
+    private boolean isNew;
 
     public User(String username, String email, String password) {
         this.setUsername(username);
@@ -25,6 +26,14 @@ public class User implements Serializable{
     }
 
     public User() { }
+
+    public boolean isNew() {
+        return isNew;
+    }
+
+    public void setIsNew(boolean isNew) {
+        this.isNew = isNew;
+    }
 
     public List<Address> getAddresses() {
         return addresses;

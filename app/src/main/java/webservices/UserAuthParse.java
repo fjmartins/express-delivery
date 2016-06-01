@@ -70,6 +70,7 @@ public class UserAuthParse implements IUserAuth {
             User user = new User();
             user.setUsername(currentUser.getUsername());
             user.setEmail(currentUser.getEmail());
+            user.setIsNew(currentUser.isNew());
             return user;
         }
         return null;
