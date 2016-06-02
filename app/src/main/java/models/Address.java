@@ -1,8 +1,5 @@
 package models;
 
-import com.parse.ParseClassName;
-import com.parse.ParseObject;
-
 /**
  * Created by kleber on 22/05/16. // morte aqui papai
  */
@@ -75,14 +72,18 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Address{" +
-                "zipCode='" + zipCode + '\'' +
-                ", district='" + district + '\'' +
-                ", city='" + city + '\'' +
-                ", state='" + state + '\'' +
-                ", number='" + number + '\'' +
-                ", complement='" + complement + '\'' +
-                ", street='" + street + '\'' +
-                '}';
+        return "CEP: " + zipCode +
+                "\nRua: '" + street +
+                "\nNúmero:'" + number;
+    }
+
+    public String detail() {
+        return "CEP: " + zipCode +
+                "\nRua: '" + street +
+                "\nNúmero:'" + number +
+                "\nComplemento:'" + complement +
+                "\nBairro:'" + district +
+                "\nCidade:'" + city +
+                "\nEstado:'" + state;
     }
 }

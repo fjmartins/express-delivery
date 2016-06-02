@@ -38,7 +38,7 @@ public class UserAddressParse implements IAddressDao {
                         addressObject.setNumber(parseObject.get("number").toString());
                         addressObject.setComplement(parseObject.get("complement").toString());
                         addressObject.setDistrict(parseObject.get("district").toString());
-                        addressObject.setStreet(parseObject.get("city").toString());
+                        addressObject.setStreet(parseObject.get("street").toString());
                         addressObject.setState(parseObject.get("state").toString());
                         addressList.add(addressObject);
                     }
@@ -61,7 +61,7 @@ public class UserAddressParse implements IAddressDao {
         addressParse.put("city", address.getCity());
         addressParse.put("state", address.getState());
         addressParse.put("number", address.getNumber());
-        addressParse.put("Street", address.getStreet());
+        addressParse.put("street", address.getStreet());
         addressParse.put("complement", address.getComplement());
         try {
             addressParse.save();
