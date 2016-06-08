@@ -70,7 +70,7 @@ public class UserAddressParse implements IAddressDao {
         }
         relation.add(addressParse);
 
-        userParse.saveInBackground(new SaveCallback() {
+        userParse.saveEventually(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null) {

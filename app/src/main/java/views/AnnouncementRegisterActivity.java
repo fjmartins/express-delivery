@@ -1,5 +1,7 @@
 package views;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -60,6 +62,7 @@ public class AnnouncementRegisterActivity extends GenericActivity {
             @Override
             public void onSuccess(List<Address> list) {
                 loadData(list);
+                AnnouncementRegisterActivity.this.checkAddress(list);
             }
 
             @Override
@@ -72,7 +75,6 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 
             }
         });
-
     }
 
     @Override
@@ -219,6 +221,30 @@ public class AnnouncementRegisterActivity extends GenericActivity {
 
             this.picture.setImageBitmap((Bitmap) extras.getParcelable("picture"));
             this.pictureMake = extras.getParcelable("picture");
+        }
+    }
+
+    private void checkAddress(List<Address> addresses) {
+        if (addresses == null || addresses.size() == 0) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(this);
+
+            dialog.setMessage(R.string.add_address_required)
+                    .setPositiveButton(R.string.register_address, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            redirect(AnnouncementRegisterActivity.this,
+                                    UserRegisterAddressActivity.class);
+                            finish();
+                        }
+                    }).
+                    setNegativeButton(R.string.after, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            redirect(AnnouncementRegisterActivity.this,
+                                    MainActivity.class);
+                            finish();
+                        }
+                    }).show();
         }
     }
 
